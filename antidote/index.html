@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Antidote by Blindsight — AI Integrity Toolkit</title>
+  <meta name="description" content="Your AI model is only as trustworthy as the data it trained on. Antidote detects poisoning, mislabels, and silent corruption in your ML pipeline — before they ship." />
+  <link rel="canonical" href="https://www.blindsight.io/antidote" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Antidote by Blindsight — AI Integrity Toolkit" />
+  <meta property="og:description" content="Your AI model is only as trustworthy as the data it trained on. Antidote detects poisoning, mislabels, and silent corruption — before they ship." />
+  <meta property="og:url" content="https://www.blindsight.io/antidote" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Blindsight" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Antidote by Blindsight — AI Integrity Toolkit" />
+  <meta name="twitter:description" content="Detect poisoning, mislabels, and silent corruption in your ML pipeline — before they ship." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Antidote",
+    "applicationCategory": "SecurityApplication",
+    "description": "AI data integrity toolkit that detects poisoning, mislabels, and silent corruption in ML pipelines.",
+    "url": "https://www.blindsight.io/antidote",
+    "author": {
+      "@type": "Organization",
+      "name": "Blindsight",
+      "url": "https://www.blindsight.io"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Pilot program — currently accepting applications"
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/antidote.css" />
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- DEPTH INDICATOR -->
+<div id="depth-indicator">
+  <span class="depth-label">Depth</span>
+  <div class="depth-track">
+    <div class="depth-marker" id="depth-dot"></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;margin-top:4px;">
+    <span class="depth-zone-label active" id="zlabel-1">Surface</span>
+    <span class="depth-zone-label" id="zlabel-2">System</span>
+    <span class="depth-zone-label" id="zlabel-3">Data</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-back">Blindsight</a>
+    <div class="nav-sep"></div>
+    <div class="nav-product">
+      <span class="nav-product-name">Antidote</span>
+      <span class="nav-product-by">// AI Integrity Toolkit</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#zone-1">Product</a></li>
+    <li><a href="#zone-2">How it works</a></li>
+    <li><a href="#zone-3">Technical depth</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="theme-toggle-wrap">
+      <span class="theme-icon-label icon-moon">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <path d="M11 7.5A5 5 0 0 1 5.5 2a5 5 0 1 0 5.5 5.5z"/>
+        </svg>
+      </span>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+      <span class="theme-icon-label icon-sun">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <circle cx="6.5" cy="6.5" r="2.5"/>
+          <path d="M6.5 1v1.2M6.5 10.8V12M1 6.5h1.2M10.8 6.5H12M2.75 2.75l.85.85M9.4 9.4l.85.85M9.4 3.6l-.85.85M3.6 9.4l-.85.85"/>
+        </svg>
+      </span>
+    </div>
+    <a href="#" class="nav-cta">Apply for Pilot →</a>
+  </div>
+</nav>
+
+<!-- ══════════════════ ZONE 1 — SURFACE ══════════════════ -->
+<section class="zone" id="zone-1">
+
+  <div class="reveal">
+    <div class="zone-tag">
+      <span class="zone-tag-dot dot-surface"></span>
+      Zone 01 — Surface
+    </div>
+    <h1 class="zone-1-headline">
+      Your model learned<br/>
+      from your data.<br/>
+      <em>Both can be compromised.</em>
+    </h1>
+    <p class="zone-1-sub">
+      A poisoned training set turns your model into an attacker's tool. A single mislabeled class changes a prediction, a decision, an outcome your customer trusted. None of it shows up in your logs.<br/><br/>
+      Antidote monitors your AI pipeline at the <strong>data layer</strong> — 
+      detecting, healing, and documenting poisoning, mislabels, and silent corruption 
+      before they shape your model, your outputs, or your reputation.
+    </p>
+
+    <!-- 5 pills with icons -->
+    <div class="outcome-pills">
+      <span class="pill pill-green">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6l4 4 6-6"/></svg>
+        Poisoning healed
+      </span>
+      <span class="pill pill-green">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6l4 4 6-6"/></svg>
+        Mislabels corrected
+      </span>
+      <span class="pill pill-blue">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="5"/><path d="M6 3v4M6 9v.5"/></svg>
+        Drift monitored
+      </span>
+      <span class="pill pill-yellow">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 1l1.5 3.5 3.5.5-2.5 2.5.6 3.5L6 9.5 2.9 11l.6-3.5L1 5l3.5-.5z"/></svg>
+        Bias &amp; Shortcuts detected
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="8" height="8" rx="1"/><path d="M4 6h4M4 8h2"/></svg>
+        Audit-ready reports
+      </span>
+    </div>
+
+    <div class="cta-row">
+      <a href="#" class="btn-primary">
+        Apply for Pilot
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
+      </a>
+      <a href="#zone-2" class="btn-ghost">See how it works ↓</a>
+    </div>
+    <div style="margin-top:16px;font-family:var(--mono);font-size:var(--fs-xxs);letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);">
+      Pilot cohort limited to 10 teams · Q1 2026
+    </div>
+  </div>
+
+  <!-- UI SHOWCASE -->
+  <div class="ui-showcase reveal reveal-delay-2">
+    <div class="ui-window">
+      <div class="ui-window-bar">
+        <div class="ui-dots">
+          <div class="ui-dot" style="background:#E5494D;"></div>
+          <div class="ui-dot" style="background:#F2C94D;"></div>
+          <div class="ui-dot" style="background:#2DD573;"></div>
+        </div>
+        <span class="ui-window-title">// Antidote — Datasets</span>
+        <span style="font-family:var(--mono);font-size:var(--fs-xxs);color:var(--green);display:flex;align-items:center;gap:5px;">
+          <span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 2s infinite;"></span>Live
+        </span>
+      </div>
+      <div class="ui-window-body">
+        <div style="font-family:var(--mono);font-size:var(--fs-xxs);color:var(--text-dim);margin-bottom:14px;display:flex;gap:20px;">
+          <span>2 datasets</span><span>13,552 samples</span>
+          <span style="color:var(--red);">424 vulnerabilities</span>
+        </div>
+        <table class="mock-table">
+          <thead>
+            <tr><th>Name</th><th>Type</th><th>Samples</th><th>Status</th><th>Issues</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:var(--blue);">5008_Federalist_Papers.docx</td>
+              <td><span class="badge badge-type">Text</span></td>
+              <td>1,840</td>
+              <td><span class="badge badge-warn">⚠ Warning</span></td>
+              <td><span class="badge badge-warn">4</span></td>
+            </tr>
+            <tr>
+              <td style="color:var(--blue);">chest_xray_pneumonia</td>
+              <td><span class="badge badge-type">2D Image</span></td>
+              <td>11,712</td>
+              <td><span class="badge badge-warn">⚠ Warning</span></td>
+              <td><span class="badge badge-alert">420</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="health-row">
+      <div class="health-cell">
+        <span class="health-val">13,552</span>
+        <span class="health-lbl">Samples scanned</span>
+      </div>
+      <div class="health-cell">
+        <span class="health-val" style="color:var(--red);">424</span>
+        <span class="health-lbl">Vulnerabilities</span>
+      </div>
+      <div class="health-cell">
+        <span class="health-val" style="color:var(--yellow);">98%</span>
+        <span class="health-lbl">Health score</span>
+      </div>
+      <div class="health-cell">
+        <span class="health-val" style="color:var(--green);">&lt;4h</span>
+        <span class="health-lbl">Time to insight</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- STATS BANNER -->
+<div class="stats-banner reveal">
+  <div class="stats-banner-label">// The threat is real — the numbers don't lie</div>
+  <div class="stats-grid">
+    <div class="stat-block">
+      <span class="stat-big" style="color:var(--red);">241</span>
+      <p class="stat-desc">Average days to identify and contain a data breach — a record low, yet still almost 8 months of undetected exposure.</p>
+      <span class="stat-source">Source: IBM Cost of a Data Breach Report, 2025</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-big" style="color:var(--yellow);">1–3%</span>
+      <p class="stat-desc">Poisoning just 1–3% of training data is enough to significantly impair a model's ability to generate accurate predictions.</p>
+      <span class="stat-source">Source: digitalcommons.lasalle.edu; SentinelOne, 2025</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-big" style="color:var(--blue);">250</span>
+      <p class="stat-desc">Malicious documents needed to backdoor any LLM — regardless of model size. Model scale offers no protection.</p>
+      <span class="stat-source">Source: Anthropic, UK AI Security Institute &amp; Alan Turing Institute, 2025 — arXiv:2510.07192</span>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST STRIP -->
+<div style="position:relative;z-index:10;border-bottom:1px solid var(--border);background:var(--bg2);padding:20px 80px;text-align:center;transition:var(--transition-theme);">
+  <span style="font-family:var(--mono);font-size:var(--fs-xxs);letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);">// Built by hackers, for builders</span>
+</div>
+
+<!-- USP SECTION — Zone 01 -->
+<div class="usp-section reveal">
+  <div class="usp-header">
+    <h2 class="usp-headline">What Antidote actually delivers.</h2>
+    <p class="usp-sub">Clean data doesn't just reduce risk — it directly improves model performance, security posture, and compliance readiness.</p>
+  </div>
+  <div class="usp-grid" style="grid-template-columns:repeat(2,1fr);">
+    <div class="usp-card">
+      <div class="usp-card-accent"></div>
+      <div class="usp-index">// OUTCOME · 01</div>
+      <span class="usp-metric">↑ Accuracy, ↓ Time</span>
+      <div class="usp-title">Higher ceiling, faster convergence</div>
+      <p class="usp-body">Removing mislabeled, poisoned, and low-quality samples raises the ceiling of what your model can achieve — and clean data means fewer epochs to get there. Less tuning wasted on noise. Faster iteration cycles. You reach your target accuracy sooner and at lower compute cost.</p>
+    </div>
+    <div class="usp-card">
+      <div class="usp-card-accent"></div>
+      <div class="usp-index">// OUTCOME · 02</div>
+      <span class="usp-metric">↑ Security Posture</span>
+      <div class="usp-title">Eliminate hidden triggers before production</div>
+      <p class="usp-body">Detect and eliminate backdoors, adversarial patches, prompt injections, and poisoning attacks before they reach production. A model trained on clean data is a model without hidden triggers — and a security posture your investors can verify.</p>
+    </div>
+    <div class="usp-card">
+      <div class="usp-card-accent"></div>
+      <div class="usp-index">// OUTCOME · 03</div>
+      <span class="usp-metric">↓ Training Cost</span>
+      <div class="usp-title">Stop spending compute on poisoned data</div>
+      <p class="usp-body">Catch data issues before training begins. Eliminate costly retraining cycles caused by corrupted datasets discovered post-deployment. Every hour of GPU time spent on bad data is budget you don't get back.</p>
+    </div>
+    <div class="usp-card">
+      <div class="usp-card-accent"></div>
+      <div class="usp-index">// OUTCOME · 04</div>
+      <span class="usp-metric">↑ Compliance Coverage</span>
+      <div class="usp-title">Audit-ready before the regulator asks</div>
+      <p class="usp-body">Fully configurable audit reports aligned with GDPR and the EU AI Act. Each report section is a Data Field you control — define which fields appear, structure, and export format. Ready for regulators, investors, and enterprise procurement.</p>
+    </div>
+  </div>
+</div>
+
+<!-- DIVIDER 1→2 -->
+<div class="zone-divider">
+  <span class="zone-divider-label">↓ entering the system</span>
+</div>
+
+<!-- ══════════════════ ZONE 2 — SYSTEM ══════════════════ -->
+<section class="zone" id="zone-2">
+
+  <div class="zone-2-header">
+    <div class="reveal">
+      <div class="zone-tag">
+        <span class="zone-tag-dot dot-system"></span>
+        Zone 02 — System
+      </div>
+      <h2 class="zone-2-headline">How Antidote<br/>actually works.</h2>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <p class="zone-2-sub">
+        Our proprietary engines work in concert across your pipeline — from the moment 
+        data enters your system to the audit log that evidences its integrity. 
+        Each stage is configurable, explainable, and built for AI-specific threat vectors 
+        that general data quality tools were never designed to catch.
+      </p>
+    </div>
+  </div>
+
+  <!-- Four beats -->
+  <div class="mechanism-grid reveal">
+    <div class="mechanism-beat beat-detect">
+      <span class="beat-num">01 //</span>
+      <div class="beat-title">Detect</div>
+      <p class="beat-body">Statistical engines learn the internal structure and relationships of your data. Samples that deviate from learned representations are flagged — and sequential engines classify the type: mislabeled, poisoned, or low quality.</p>
+      <span class="beat-tag">Unsupervised · No baseline needed</span>
+    </div>
+    <div class="mechanism-beat beat-remediate">
+      <span class="beat-num">02 //</span>
+      <div class="beat-title">Remediate</div>
+      <p class="beat-body">Antidote can automatically relabel based on feature cluster position, remove poisoned or degraded samples, or queue for human review — configurable by confidence threshold to fit your workflow.</p>
+      <span class="beat-tag">Auto · Manual · Hybrid</span>
+    </div>
+    <div class="mechanism-beat beat-explain">
+      <span class="beat-num">03 //</span>
+      <div class="beat-title">Explain</div>
+      <p class="beat-body">Every flagged sample is reviewable in the UI. Your team sees exactly what was changed, why it was changed, and the data's position in latent space. No black box. Complete visibility into the decision.</p>
+      <span class="beat-tag">Latent space explorer · Sample preview</span>
+    </div>
+    <div class="mechanism-beat beat-report">
+      <span class="beat-num">04 //</span>
+      <div class="beat-title">Report</div>
+      <p class="beat-body">Fully configurable audit reports — each section is a Data Field you control. Choose which fields appear, define the structure, and export in your preferred format. Aligned with GDPR and EU AI Act requirements.</p>
+      <span class="beat-tag">GDPR · EU AI Act · Configurable export</span>
+    </div>
+  </div>
+
+  <!-- Reports configurable note -->
+  <div class="reports-note reveal">
+    <div class="reports-note-icon">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 4h12M4 8h12M4 12h8M4 16h6"/>
+        <circle cx="16" cy="14" r="3"/>
+        <path d="M15 14h2M16 13v2"/>
+      </svg>
+    </div>
+    <div>
+      <div class="reports-note-title">Fully configurable reports</div>
+      <p class="reports-note-body">Every report is composed of Data Fields — you choose which fields appear, define the structure, and select your export format. Designed for compliance teams, security audits, and enterprise procurement. Every finding is traceable, every remediation documented, every report exportable on demand.</p>
+    </div>
+  </div>
+
+  <!-- Mid-zone screenshots -->
+  <div class="mid-screenshots reveal">
+    <!-- Scan details mock -->
+    <div class="screenshot-card">
+      <div class="screenshot-bar">
+        <div class="ui-dots">
+          <div class="ui-dot" style="background:#E5494D;"></div>
+          <div class="ui-dot" style="background:#F2C94D;"></div>
+          <div class="ui-dot" style="background:#2DD573;"></div>
+        </div>
+        <span class="screenshot-bar-title">// Scan Details · Text Analysis</span>
+        <span class="badge badge-alert">Critical 3</span>
+      </div>
+      <div class="screenshot-body">
+        <div style="font-family:var(--mono);font-size:var(--fs-xxs);color:var(--text-dim);margin-bottom:14px;">
+          5008_Federalist_Papers.docx · February 13th, 2026 · 4 seconds · TEXT ANALYSIS
+        </div>
+        <div class="scan-result-row">
+          <span class="badge badge-alert">Critical</span>
+          <span class="scan-result-type">Sensitive Info <span style="color:var(--text-dim);">Github Pat</span></span>
+          <span class="scan-result-file">P8</span>
+        </div>
+        <div class="scan-result-row">
+          <span class="badge badge-alert">Critical</span>
+          <span class="scan-result-type">Sensitive Info <span style="color:var(--text-dim);">Password Assignment</span></span>
+          <span class="scan-result-file">P8</span>
+        </div>
+        <div class="scan-result-row">
+          <span class="badge badge-alert">Critical</span>
+          <span class="scan-result-type">Prompt Injection</span>
+          <span class="scan-result-file">P13</span>
+        </div>
+        <div class="scan-result-row">
+          <span class="badge badge-warn">Medium</span>
+          <span class="scan-result-type">Off Topic</span>
+          <span class="scan-result-file">P16</span>
+        </div>
+        <div style="margin-top:14px;padding:12px 14px;background:rgba(229,73,77,0.06);border-left:2px solid var(--red);">
+          <div style="font-family:var(--mono);font-size:9.9px;color:var(--red);margin-bottom:6px;">// Finding · Prompt Injection · P13</div>
+          <div style="font-family:var(--mono);font-size:var(--fs-small);color:var(--text-mid);line-height:1.5;">
+            <strong style="color:var(--text);">"Forget everything we've discussed so far."</strong> — instruction-like patterns detected that can redirect model behavior. May cause unsafe output, data leakage, or policy bypass.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dataset health mock -->
+    <div class="screenshot-card">
+      <div class="screenshot-bar">
+        <div class="ui-dots">
+          <div class="ui-dot" style="background:#E5494D;"></div>
+          <div class="ui-dot" style="background:#F2C94D;"></div>
+          <div class="ui-dot" style="background:#2DD573;"></div>
+        </div>
+        <span class="screenshot-bar-title">// Dataset Health · chest_xray_pneumonia</span>
+        <span class="badge badge-warn">⚠ Warning</span>
+      </div>
+      <div class="screenshot-body">
+        <div class="dataset-info-grid">
+          <div class="di-cell">
+            <div class="di-label">Sample size</div>
+            <div class="di-val">11,712</div>
+          </div>
+          <div class="di-cell">
+            <div class="di-label">Detection rate</div>
+            <div class="di-val">3.59%</div>
+          </div>
+          <div class="di-cell">
+            <div class="di-label">Mislabel rate</div>
+            <div class="di-val" style="color:var(--yellow);">3.6%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:36%;background:var(--yellow);"></div></div>
+          </div>
+          <div class="di-cell">
+            <div class="di-label">Outlier rate</div>
+            <div class="di-val" style="color:var(--green);">0%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:0%;background:var(--green);"></div></div>
+          </div>
+          <div class="di-cell">
+            <div class="di-label">Scan coverage</div>
+            <div class="di-val" style="color:var(--green);">100%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%;background:var(--green);"></div></div>
+          </div>
+          <div class="di-cell">
+            <div class="di-label">Labels / Classes</div>
+            <div style="display:flex;gap:6px;margin-top:4px;">
+              <span class="badge badge-type">NORMAL</span>
+              <span class="badge badge-type">PNEUMONIA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Competitive wedge -->
+  <div class="wedge-block reveal">
+    <div class="wedge-side">
+      <div class="wedge-label">Observability tools</div>
+      <div class="wedge-headline">Watch what your model does.</div>
+      <p class="wedge-body">Runtime and model-layer tools catch problems after the fact — after your model has already learned from compromised data. By then, the damage is inside the system.</p>
+      <div class="wedge-items">
+        <div class="wedge-item"><span class="wedge-item-icon">✗</span>React to output anomalies post-inference</div>
+        <div class="wedge-item"><span class="wedge-item-icon">✗</span>Cannot inspect the data that built the model</div>
+        <div class="wedge-item"><span class="wedge-item-icon">✗</span>Not designed for AI-specific attack vectors</div>
+      </div>
+    </div>
+    <div class="wedge-side wedge-ours">
+      <div class="wedge-label">Antidote</div>
+      <div class="wedge-headline">Watch what your model ingests.</div>
+      <p class="wedge-body">Antidote operates at the data layer — before anything reaches your model. Threats are caught at ingestion, during training, and across your RAG corpus. Prevention, not reaction.</p>
+      <div class="wedge-items">
+        <div class="wedge-item"><span class="wedge-item-icon" style="color:var(--green);">✓</span>Intercept threats before they enter training</div>
+        <div class="wedge-item"><span class="wedge-item-icon" style="color:var(--green);">✓</span>Purpose-built for AI-specific threat vectors</div>
+        <div class="wedge-item"><span class="wedge-item-icon" style="color:var(--green);">✓</span>Works with your existing ML pipeline</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- DIVIDER 2→3 -->
+<div class="zone-divider">
+  <span class="zone-divider-label">↓ entering the data layer</span>
+</div>
+
+<!-- ══════════════════ PLAYGROUND — ELEVATED SECTION ══════════════════ -->
+<section class="playground-section" style="position:relative;z-index:10;padding:96px 80px;background:var(--bg);transition:var(--transition-theme);">
+  <div style="margin-bottom:56px;max-width:560px;" class="reveal">
+    <div class="zone-tag">
+      <span class="zone-tag-dot dot-system"></span>
+      // Playground
+    </div>
+    <h2 style="font-family:var(--display);font-size:clamp(28px,3vw,48px);font-weight:700;letter-spacing:-0.03em;color:var(--text);margin-bottom:16px;line-height:1.06;">
+      See your data the way<br/>your model sees it.
+    </h2>
+    <p style="font-size:var(--fs-body);color:var(--text-mid);line-height:1.65;">
+      Explore, split, and validate your datasets visually before committing to training. Antidote flags bias, coverage gaps, and class imbalance — so you know what you're building on.
+    </p>
+  </div>
+
+  <div class="feature-card reveal">
+    <div class="feature-card-inner">
+      <div class="feature-card-left">
+        <div class="feature-card-label">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="1" width="10" height="10" rx="1"/><path d="M4 4h4M4 6h4M4 8h2"/></svg>
+          // Playground / Data Room
+        </div>
+        <div class="feature-card-title">Understand your data before you train on it.</div>
+        <p class="feature-card-body">Import tabular datasets (CSV, Parquet, Arrow) and explore them visually before committing to training. Split into train/validation/test sets — and Antidote will tell you if the split can be created without introducing bias.</p>
+        <div class="feature-list">
+          <div class="feature-item"><span class="feature-item-icon">→</span>Visualise distributions, class balance, and coverage gaps</div>
+          <div class="feature-item"><span class="feature-item-icon">→</span>Define custom split ratios (e.g. 70/20/10) and validate feasibility</div>
+          <div class="feature-item"><span class="feature-item-icon">→</span>Focus on a specific class or condition — Antidote flags if there's enough quality data</div>
+          <div class="feature-item"><span class="feature-item-icon">→</span>Isolate any target label and verify it can be split without introducing bias contamination</div>
+        </div>
+      </div>
+      <div class="feature-card-right">
+        <div class="playground-mock">
+          <div class="pg-header">// Dataset split — chest_xray_pneumonia</div>
+          <div style="margin-bottom:12px;">
+            <div class="pg-split-row" style="margin-bottom:6px;">
+              <span class="pg-split-label">Train</span>
+              <div class="pg-split-bar"><div class="pg-split-fill" style="width:70%;background:var(--blue);"></div></div>
+              <span class="pg-split-pct">70%</span>
+            </div>
+            <div class="pg-split-row" style="margin-bottom:6px;">
+              <span class="pg-split-label">Validate</span>
+              <div class="pg-split-bar"><div class="pg-split-fill" style="width:20%;background:var(--yellow);"></div></div>
+              <span class="pg-split-pct">20%</span>
+            </div>
+            <div class="pg-split-row">
+              <span class="pg-split-label">Test</span>
+              <div class="pg-split-bar"><div class="pg-split-fill" style="width:10%;background:var(--green);"></div></div>
+              <span class="pg-split-pct">10%</span>
+            </div>
+          </div>
+          <div class="pg-notice">✓ Split is feasible without introducing class bias across NORMAL / PNEUMONIA labels.</div>
+          <div style="margin-top:14px;">
+            <div class="pg-header" style="margin-bottom:8px;">// Focus class selector</div>
+            <div class="pg-class-selector">
+              <span class="pg-class-chip">NORMAL</span>
+              <span class="pg-class-chip active">PNEUMONIA</span>
+            </div>
+            <div style="margin-top:10px;font-family:var(--mono);font-size:9.9px;color:var(--text-dim);line-height:1.5;">
+              PNEUMONIA class: 4,273 samples · <span style="color:var(--green);">sufficient for training</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ ZONE 3 — DATA LAYER ══════════════════ -->
+<section class="zone" id="zone-3">
+
+  <div class="zone-3-header reveal">
+    <div class="zone-tag">
+      <span class="zone-tag-dot dot-data"></span>
+      Zone 03 — Data Layer
+    </div>
+    <h2 class="zone-3-headline">The threat taxonomy.<br/>All six. Covered.</h2>
+    <p class="zone-3-sub">Six universal threat categories apply across every sector, pipeline, and model type. Each one is a failure mode Antidote is purpose-built to detect, remediate, and document.</p>
+  </div>
+
+  <!-- 6 threat cells — 3+3 layout -->
+  <div class="threat-grid reveal">
+    <div class="threat-cell" data-index="01">
+      <div class="threat-icon">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1l1.5 3.5 3.5.5-2.5 2.5.6 3.5L7 9.5 3.4 11l.6-3.5L1.5 5l3.5-.5z"/></svg>
+        // THREAT · 01
+      </div>
+      <div class="threat-name">Poisoning &amp; Contamination</div>
+      <p class="threat-desc">Malicious inserts, compromised suppliers, insider changes, synthetic data abuse. Detects subtle and intentional alterations that mimic normal data and evade traditional anomaly detection.</p>
+    </div>
+    <div class="threat-cell" data-index="02">
+      <div class="threat-icon">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="10" height="10" rx="1"/><path d="M5 7h4M7 5v4"/></svg>
+        // THREAT · 02
+      </div>
+      <div class="threat-name">Mislabeling &amp; Annotation Error</div>
+      <p class="threat-desc">Human mistakes, inconsistent guidelines, label leakage, class imbalance distortions. Sequential engines identify deviation type — mislabel vs. poison vs. quality degradation.</p>
+    </div>
+    <div class="threat-cell" data-index="03">
+      <div class="threat-icon">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 10Q4 4 7 7Q10 10 13 4"/></svg>
+        // THREAT · 03
+      </div>
+      <div class="threat-name">Outliers, Drift &amp; Silent Corruption</div>
+      <p class="threat-desc">Pipeline bugs, sensor changes, seasonality, new populations, domain shift. Continuous monitoring with "why changed" signals to identify the source before it affects training.</p>
+    </div>
+    <div class="threat-cell" data-index="04">
+      <div class="threat-icon">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><path d="M7 4v4M7 10v.5"/></svg>
+        // THREAT · 04
+      </div>
+      <div class="threat-name">Leakage &amp; Policy Violations</div>
+      <p class="threat-desc">PII/PHI, secrets, regulated data crossing boundaries, retention violations. Detection and redaction before data reaches model training or LLM summarization pipelines.</p>
+    </div>
+    <div class="threat-cell" data-index="05">
+      <div class="threat-icon">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h10M2 7h7M2 10h5"/><circle cx="11" cy="9" r="2.5"/></svg>
+        // THREAT · 05
+      </div>
+      <div class="threat-name">RAG &amp; Prompt Injection</div>
+      <p class="threat-desc">Hidden instructions, malicious documents, contradictory sources, authority spoofing. Corpus monitoring flags suspicious inserts and contradiction patterns across your knowledge base.</p>
+    </div>
+    <div class="threat-cell" data-index="06">
+      <div class="threat-icon">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12Q7 2 12 12"/><path d="M4 9h6"/></svg>
+        // THREAT · 06
+      </div>
+      <div class="threat-name">Shortcut Learning &amp; Bias</div>
+      <p class="threat-desc">Models learning the wrong pattern — performing in testing while failing silently in production. Antidote's dedicated Bias &amp; Shortcuts scan reveals what your model actually learned and why.</p>
+    </div>
+  </div>
+
+  <!-- Compliance -->
+  <div class="compliance-row reveal">
+    <div class="compliance-cell">
+      <div class="compliance-reg">// GDPR</div>
+      <div class="compliance-title">Article 22 Compliance</div>
+      <p class="compliance-body">Audit trails documenting every detection, remediation, and access event — supporting GDPR's requirements for explainability and data traceability in automated decision systems.</p>
+    </div>
+    <div class="compliance-cell">
+      <div class="compliance-reg">// EU AI Act</div>
+      <div class="compliance-title">High-Risk AI Coverage</div>
+      <p class="compliance-body">The EU AI Act mandates monitoring of data integrity and data drift for high-risk AI systems. Antidote's reporting module is purpose-built to satisfy these requirements with configurable, export-ready reports.</p>
+    </div>
+    <div class="compliance-cell">
+      <div class="compliance-reg">// Integration</div>
+      <div class="compliance-title">API &amp; Pipeline Native</div>
+      <p class="compliance-body">Integrates directly into ML pipelines via API or web interface. Webhooks, CI/CD compatibility, and MLOps toolchain interoperability — no disruption to your existing workflow.</p>
+    </div>
+  </div>
+
+  <!-- Terminal / UI flipper -->
+  <div class="terminal-flipper reveal">
+    <div class="flipper-tabs">
+      <button class="flipper-tab active" onclick="switchTab('terminal', this)">// Code view</button>
+      <button class="flipper-tab" onclick="switchTab('ui', this)">// UI view</button>
+    </div>
+
+    <div class="flipper-panel active" id="panel-terminal">
+      <div class="terminal">
+        <div class="terminal-body">
+          <div><span class="term-comment">// Scan completed: February 14th, 2026 · 20 min · MISLABEL</span></div>
+          <div>&nbsp;</div>
+          <div><span class="term-key">dataset</span>: <span class="term-str">"chest_xray_pneumonia"</span></div>
+          <div><span class="term-key">total_samples</span>: <span class="term-num">11712</span></div>
+          <div><span class="term-key">scan_type</span>: <span class="term-str">"MISLABEL"</span></div>
+          <div>&nbsp;</div>
+          <div><span class="term-key">findings</span>: {</div>
+          <div>&nbsp;&nbsp;<span class="term-key">critical</span>: <span class="term-num">0</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">high</span>: <span class="term-num" style="color:var(--red);">420</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">medium</span>: <span class="term-num">0</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">low</span>: <span class="term-num">0</span></div>
+          <div>}</div>
+          <div>&nbsp;</div>
+          <div><span class="term-key">top_finding</span>: {</div>
+          <div>&nbsp;&nbsp;<span class="term-key">type</span>: <span class="term-str">"Label Mismatch"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">severity</span>: <span class="term-str" style="color:var(--red);">"High"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">sample</span>: <span class="term-str">"person152_bacteria_723.jpeg"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">assigned_label</span>: <span class="term-str">"PNEUMONIA"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">suggested_label</span>: <span class="term-str">"NORMAL"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">confidence</span>: <span class="term-num">0.94</span>,</div>
+          <div>&nbsp;&nbsp;<span class="term-key">reason</span>: <span class="term-str">"Model evidence conflicts with assigned label,</span></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="term-str">suggesting annotation error or label drift."</span></div>
+          <div>}</div>
+          <div>&nbsp;</div>
+          <div><span class="term-comment">// 418 findings pending review. Remediation available.</span></div>
+          <div>$ <span class="term-cursor"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flipper-panel" id="panel-ui">
+      <div class="ui-panel">
+        <div style="font-family:var(--mono);font-size:var(--fs-xxs);color:var(--text-dim);margin-bottom:16px;">
+          chest_xray_pneumonia · Scan completed Feb 14th · 420 high-severity findings
+        </div>
+        <div class="ui-panel-grid">
+          <div class="ui-panel-cell">
+            <div class="ui-panel-label">// Finding type</div>
+            <div class="ui-panel-finding">Label Mismatch <span class="badge badge-alert">High</span></div>
+            <div class="ui-panel-detail">person152_bacteria_723.jpeg<br/>PNEUMONIA → NORMAL · confidence 0.94</div>
+          </div>
+          <div class="ui-panel-cell">
+            <div class="ui-panel-label">// Finding detail</div>
+            <div class="ui-panel-finding">Model evidence conflict</div>
+            <div class="ui-panel-detail">Model evidence conflicts with the assigned label, suggesting annotation error or label drift. Elevates accuracy risk in production.</div>
+          </div>
+          <div class="ui-panel-cell">
+            <div class="ui-panel-label">// Dataset health</div>
+            <div style="display:flex;gap:8px;align-items:center;margin-top:4px;">
+              <span class="health-val" style="font-size:28px;color:var(--yellow);">98%</span>
+              <span style="font-family:var(--mono);font-size:var(--fs-xxs);color:var(--text-dim);">Health score<br/>3 active vulns</span>
+            </div>
+          </div>
+          <div class="ui-panel-cell">
+            <div class="ui-panel-label">// Quality metrics</div>
+            <div style="margin-top:6px;display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.9px;">
+                <span style="color:var(--text-dim);">Label Accuracy</span>
+                <span style="color:var(--green);">100%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.9px;">
+                <span style="color:var(--text-dim);">Mislabel Rate</span>
+                <span style="color:var(--yellow);">3.6%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.9px;">
+                <span style="color:var(--text-dim);">Poisoning Rate</span>
+                <span style="color:var(--green);">0%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom CTA -->
+  <div class="bottom-cta reveal">
+    <div class="bottom-cta-label">// Ready to discover the blindspots inside your pipeline?</div>
+    <h2 class="bottom-cta-headline">
+      You just saw what even highly curated,<br/>public benchmark datasets hide.<br/>What's lurking in yours?
+    </h2>
+    <p class="bottom-cta-sub">
+      Most teams see their first findings within hours.<br/>
+      No disruption to your stack. No data leaves your environment.
+    </p>
+    <div class="bottom-cta-actions">
+      <a href="#" class="btn-primary">
+        Apply for Pilot Program
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
+      </a>
+      <a href="#" class="btn-ghost">Talk to the team →</a>
+    </div>
+    <div class="bottom-note">Pilot cohort limited to 10 teams · Currently accepting applications.</div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand"><strong>Antidote</strong> by Blindsight · AI Integrity Toolkit · 2026</span>
+  <ul class="footer-links">
+    <li><a href="#">Documentation</a></li>
+    <li><a href="#">API</a></li>
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</footer>
+
+<script src="/assets/js/antidote.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blindsight — Securing AI</title>
+  <meta name="description" content="AI integrity starts at the data layer. Blindsight exists because the threat to AI doesn't begin at the model — it begins at the source." />
+  <link rel="canonical" href="https://www.blindsight.io/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Blindsight — Securing AI" />
+  <meta property="og:description" content="AI integrity starts at the data layer. The threat to AI doesn't begin at the model — it begins at the source." />
+  <meta property="og:url" content="https://www.blindsight.io/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Blindsight" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blindsight — Securing AI" />
+  <meta name="twitter:description" content="AI integrity starts at the data layer. The threat to AI doesn't begin at the model — it begins at the source." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Blindsight",
+    "url": "https://www.blindsight.io",
+    "description": "AI security and integrity platform. Securing AI at the data layer.",
+    "foundingDate": "2025",
+    "email": "guilherme@blindsight.io",
+    "slogan": "Securing AI",
+    "knowsAbout": ["AI Security", "Data Integrity", "Machine Learning", "Data Poisoning Detection", "AI Compliance"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Blindsight",
+    "url": "https://www.blindsight.io"
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/home.css" />
+</head>
+<body class="hero-locked">
+
+<!-- NAV (hidden during hero animation) -->
+<nav id="main-nav" class="nav-hidden">
+  <div style="display:flex;align-items:center;">
+    <a href="/" class="nav-wordmark">blindsight</a>
+    <span class="nav-tagline">Securing AI</span>
+  </div>
+  <ul class="nav-links-hp">
+    <li><a href="/antidote">Antidote</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="mailto:guilherme@blindsight.io">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════ HERO — SCROLL-LOCKED TAKEOVER ══════════════════ -->
+<section id="hero">
+  <!-- Three.js canvas -->
+  <div id="three-container"></div>
+
+  <!-- Phase A: Danger labels (appear after drop impact) -->
+  <div class="ripple-labels" id="ripple-labels">
+    <div class="ripple-label rl-center">// Data is the centre. Everything else are ripples</div>
+    <div class="ripple-label rl-1">// reduced accuracy</div>
+    <div class="ripple-label rl-2">// model failure in production</div>
+    <div class="ripple-label rl-3">// backdoor in training data</div>
+    <div class="ripple-label rl-4">// trust collapses downstream</div>
+    <div class="ripple-label rl-5">// higher training costs</div>
+    <div class="ripple-label rl-6">// spurious correlations</div>
+    <div class="ripple-label rl-7">// increased energy expenditure</div>
+  </div>
+
+  <!-- Phase A: Scroll hint (appears after dangers settle) -->
+  <div class="phase-a-hint" id="phase-a-hint">
+    <span>Scroll to look deeper</span>
+    <div class="hint-arrow"></div>
+  </div>
+
+  <!-- Phase B: Text layer (fades in when user scrolls) -->
+  <div class="hero-text-layer" id="hero-text">
+    <h1 class="hero-headline">
+      A single drop of <span style="color:#6D28D9;">poison</span><br/>is all it takes.<br/>
+      <em>Everything after learns from it.</em>
+    </h1>
+    <p class="hero-sub">
+      <strong>Blindsight</strong> is an AI integrity company. We exist because the threat to AI doesn't start at the model. It starts at the data.
+    </p>
+    <div class="scroll-cue">
+      <span>Continue</span>
+      <div class="scroll-cue-arrow"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Gradient transition -->
+<div class="transition-zone"></div>
+
+<!-- ══════════════════ BEAT 2 — THE SHIFT LEFT ARGUMENT ══════════════════ -->
+<section id="shift-left">
+  <div class="sl-preamble reveal-hp">
+    <div class="sl-tag">// Why shift left</div>
+    <h2 class="sl-headline">Security invested early<br/>compounds at every stage.</h2>
+    <p class="sl-body">
+      You wouldn't set out into uncharted territory without preparation. You'd bring failsafes, equipment, a map of what could go wrong. You might improvise later — but improvisation under pressure is never the same as readiness by design.
+    </p>
+  </div>
+
+  <div class="sl-stages reveal-hp">
+    <div class="sl-stage">
+      <div class="sl-stage-tag tag-red">// Where most teams put security</div>
+      <div class="sl-stage-title">After deployment.</div>
+      <p class="sl-stage-body">Monitoring outputs. Catching anomalies post-inference. Reacting to model failures that already happened. By the time you see the symptom, the compromised data has already shaped the model's understanding of the world.</p>
+    </div>
+    <div class="sl-stage">
+      <div class="sl-stage-tag tag-yellow">// Where the threat actually lives</div>
+      <div class="sl-stage-title">Inside the data.</div>
+      <p class="sl-stage-body">Poisoned samples. Mislabeled ground truth. Silent corruption from pipeline drift. The data your model trusts most is the data no one inspected. And it only takes 1–3% contamination to fundamentally alter what a model learns.</p>
+    </div>
+    <div class="sl-stage">
+      <div class="sl-stage-tag tag-green">// Where Blindsight operates</div>
+      <div class="sl-stage-title">At the origin.</div>
+      <p class="sl-stage-body">Before the first training run. Before the model forms its first representation. Integrity at the data layer means every subsequent stage — training, evaluation, deployment, production — inherits trust, not risk.</p>
+    </div>
+  </div>
+
+  <div class="sl-summary reveal-hp">
+    Shift left. Invest early. The cost is small. The protection <em>compounds through every stage of your pipeline</em> — from training to production to the decisions your customers rely on.
+  </div>
+</section>
+
+<!-- ══════════════════ BEAT 3 — THE PHILOSOPHY ══════════════════ -->
+<section id="philosophy">
+  <div class="phil-tag reveal-hp">// What we believe</div>
+
+  <div class="phil-grid">
+    <div class="phil-statements">
+      <div class="phil-statement">
+        <div class="phil-statement-text">AI was supposed to amplify possibility.</div>
+        <p class="phil-statement-sub">Not automate blindspots. Not inherit the biases and errors that humans couldn't see in the data. The promise of AI depends on the integrity of what it learns from.</p>
+      </div>
+      <div class="phil-statement">
+        <div class="phil-statement-text">Prevention means understanding.</div>
+        <p class="phil-statement-sub">You can't protect what you can't see. The black box isn't just the model — it's the data pipeline feeding it. Blindsight exists to make that pipeline visible, auditable, and trustworthy.</p>
+      </div>
+      <div class="phil-statement">
+        <div class="phil-statement-text">The builders deserve better infrastructure.</div>
+        <p class="phil-statement-sub">Right now, the people building AI are flying blind on data integrity. They move fast because they have to. We exist so they can move fast <em>and</em> move safely. Speed and trust aren't opposites — they're compounding forces.</p>
+      </div>
+      <div class="phil-statement">
+        <div class="phil-statement-text">We want to make AI the force it was supposed to be.</div>
+        <p class="phil-statement-sub">The transformative technology that amplifies human capability, not one that silently degrades under corrupted foundations. Iron out the kinks. Earn the trust. Let AI be what it promised.</p>
+      </div>
+    </div>
+
+    <div class="phil-right reveal-hp">
+      <div class="phil-manifesto">
+        We are the human consciousness behind artificial intelligence.<br/><br/>
+        <strong>Think with conscience.</strong><br/>
+        <strong>Understand with depth.</strong><br/>
+        <strong>Build with purpose.</strong><br/>
+        <strong>Decide responsibly.</strong><br/><br/>
+        In a world where algorithms evolve faster than oversight, we stand for integrity. For visibility where there are blindspots. For systems that remain aligned as reality shifts.<br/><br/>
+        Together, we see what remains unseen — beyond blindspots. <strong>We see within.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ BEAT 4 — THE ALIGNMENT CRESCENDO ══════════════════ -->
+<section id="alignment">
+  <div class="align-tag reveal-hp">// Where this goes</div>
+
+  <h2 class="align-headline reveal-hp">
+    AI alignment doesn't start<br/>at the model layer.<br/>
+    <em>It starts at the data.</em>
+  </h2>
+
+  <p class="align-body reveal-hp">
+    You can't align what you have no visibility over. You can't trust what you haven't verified. Every conversation about safe AI, responsible AI, aligned AI eventually circles back to the same question: what did the model learn from, and can you prove it was trustworthy?
+  </p>
+
+  <div class="align-divider"></div>
+
+  <p class="align-body reveal-hp" style="margin-bottom:0;">
+    Blindsight is building the trust layer for AI. The foundational infrastructure that lets enterprises adopt AI with confidence and lets builders innovate without compromise. This is where alignment begins — at the source.
+  </p>
+</section>
+
+<!-- ══════════════════ BEAT 5 — THE QUIET EXIT ══════════════════ -->
+<section id="exit">
+  <p class="exit-line reveal-hp">
+    This is what we believe.<br/>
+    <a href="/antidote" class="exit-link">Antidote</a> is what we built because of it.
+  </p>
+  <div class="exit-sub reveal-hp">// AI Integrity Toolkit · Now in pilot</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand"><strong>Blindsight</strong> · Securing AI · 2026</span>
+  <ul class="footer-links">
+    <li><a href="/antidote">Antidote</a></li>
+    <li><a href="/privacy-policy">Privacy</a></li>
+    <li><a href="mailto:info@blindsight.io">Contact</a></li>
+  </ul>
+</footer>
+
+<script src="assets/js/home.js"></script>
+</body>
+</html>

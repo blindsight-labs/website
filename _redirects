@@ -1,0 +1,3 @@
+# Clean URL routing
+/antidote    /antidote/index.html   200
+/antidote/   /antidote/index.html   200
