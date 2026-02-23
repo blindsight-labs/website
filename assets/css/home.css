@@ -440,13 +440,23 @@
       .nav-logo { height: 18px; }
       .nav-tagline { display: none; }
 
+      #hero { min-height: 100vh; min-height: 100dvh; }
+
       .hero-headline { font-size: clamp(28px, 7vw, 42px); }
       .hero-sub { font-size: 14px; max-width: 90%; }
 
-      .ripple-label { font-size: 7px; letter-spacing: 0.08em; }
-      .rl-3 { right: 3%; } .rl-4 { right: 4%; }
-      .rl-5 { left: 3%; } .rl-6 { left: 2%; }
-      .rl-2, .rl-7 { display: none; }
+      /* Danger labels — reflow for mobile */
+      .ripple-label { font-size: 8px; letter-spacing: 0.06em; white-space: normal; max-width: 45vw; }
+      .rl-center { font-size: 10px; max-width: 70vw; }
+      .rl-1 { top: 12%; left: 50%; }
+      .rl-2 { top: 20%; right: 4%; left: auto; }
+      .rl-3 { top: 40%; right: 4%; left: auto; transform: none; }
+      .rl-4 { bottom: 20%; right: 4%; left: auto; }
+      .rl-5 { top: 20%; left: 4%; right: auto; }
+      .rl-6 { top: 40%; left: 4%; right: auto; transform: none; }
+      .rl-7 { bottom: 20%; left: 4%; right: auto; }
+
+      .phase-a-hint { bottom: 32px; }
 
       #shift-left, #philosophy, #alignment, #exit { padding-left: 16px; padding-right: 16px; }
       #shift-left, #philosophy { padding-top: 72px; padding-bottom: 72px; }

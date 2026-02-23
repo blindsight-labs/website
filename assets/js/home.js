@@ -104,7 +104,9 @@ window.addEventListener('wheel', (e) => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   container.appendChild(renderer.domElement);
 
-  const waterGeo = new THREE.PlaneGeometry(20, 20, 200, 200);
+  const isMobile = window.innerWidth <= 640;
+  const waterDetail = isMobile ? 100 : 200;
+  const waterGeo = new THREE.PlaneGeometry(20, 20, waterDetail, waterDetail);
   waterGeo.rotateX(-Math.PI / 2);
 
   const poisonPurple = new THREE.Color(0x6D28D9);
