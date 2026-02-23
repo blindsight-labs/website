@@ -60,7 +60,11 @@
 <!-- NAV (hidden during hero animation) -->
 <nav id="main-nav" class="nav-hidden">
   <div style="display:flex;align-items:center;">
-    <a href="/" class="nav-wordmark">blindsight</a>
+    <a href="/" class="nav-wordmark">
+      <img src="/assets/images/logo-blindsight.svg" alt="Blindsight" class="nav-logo"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='inline'" />
+      <span class="nav-logo-fallback" style="display:inline;">blindsight</span>
+    </a>
     <span class="nav-tagline">Securing AI</span>
   </div>
   <ul class="nav-links-hp">
@@ -77,7 +81,7 @@
 
   <!-- Phase A: Danger labels (appear after drop impact) -->
   <div class="ripple-labels" id="ripple-labels">
-    <div class="ripple-label rl-center">// Data is the centre. Everything else are ripples</div>
+    <div class="ripple-label rl-center">Data is the centre.<br/>Everything else are ripples</div>
     <div class="ripple-label rl-1">// reduced accuracy</div>
     <div class="ripple-label rl-2">// model failure in production</div>
     <div class="ripple-label rl-3">// backdoor in training data</div>
@@ -96,8 +100,9 @@
   <!-- Phase B: Text layer (fades in when user scrolls) -->
   <div class="hero-text-layer" id="hero-text">
     <h1 class="hero-headline">
-      A single drop of <span style="color:#6D28D9;">poison</span><br/>is all it takes.<br/>
-      <em>Everything after learns from it.</em>
+      A single drop of <span style="color:#6D28D9;">poison</span>
+      <span class="hero-sentence-break">is all it takes.</span>
+      <em class="hero-sentence-gap">Everything after learns from it.</em>
     </h1>
     <p class="hero-sub">
       <strong>Blindsight</strong> is an AI integrity company. We exist because the threat to AI doesn't start at the model. It starts at the data.
@@ -171,13 +176,20 @@
 
     <div class="phil-right reveal-hp">
       <div class="phil-manifesto">
-        We are the human consciousness behind artificial intelligence.<br/><br/>
+        We are the human consciousness<br/>
+        behind artificial intelligence.<br/><br/>
         <strong>Think with conscience.</strong><br/>
         <strong>Understand with depth.</strong><br/>
         <strong>Build with purpose.</strong><br/>
         <strong>Decide responsibly.</strong><br/><br/>
-        In a world where algorithms evolve faster than oversight, we stand for integrity. For visibility where there are blindspots. For systems that remain aligned as reality shifts.<br/><br/>
-        Together, we see what remains unseen — beyond blindspots. <strong>We see within.</strong>
+        In a world where algorithms evolve<br/>
+        faster than oversight,<br/>
+        we stand for integrity.<br/>
+        For visibility where there are blindspots.<br/>
+        For systems that remain aligned<br/>
+        as reality shifts.<br/><br/>
+        Together, we see what remains unseen —<br/>
+        beyond blindspots. <strong>We see within.</strong>
       </div>
     </div>
   </div>
@@ -189,18 +201,19 @@
 
   <h2 class="align-headline reveal-hp">
     AI alignment doesn't start<br/>at the model layer.<br/>
-    <em>It starts at the data.</em>
+    <em>It starts with data.</em>
   </h2>
 
   <p class="align-body reveal-hp">
     You can't align what you have no visibility over. You can't trust what you haven't verified. Every conversation about safe AI, responsible AI, aligned AI eventually circles back to the same question: what did the model learn from, and can you prove it was trustworthy?
   </p>
 
-  <div class="align-divider"></div>
+  <div class="align-divider reveal-hp"></div>
 
   <p class="align-body reveal-hp" style="margin-bottom:0;">
     Blindsight is building the trust layer for AI. The foundational infrastructure that lets enterprises adopt AI with confidence and lets builders innovate without compromise. This is where alignment begins — at the source.
   </p>
+  <div class="align-divider reveal-hp"></div>
 </section>
 
 <!-- ══════════════════ BEAT 5 — THE QUIET EXIT ══════════════════ -->

@@ -232,7 +232,8 @@ window.addEventListener('wheel', (e) => {
   let dropStarted = false;
   let dropHit = false;
   const dropDelay = 0.8;
-  const dropSpeed = 4.8;
+  const GRAVITY = 12;          // acceleration (units/s²)
+  let dropVelocity = 1.5;      // initial velocity — slow start
   const clock = new THREE.Clock();
   let lastTime = 0;
   const dropStartY = 5;
@@ -252,7 +253,10 @@ window.addEventListener('wheel', (e) => {
         dropStarted = true;
         heroPhase.current = 'animating';
       }
-      droplet.position.y -= dropSpeed * Math.max(delta, 0.001);
+
+      // Gravity: accelerate velocity over time
+      dropVelocity += GRAVITY * Math.max(delta, 0.001);
+      droplet.position.y -= dropVelocity * Math.max(delta, 0.001);
 
       // Deform from sphere to teardrop as it falls
       const fallProgress = Math.min(1, (dropStartY - droplet.position.y) / dropStartY);
@@ -279,33 +283,108 @@ window.addEventListener('wheel', (e) => {
 })();
 
 
-// ══════════════════ DARK→LIGHT TRANSITION ══════════════════
+// ══════════════════ DARK→LIGHT TRANSITION (scroll-progress) ══════════════════
 
 const shiftLeftSection = document.getElementById('shift-left');
-
-const transitionObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.intersectionRatio > 0.35) {
-      shiftLeftSection.classList.add('transitioned');
-      mainNav.classList.add('nav-light');
-    } else if (entry.intersectionRatio < 0.1) {
-      shiftLeftSection.classList.remove('transitioned');
-      mainNav.classList.remove('nav-light');
-    }
-  });
-}, { threshold: [0, 0.1, 0.2, 0.35, 0.5] });
-transitionObserver.observe(shiftLeftSection);
-
-// Back to dark for alignment
 const alignmentSection = document.getElementById('alignment');
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return [r, g, b];
+}
+
+function lerpColor(hex1, hex2, t) {
+  const [r1,g1,b1] = hexToRgb(hex1);
+  const [r2,g2,b2] = hexToRgb(hex2);
+  const r = Math.round(r1 + (r2-r1)*t);
+  const g = Math.round(g1 + (g2-g1)*t);
+  const b = Math.round(b1 + (b2-b1)*t);
+  return `rgb(${r},${g},${b})`;
+}
+
+function lerpColorRgba(hex1, hex2, t, a1, a2) {
+  const [r1,g1,b1] = hexToRgb(hex1);
+  const [r2,g2,b2] = hexToRgb(hex2);
+  const r = Math.round(r1 + (r2-r1)*t);
+  const g = Math.round(g1 + (g2-g1)*t);
+  const b = Math.round(b1 + (b2-b1)*t);
+  const a = a1 + (a2-a1)*t;
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+// Cache element references for performance
+const slStages = shiftLeftSection.querySelectorAll('.sl-stage');
+const slStageTags = shiftLeftSection.querySelectorAll('.sl-stage-tag');
+const slStageTitles = shiftLeftSection.querySelectorAll('.sl-stage-title');
+const slStageBodies = shiftLeftSection.querySelectorAll('.sl-stage-body');
+const slTag = shiftLeftSection.querySelector('.sl-tag');
+const slHeadline = shiftLeftSection.querySelector('.sl-headline');
+const slBody = shiftLeftSection.querySelector('.sl-body');
+const slSummary = shiftLeftSection.querySelector('.sl-summary');
+const slStagesGrid = shiftLeftSection.querySelector('.sl-stages');
+const navEl = document.getElementById('main-nav');
+
+let lastShiftProgress = -1;
+
+function applyShiftTransition(p) {
+  if (Math.abs(p - lastShiftProgress) < 0.005) return; // skip tiny updates
+  lastShiftProgress = p;
+
+  // Section background: dark → light
+  shiftLeftSection.style.background = lerpColor('#0a0a0a', '#F0F0EC', p);
+
+  // Stage background
+  slStages.forEach(el => { el.style.background = lerpColor('#0a0a0a', '#F0F0EC', p); });
+
+  // Stage grid gap color
+  if (slStagesGrid) slStagesGrid.style.background = lerpColorRgba('#ffffff','#000000', p, 0.06, 0.08);
+
+  // Text colors
+  if (slTag) slTag.style.color = lerpColor('#545454', '#888888', p);
+  if (slHeadline) slHeadline.style.color = lerpColor('#F8F8F8', '#020202', p);
+  if (slBody) slBody.style.color = lerpColor('#C5C5C5', '#3a3a3a', p);
+  if (slSummary) slSummary.style.color = lerpColor('#F8F8F8', '#020202', p);
+
+  slStageTitles.forEach(el => { el.style.color = lerpColor('#F8F8F8', '#020202', p); });
+  slStageBodies.forEach(el => { el.style.color = lerpColor('#888888', '#545454', p); });
+
+  // Stage tags: preserve hue, slightly darken on light bg
+  slStageTags.forEach(el => {
+    if (el.classList.contains('tag-red')) el.style.color = lerpColor('#E5494D', '#c0392b', p);
+    else if (el.classList.contains('tag-yellow')) el.style.color = lerpColor('#F2C94D', '#8a6800', p);
+    else if (el.classList.contains('tag-green')) el.style.color = lerpColor('#2DD573', '#0a8c46', p);
+  });
+
+  // Nav theme
+  if (p > 0.45) navEl.classList.add('nav-light');
+  else navEl.classList.remove('nav-light');
+}
+
+// Back to dark when alignment section enters (scroll-based via IntersectionObserver is fine here
+// since this is a one-way entrance into the dark section)
 const darkNavObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
-      mainNav.classList.remove('nav-light');
+      navEl.classList.remove('nav-light');
     }
   });
 }, { threshold: [0.2] });
 darkNavObserver.observe(alignmentSection);
+
+window.addEventListener('scroll', () => {
+  const rect = shiftLeftSection.getBoundingClientRect();
+  const windowH = window.innerHeight;
+  // progress: 0 = section just entering viewport, 1 = section top at ~40% up from bottom
+  const progress = Math.min(1, Math.max(0,
+    (windowH - rect.top) / (windowH * 0.65)
+  ));
+  applyShiftTransition(progress);
+}, { passive: true });
+
+// Run once on load in case page is already scrolled
+applyShiftTransition(0);
 
 
 // ══════════════════ REVEAL ON SCROLL ══════════════════
@@ -332,3 +411,79 @@ const philObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.2 });
 philStatements.forEach(el => philObserver.observe(el));
+
+
+// ══════════════════ PAIN LABEL TOOLTIPS ══════════════════
+
+const painContext = {
+  'rl-1': 'Corrupted training samples directly lower model precision — often invisibly, until deployment.',
+  'rl-2': 'A model that passes evaluation can still fail in production when its data foundation was compromised.',
+  'rl-3': 'Adversarial actors embed hidden triggers in training data that silently alter model behaviour on specific inputs.',
+  'rl-4': 'Every system, decision, and user that relies on the model inherits its data integrity failures.',
+  'rl-5': 'Retraining from scratch after discovering corrupt data wastes GPU time and delays your roadmap.',
+  'rl-6': 'Models trained on biased data learn the wrong patterns — confident, wrong, and undetectable without inspection.',
+  'rl-7': 'Training on low-quality data extends compute cycles and magnifies the carbon cost of model development.',
+};
+
+let activeTooltip = null;
+
+function createTooltip(text, targetEl) {
+  const tip = document.createElement('div');
+  tip.className = 'rl-tooltip';
+  tip.textContent = text;
+  document.getElementById('hero').appendChild(tip);
+
+  // Position relative to the label
+  const heroRect = document.getElementById('hero').getBoundingClientRect();
+  const labelRect = targetEl.getBoundingClientRect();
+  const tipWidth = 230;
+  const tipHeight = 70; // approximate
+
+  let left = labelRect.left - heroRect.left + labelRect.width / 2 - tipWidth / 2;
+  let top = labelRect.top - heroRect.top - tipHeight - 14;
+
+  // Clamp to hero bounds
+  left = Math.max(8, Math.min(left, heroRect.width - tipWidth - 8));
+  if (top < 8) top = labelRect.top - heroRect.top + labelRect.height + 10;
+
+  tip.style.left = left + 'px';
+  tip.style.top = top + 'px';
+  tip.style.width = tipWidth + 'px';
+
+  // Trigger enter animation
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => tip.classList.add('visible'));
+  });
+
+  return tip;
+}
+
+function removeTooltip() {
+  if (!activeTooltip) return;
+  const tip = activeTooltip;
+  activeTooltip = null;
+  tip.classList.remove('visible');
+  setTimeout(() => { if (tip.parentNode) tip.parentNode.removeChild(tip); }, 220);
+}
+
+// Enable pointer events on individual labels (not the container)
+const rippleLabelsContainer = document.getElementById('ripple-labels');
+rippleLabelsContainer.style.pointerEvents = 'none';
+
+document.querySelectorAll('.ripple-label:not(.rl-center)').forEach(label => {
+  label.style.pointerEvents = 'auto';
+
+  // Find which key matches this label's class
+  const matchKey = Object.keys(painContext).find(k => label.classList.contains(k));
+  if (!matchKey) return;
+
+  label.addEventListener('mouseenter', () => {
+    removeTooltip();
+    if (label.classList.contains('show') &&
+        (heroPhase.current === 'ready' || heroPhase.current === 'dangers')) {
+      activeTooltip = createTooltip(painContext[matchKey], label);
+    }
+  });
+
+  label.addEventListener('mouseleave', removeTooltip);
+});
