@@ -23,6 +23,13 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
 
+  <!-- Set theme before paint to avoid flash -->
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    );
+  </script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -31,17 +38,59 @@
       --sans: 'IBM Plex Sans', sans-serif;
       --display: 'Space Grotesk', sans-serif;
       --purple: #6D28D9;
+      --transition-theme: background 0.45s ease, color 0.45s ease, border-color 0.45s ease;
+    }
+
+    [data-theme="dark"] {
+      --bg: #020202;
+      --text: #F8F8F8;
+      --text-mid: #C5C5C5;
+      --text-dim: #545454;
+      --text-body: rgba(255,255,255,0.55);
+      --text-intro: rgba(255,255,255,0.7);
+      --text-heading-sub: rgba(255,255,255,0.9);
+      --text-strong: rgba(255,255,255,0.8);
+      --text-updated: rgba(255,255,255,0.3);
+      --nav-bg: rgba(2,2,2,0.7);
+      --nav-link: rgba(255,255,255,0.35);
+      --nav-tagline: rgba(255,255,255,0.3);
+      --border: rgba(255,255,255,0.05);
+      --divider: rgba(255,255,255,0.06);
+      --mobile-bg: rgba(2,2,2,0.96);
+      --mobile-link: rgba(255,255,255,0.7);
+      --hamburger: #F8F8F8;
+    }
+
+    [data-theme="light"] {
+      --bg: #F2F2EF;
+      --text: #020202;
+      --text-mid: #3a3a3a;
+      --text-dim: #888;
+      --text-body: rgba(0,0,0,0.55);
+      --text-intro: rgba(0,0,0,0.6);
+      --text-heading-sub: rgba(0,0,0,0.8);
+      --text-strong: rgba(0,0,0,0.7);
+      --text-updated: rgba(0,0,0,0.3);
+      --nav-bg: rgba(242,242,239,0.92);
+      --nav-link: rgba(0,0,0,0.35);
+      --nav-tagline: rgba(0,0,0,0.3);
+      --border: rgba(0,0,0,0.08);
+      --divider: rgba(0,0,0,0.08);
+      --mobile-bg: rgba(242,242,239,0.96);
+      --mobile-link: rgba(0,0,0,0.6);
+      --hamburger: #020202;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: #020202;
-      color: #F8F8F8;
+      background: var(--bg);
+      color: var(--text);
       font-family: var(--sans);
       font-size: 15.4px;
       min-height: 100vh;
       overflow-x: hidden;
+      transition: var(--transition-theme);
     }
 
     /* ── NAV ── */
@@ -49,27 +98,33 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
       padding: 24px 56px;
-      background: rgba(2,2,2,0.7); backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: var(--nav-bg); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition-theme);
     }
     .nav-wordmark {
       font-family: var(--display); font-size: 18px; font-weight: 700;
-      color: #F8F8F8; text-decoration: none; letter-spacing: -0.02em;
+      color: var(--text); text-decoration: none; letter-spacing: -0.02em;
       display: flex; align-items: center;
+      transition: color 0.45s ease;
     }
     .nav-logo { height: 22px; width: auto; display: block; }
+    .nav-logo-dark { display: block; }
+    .nav-logo-light { display: none; }
+    [data-theme="light"] .nav-logo-dark { display: none; }
+    [data-theme="light"] .nav-logo-light { display: block; }
     .nav-tagline {
       font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
-      text-transform: uppercase; color: rgba(255,255,255,0.3);
-      margin-left: 12px;
+      text-transform: uppercase; color: var(--nav-tagline);
+      margin-left: 12px; transition: color 0.45s ease;
     }
     .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
     .nav-links a {
       font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(255,255,255,0.35);
+      text-transform: uppercase; color: var(--nav-link);
       text-decoration: none; transition: color 0.3s;
     }
-    .nav-links a:hover { color: #F8F8F8; }
+    .nav-links a:hover { color: var(--text); }
 
     /* Hamburger */
     .hamburger {
@@ -78,8 +133,8 @@
       flex-direction: column; justify-content: space-between;
     }
     .hamburger span {
-      display: block; width: 100%; height: 2px; background: #F8F8F8;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      display: block; width: 100%; height: 2px; background: var(--hamburger);
+      transition: transform 0.3s ease, opacity 0.3s ease, background 0.45s ease;
     }
     .hamburger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
@@ -87,17 +142,18 @@
 
     .mobile-menu {
       display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(2,2,2,0.96); backdrop-filter: blur(20px);
+      background: var(--mobile-bg); backdrop-filter: blur(20px);
       z-index: 199;
       flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+      transition: background 0.45s ease;
     }
     .mobile-menu.open { display: flex; }
     .mobile-menu a {
       font-family: var(--mono); font-size: 14px; letter-spacing: 0.14em;
-      text-transform: uppercase; color: rgba(255,255,255,0.7);
+      text-transform: uppercase; color: var(--mobile-link);
       text-decoration: none; transition: color 0.3s;
     }
-    .mobile-menu a:hover { color: #F8F8F8; }
+    .mobile-menu a:hover { color: var(--text); }
 
     /* ── CONTENT ── */
     .pp-container {
@@ -116,49 +172,50 @@
       font-family: var(--display); font-size: clamp(32px, 5vw, 48px);
       font-weight: 700; letter-spacing: -0.03em;
       line-height: 1.15; margin-bottom: 12px;
+      color: var(--text); transition: color 0.45s ease;
     }
 
     .pp-updated {
       font-family: var(--mono); font-size: 11px;
-      color: rgba(255,255,255,0.3); letter-spacing: 0.06em;
-      margin-bottom: 48px;
+      color: var(--text-updated); letter-spacing: 0.06em;
+      margin-bottom: 48px; transition: color 0.45s ease;
     }
 
     .pp-intro {
       font-size: 15.4px; line-height: 1.75;
-      color: rgba(255,255,255,0.7); margin-bottom: 48px;
+      color: var(--text-intro); margin-bottom: 48px;
+      transition: color 0.45s ease;
     }
 
-    .pp-section {
-      margin-bottom: 40px;
-    }
+    .pp-section { margin-bottom: 40px; }
 
     .pp-section h2 {
       font-family: var(--display); font-size: 20px;
       font-weight: 700; letter-spacing: -0.02em;
-      margin-bottom: 16px; color: #F8F8F8;
+      margin-bottom: 16px; color: var(--text);
+      transition: color 0.45s ease;
     }
 
     .pp-section h3 {
       font-family: var(--display); font-size: 16px;
       font-weight: 700; letter-spacing: -0.01em;
-      margin-bottom: 10px; color: rgba(255,255,255,0.9);
+      margin-bottom: 10px; color: var(--text-heading-sub);
+      transition: color 0.45s ease;
     }
 
     .pp-section p {
       font-size: 14px; line-height: 1.8;
-      color: rgba(255,255,255,0.55); margin-bottom: 14px;
+      color: var(--text-body); margin-bottom: 14px;
+      transition: color 0.45s ease;
     }
 
-    .pp-section ul {
-      list-style: none; margin-bottom: 16px; padding: 0;
-    }
+    .pp-section ul { list-style: none; margin-bottom: 16px; padding: 0; }
 
     .pp-section ul li {
       font-size: 14px; line-height: 1.8;
-      color: rgba(255,255,255,0.55);
+      color: var(--text-body);
       padding-left: 20px; position: relative;
-      margin-bottom: 10px;
+      margin-bottom: 10px; transition: color 0.45s ease;
     }
 
     .pp-section ul li::before {
@@ -170,13 +227,15 @@
     }
 
     .pp-section strong {
-      color: rgba(255,255,255,0.8); font-weight: 600;
+      color: var(--text-strong); font-weight: 600;
+      transition: color 0.45s ease;
     }
 
     .pp-divider {
       height: 1px;
-      background: rgba(255,255,255,0.06);
+      background: var(--divider);
       margin: 48px 0;
+      transition: background 0.45s ease;
     }
 
     .pp-section a {
@@ -188,23 +247,25 @@
 
     /* ── FOOTER ── */
     footer {
-      padding: 32px 56px; background: #020202;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 32px 56px; background: var(--bg);
+      border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       position: relative; z-index: 1;
+      transition: var(--transition-theme);
     }
     .footer-brand {
       font-family: var(--mono); font-size: 10px;
-      letter-spacing: 0.1em; color: #545454;
+      letter-spacing: 0.1em; color: var(--text-dim);
+      transition: color 0.45s ease;
     }
-    .footer-brand strong { color: #C5C5C5; }
+    .footer-brand strong { color: var(--text-mid); transition: color 0.45s ease; }
     .footer-links { display: flex; gap: 28px; list-style: none; }
     .footer-links a {
       font-family: var(--mono); font-size: 9.5px;
       letter-spacing: 0.1em; text-transform: uppercase;
-      color: #545454; text-decoration: none; transition: color 0.2s;
+      color: var(--text-dim); text-decoration: none; transition: color 0.2s;
     }
-    .footer-links a:hover { color: #C5C5C5; }
+    .footer-links a:hover { color: var(--text-mid); }
 
     /* ── RESPONSIVE ── */
     @media (min-width: 1400px) {
@@ -235,7 +296,8 @@
 <nav>
   <div style="display:flex;align-items:center;">
     <a href="/" class="nav-wordmark">
-      <img src="../assets/images/logo_blindsight_FULL_white.png" alt="Blindsight" class="nav-logo" />
+      <img src="../assets/images/logo_blindsight_FULL_white.png" alt="Blindsight" class="nav-logo nav-logo-dark" />
+      <img src="../assets/images/logo_blindsight_FULL_black.png" alt="Blindsight" class="nav-logo nav-logo-light" />
     </a>
     <span class="nav-tagline">Securing AI</span>
   </div>
@@ -475,6 +537,11 @@
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('open');
     mobileMenu.classList.toggle('open');
+  });
+
+  // Live OS preference listener
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    document.documentElement.setAttribute('data-theme', e.matches ? 'light' : 'dark');
   });
 </script>
 </body>

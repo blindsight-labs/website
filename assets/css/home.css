@@ -385,8 +385,8 @@
     #exit {
       padding: 80px 80px 96px; background: #020202;
       text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.05);
       position: relative; z-index: 1;
+      margin-top: -1px;
     }
     .exit-line {
       font-family: var(--sans); font-size: 17px;

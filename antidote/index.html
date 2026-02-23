@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -59,6 +59,13 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/antidote.css" />
+
+  <!-- Set theme before paint to avoid flash -->
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    );
+  </script>
 </head>
 <body>
 

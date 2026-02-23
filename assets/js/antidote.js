@@ -1,12 +1,21 @@
   // ── THEME TOGGLE ──
   const html = document.documentElement;
+  let userOverride = false;
   function toggleTheme() {
+    userOverride = true;
     html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     initCanvas();
   }
   document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
   const mobileToggle = document.getElementById('theme-toggle-mobile');
   if (mobileToggle) mobileToggle.addEventListener('click', toggleTheme);
+
+  // Live OS preference listener (respects manual override)
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    if (userOverride) return;
+    html.setAttribute('data-theme', e.matches ? 'light' : 'dark');
+    initCanvas();
+  });
 
   // ── TAB FLIPPER ──
   function switchTab(panel, btn) {
