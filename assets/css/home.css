@@ -321,7 +321,7 @@
     }
     .phil-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: start;
+      gap: 80px; align-items: center;
     }
     .phil-statements { display: flex; flex-direction: column; gap: 48px; }
     .phil-statement {
@@ -340,12 +340,14 @@
       font-size: 14px; line-height: 1.7;
       color: #545454; max-width: 440px;
     }
-    .phil-right { padding-top: 12px; }
+    .phil-right {
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+    }
     .phil-manifesto {
       font-family: var(--mono); font-size: 12px;
       line-height: 1.85; color: #888;
-      border-left: 1px solid rgba(0,0,0,0.1);
-      padding-left: 28px;
+      text-align: center;
     }
     .phil-manifesto strong { color: #020202; font-weight: 700; }
 
