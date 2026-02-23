@@ -1,9 +1,12 @@
   // ── THEME TOGGLE ──
   const html = document.documentElement;
-  document.getElementById('theme-toggle').addEventListener('click', () => {
+  function toggleTheme() {
     html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     initCanvas();
-  });
+  }
+  document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+  const mobileToggle = document.getElementById('theme-toggle-mobile');
+  if (mobileToggle) mobileToggle.addEventListener('click', toggleTheme);
 
   // ── TAB FLIPPER ──
   function switchTab(panel, btn) {
@@ -112,6 +115,24 @@
   }, { threshold: 0.15 });
   beats.forEach(b => { b.style.opacity = '0'; b.style.transform = 'translateY(16px)'; b.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; });
   if (beats[0]) beatObs.observe(beats[0]);
+
+  // ── HAMBURGER MENU ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
 
   // ── GA EVENT TRACKING ──
   document.querySelectorAll('a[href*="tally.so"]').forEach(link => {

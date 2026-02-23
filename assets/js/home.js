@@ -490,6 +490,29 @@ document.querySelectorAll('.ripple-label:not(.rl-center)').forEach(label => {
   label.addEventListener('mouseleave', removeTooltip);
 });
 
+// ── HAMBURGER MENU ──
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  // Sync light/dark mode with nav
+  const navObserver = new MutationObserver(() => {
+    mobileMenu.classList.toggle('light-mode', mainNav.classList.contains('nav-light'));
+  });
+  navObserver.observe(mainNav, { attributes: true, attributeFilter: ['class'] });
+}
+
 // ── GA EVENT TRACKING ──
 document.querySelectorAll('a[href*="tally.so"], a[href*="antidote"]').forEach(link => {
   link.addEventListener('click', () => {
