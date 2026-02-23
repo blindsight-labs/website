@@ -321,7 +321,7 @@
     }
     .phil-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
+      gap: 80px; align-items: start;
     }
     .phil-statements { display: flex; flex-direction: column; gap: 48px; }
     .phil-statement {
