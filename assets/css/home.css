@@ -342,12 +342,10 @@
     }
     .phil-right {
       display: flex; align-items: center; justify-content: center;
-      text-align: center;
     }
     .phil-manifesto {
       font-family: var(--mono); font-size: 12px;
       line-height: 1.85; color: #888;
-      text-align: center;
     }
     .phil-manifesto strong { color: #020202; font-weight: 700; }
 
