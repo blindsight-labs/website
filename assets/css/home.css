@@ -498,23 +498,18 @@
       .hero-headline { font-size: clamp(28px, 7vw, 42px); }
       .hero-sub { font-size: 14px; max-width: 90%; }
 
-      /* Danger labels — circular arrangement for mobile */
+      /* Danger labels — circular arrangement for mobile: 3 above, 4 below */
       .ripple-label { font-size: 8px; letter-spacing: 0.06em; white-space: nowrap; max-width: none; transform: none; }
       .rl-center { font-size: 10px; max-width: 70vw; transform: translate(-50%, -50%); }
-      /* 12 o'clock */
-      .rl-1 { top: 15%; left: 50%; transform: translateX(-50%); }
-      /* ~2 o'clock */
-      .rl-2 { top: 26%; left: auto; right: 4%; }
-      /* 3 o'clock */
-      .rl-3 { top: 46%; left: auto; right: 4%; transform: none; }
-      /* ~5 o'clock */
-      .rl-4 { bottom: 22%; left: auto; right: 6%; top: auto; }
-      /* ~10 o'clock */
-      .rl-5 { top: 26%; left: 4%; right: auto; }
-      /* 9 o'clock */
-      .rl-6 { top: 46%; left: 4%; right: auto; transform: none; }
-      /* ~7 o'clock */
-      .rl-7 { bottom: 22%; left: 4%; right: auto; top: auto; }
+      /* Above center: 3 labels */
+      .rl-1 { top: 20%; left: 50%; transform: translateX(-50%); }
+      .rl-5 { top: 32%; left: 4%; right: auto; }
+      .rl-2 { top: 32%; left: auto; right: 4%; }
+      /* Below center: 4 labels */
+      .rl-6 { top: auto; bottom: 32%; left: 4%; right: auto; transform: none; }
+      .rl-3 { top: auto; bottom: 32%; left: auto; right: 4%; transform: none; }
+      .rl-7 { top: auto; bottom: 20%; left: 4%; right: auto; }
+      .rl-4 { top: auto; bottom: 20%; left: auto; right: 4%; }
 
       .phase-a-hint { bottom: 32px; }
 
