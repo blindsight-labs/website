@@ -885,4 +885,20 @@
       .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
     }
 
+    /* ── WIDE SCREEN CONTAINMENT ── */
+    @media (min-width: 1400px) {
+      #zone-1, #zone-2, #zone-3, .usp-section, .stats-banner {
+        padding-left: calc((100vw - 1280px) / 2);
+        padding-right: calc((100vw - 1280px) / 2);
+      }
+      nav, footer {
+        padding-left: calc((100vw - 1280px) / 2);
+        padding-right: calc((100vw - 1280px) / 2);
+      }
+      .zone-divider {
+        padding-left: calc((100vw - 1280px) / 2);
+        padding-right: calc((100vw - 1280px) / 2);
+      }
+    }
+
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.85)} }
