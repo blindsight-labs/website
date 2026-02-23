@@ -887,7 +887,7 @@
 
     /* ── WIDE SCREEN CONTAINMENT ── */
     @media (min-width: 1400px) {
-      #zone-1, #zone-2, #zone-3, .usp-section, .stats-banner {
+      #zone-1, #zone-2, #zone-3, .usp-section, .stats-banner, .playground-section {
         padding-left: calc((100vw - 1280px) / 2);
         padding-right: calc((100vw - 1280px) / 2);
       }
