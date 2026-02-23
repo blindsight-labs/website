@@ -68,7 +68,7 @@
 
     /* ── DEPTH INDICATOR ── */
     #depth-indicator {
-      position: fixed; right: 24px; top: 50%;
+      position: fixed; right: 48px; top: 50%;
       transform: translateY(-50%);
       z-index: 200;
       display: flex; flex-direction: column; align-items: flex-end; gap: 0;
