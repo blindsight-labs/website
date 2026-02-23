@@ -436,10 +436,34 @@
       .phil-grid { grid-template-columns: 1fr; gap: 48px; }
     }
     @media (max-width: 640px) {
+      nav { padding: 14px 16px; }
+      .nav-logo { height: 18px; }
+      .nav-tagline { display: none; }
+
       .hero-headline { font-size: clamp(28px, 7vw, 42px); }
+      .hero-sub { font-size: 14px; max-width: 90%; }
+
       .ripple-label { font-size: 7px; letter-spacing: 0.08em; }
       .rl-3 { right: 3%; } .rl-4 { right: 4%; }
       .rl-5 { left: 3%; } .rl-6 { left: 2%; }
       .rl-2, .rl-7 { display: none; }
-      footer { flex-direction: column; gap: 16px; text-align: center; }
+
+      #shift-left, #philosophy, #alignment, #exit { padding-left: 16px; padding-right: 16px; }
+      #shift-left, #philosophy { padding-top: 72px; padding-bottom: 72px; }
+      #alignment { padding-top: 80px; padding-bottom: 80px; }
+      #exit { padding: 56px 16px 64px; }
+
+      .sl-headline { font-size: clamp(24px, 6vw, 36px); }
+      .sl-stage { padding: 28px 20px; }
+
+      .phil-statement-text { font-size: clamp(20px, 5vw, 28px); }
+      .phil-manifesto { font-size: 11px; padding-left: 20px; }
+
+      .align-headline { font-size: clamp(24px, 6vw, 40px); }
+      .align-body { font-size: 14px; }
+
+      .exit-line { font-size: 15px; }
+
+      footer { padding: 24px 16px; flex-direction: column; gap: 16px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
     }
