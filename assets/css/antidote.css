@@ -830,6 +830,7 @@
       .compliance-row { grid-template-columns: 1fr; }
       nav { padding: 16px 24px; }
       .nav-links { display: none; }
+      .nav-right { display: none; }
       .hamburger { display: flex; }
       #zone-1, #zone-2, #zone-3, .usp-section, .stats-banner, .playground-section { padding: 80px 24px; }
       footer { padding: 24px; flex-direction: column; gap: 16px; text-align: center; }
@@ -848,8 +849,6 @@
       .nav-back::before { font-size: var(--fs-xxs); }
       .nav-sep { display: none; }
       .nav-product-by { display: none; }
-      .nav-right { display: none; }
-      .hamburger { order: 2; margin-left: auto; }
 
       #zone-1 { padding: 100px 16px 56px; min-height: auto; }
       #zone-2, #zone-3, .usp-section, .stats-banner, .playground-section { padding: 56px 16px; }
