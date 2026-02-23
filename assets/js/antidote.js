@@ -112,3 +112,13 @@
   }, { threshold: 0.15 });
   beats.forEach(b => { b.style.opacity = '0'; b.style.transform = 'translateY(16px)'; b.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; });
   if (beats[0]) beatObs.observe(beats[0]);
+
+  // ── GA EVENT TRACKING ──
+  document.querySelectorAll('a[href*="tally.so"]').forEach(link => {
+    link.addEventListener('click', () => {
+      gtag('event', 'cta_click', {
+        event_category: 'engagement',
+        event_label: link.textContent.trim().replace(/\s+/g, ' ')
+      });
+    });
+  });

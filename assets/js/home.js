@@ -487,3 +487,13 @@ document.querySelectorAll('.ripple-label:not(.rl-center)').forEach(label => {
 
   label.addEventListener('mouseleave', removeTooltip);
 });
+
+// ── GA EVENT TRACKING ──
+document.querySelectorAll('a[href*="tally.so"], a[href*="antidote"]').forEach(link => {
+  link.addEventListener('click', () => {
+    gtag('event', 'cta_click', {
+      event_category: 'engagement',
+      event_label: link.textContent.trim().replace(/\s+/g, ' ')
+    });
+  });
+});
