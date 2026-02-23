@@ -45,7 +45,9 @@
     }
     nav.nav-light .nav-wordmark { color: #020202; }
     .nav-logo { height: 22px; width: auto; display: block; }
-    .nav-logo-fallback { display: none; }
+    .nav-logo-light { display: none; }
+    nav.nav-light .nav-logo-dark { display: none; }
+    nav.nav-light .nav-logo-light { display: block; }
     .nav-tagline {
       font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
       text-transform: uppercase; color: rgba(255,255,255,0.3);
