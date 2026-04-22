@@ -12,6 +12,39 @@ const phaseAHint = document.getElementById('phase-a-hint');
 const heroText = document.getElementById('hero-text');
 const mainNav = document.getElementById('main-nav');
 
+// Skip hero animation if page loads scrolled (e.g. user refreshed mid-page).
+// Running Three.js while the user is already deep in the page freezes the main thread.
+// We check two signals: scrollY now (in case scroll is already restored) and the
+// presence of a persisted navigation entry indicating a reload.
+if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
+const navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+const isReload = navEntry ? navEntry.type === 'reload' : (performance.navigation && performance.navigation.type === 1);
+let skipHeroAnim = window.scrollY > 10 || (isReload && sessionStorage.getItem('bs_scrolled') === '1');
+
+function applyHeroSkip() {
+  if (heroPhase.current === 'done') return;
+  skipHeroAnim = true;
+  heroPhase.current = 'done';
+  document.body.classList.remove('hero-locked');
+  mainNav.classList.remove('nav-hidden');
+  heroText.classList.add('show');
+  threeContainer.style.display = 'none';
+  rippleLabels.style.display = 'none';
+  if (phaseAHint) phaseAHint.style.display = 'none';
+}
+
+if (skipHeroAnim) applyHeroSkip();
+
+// Track whether user has scrolled past hero, to persist across reloads.
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 200) sessionStorage.setItem('bs_scrolled', '1');
+}, { passive: true });
+
+// Scroll restoration may happen after script execution; re-check on load.
+window.addEventListener('load', () => {
+  if (window.scrollY > 10) applyHeroSkip();
+});
+
 function showDangers() {
   heroPhase.current = 'dangers';
   // Show center label first
@@ -92,7 +125,7 @@ window.addEventListener('wheel', (e) => {
 
 // ══════════════════ THREE.JS — PURPLE DROPLET & RIPPLE ══════════════════
 
-(function() {
+function initHeroThree() {
   const container = document.getElementById('three-container');
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
@@ -282,7 +315,18 @@ window.addEventListener('wheel', (e) => {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
-})();
+}
+
+// Defer hero init until after browser restores scroll position.
+function maybeInitHero() {
+  if (window.scrollY > 10) {
+    applyHeroSkip();
+    return;
+  }
+  initHeroThree();
+}
+if (document.readyState === 'complete') maybeInitHero();
+else window.addEventListener('load', maybeInitHero);
 
 
 // ══════════════════ DARK→LIGHT TRANSITION (scroll-progress) ══════════════════
