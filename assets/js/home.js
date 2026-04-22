@@ -522,3 +522,26 @@ document.querySelectorAll('a[href*="tally.so"], a[href*="antidote"]').forEach(li
     });
   });
 });
+
+// ══════════════════ NAV CTA — Section-based color ══════════════════
+const navCta = document.getElementById('nav-cta');
+if (navCta) {
+  const ctaSections = [
+    { el: document.getElementById('hero'),       color: '#6D28D9' }, // purple (poison)
+    { el: document.getElementById('shift-left'), color: '#2DD573' }, // green (Blindsight operates)
+    { el: document.getElementById('exit'),       color: '#F2C94D' }, // yellow (final)
+  ].filter(s => s.el);
+
+  const updateCtaColor = () => {
+    const y = window.scrollY + 140; // viewport top + nav height
+    let active = ctaSections[0];
+    for (const s of ctaSections) {
+      if (s.el.offsetTop <= y) active = s;
+    }
+    navCta.style.background = active.color;
+    navCta.style.color = active.color === '#F2C94D' ? '#020202' : '#F8F8F8';
+  };
+
+  window.addEventListener('scroll', updateCtaColor, { passive: true });
+  updateCtaColor();
+}
