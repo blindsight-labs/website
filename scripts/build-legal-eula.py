@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build legal/eula/index.html from the licence text.
 
-    python3 scripts/build-legal-eula.py TEXT.md [--version 0.1] [--published 2026-11-16] [--require-final]
+    python3 scripts/build-legal-eula.py TEXT.md --meta licence.json [--platform-meta current.json] [--require-final]
 
 The text is the same file the Blindsight platform serves and the installers show.
 While it still holds a placeholder (a "[" or an <angle placeholder>) the page is
@@ -15,7 +15,9 @@ pages cannot drift apart.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
+import json
 import re
 import sys
 from pathlib import Path
@@ -57,8 +59,13 @@ def body_from(text: str) -> str:
     return body.replace('  </div>\n  <div class="pp-section">', '<div class="pp-section">', 1) if body.startswith("  </div>") else '  <div class="pp-section">\n' + body
 
 
-def build(text: str, version: str, published: str) -> tuple[str, bool]:
-    final = not placeholders(text)
+def text_hash(text: str) -> str:
+    """Same normalisation as the platform and the installers: LF, one trailing newline."""
+    return hashlib.sha256((text.replace("\r\n", "\n").replace("\r", "\n").rstrip("\n") + "\n").encode("utf-8")).hexdigest()
+
+
+def build(text: str, version: str, published: str, marked_final: bool = False) -> tuple[str, bool]:
+    final = bool(marked_final) and not placeholders(text)
     frame = FRAME.read_text(encoding="utf-8")
     head, rest = frame.split("<!-- CONTENT -->", 1)
     foot = rest.split("<!-- FOOTER -->", 1)[1]
@@ -88,14 +95,22 @@ def build(text: str, version: str, published: str) -> tuple[str, bool]:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("text", type=Path)
-    ap.add_argument("--version", default="0.1")
-    ap.add_argument("--published", default="2026-11-16")
+    ap.add_argument("--meta", type=Path, required=True, help="licence.json: version, published_at, final")
+    ap.add_argument("--platform-meta", type=Path, help="the platform's current.json, to compare the version")
     ap.add_argument("--require-final", action="store_true")
     ap.add_argument("--out", type=Path, default=OUT)
     a = ap.parse_args(argv)
-    page, final = build(a.text.read_text(encoding="utf-8"), a.version, a.published)
+    meta = json.loads(a.meta.read_text(encoding="utf-8"))
+    if a.platform_meta:
+        theirs = json.loads(a.platform_meta.read_text(encoding="utf-8"))
+        if str(theirs.get("version")) != str(meta.get("version")):
+            print(f"The licence version here ({meta.get('version')}) is not the platform's ({theirs.get('version')}).", file=sys.stderr)
+            return 1
+    text = a.text.read_text(encoding="utf-8")
+    page, final = build(text, str(meta["version"]), str(meta["published_at"]), bool(meta.get("final")))
+    print(f"licence {meta['version']} sha256 {text_hash(text)}")
     if a.require_final and not final:
-        print("The licence text still has placeholders; not building a final page.", file=sys.stderr)
+        print("The licence text is not final (not marked final, or it still has placeholders); not building a final page.", file=sys.stderr)
         return 1
     a.out.parent.mkdir(parents=True, exist_ok=True)
     a.out.write_text(page, encoding="utf-8")
