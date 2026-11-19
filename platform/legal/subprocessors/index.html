@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-06PKBPMVBJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-06PKBPMVBJ');
+  </script>
+
+  <title>Blindsight Sub-processors | Blindsight platform</title>
+  <meta name="description" content="The providers Blindsight uses to process customer data." />
+  <link rel="canonical" href="https://blindsight.io/platform/legal/subprocessors" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/images/Emblem_B.png" type="image/png" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Set theme before paint to avoid flash -->
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    );
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+      --display: 'Space Grotesk', sans-serif;
+      --purple: #6D28D9;
+      --transition-theme: background 0.45s ease, color 0.45s ease, border-color 0.45s ease;
+    }
+
+    [data-theme="dark"] {
+      --bg: #020202;
+      --text: #F8F8F8;
+      --text-mid: #C5C5C5;
+      --text-dim: #545454;
+      --text-body: rgba(255,255,255,0.55);
+      --text-intro: rgba(255,255,255,0.7);
+      --text-heading-sub: rgba(255,255,255,0.9);
+      --text-strong: rgba(255,255,255,0.8);
+      --text-updated: rgba(255,255,255,0.3);
+      --nav-bg: rgba(2,2,2,0.7);
+      --nav-link: rgba(255,255,255,0.35);
+      --nav-tagline: rgba(255,255,255,0.3);
+      --border: rgba(255,255,255,0.05);
+      --divider: rgba(255,255,255,0.06);
+      --mobile-bg: rgba(2,2,2,0.96);
+      --mobile-link: rgba(255,255,255,0.7);
+      --hamburger: #F8F8F8;
+    }
+
+    [data-theme="light"] {
+      --bg: #F2F2EF;
+      --text: #020202;
+      --text-mid: #3a3a3a;
+      --text-dim: #888;
+      --text-body: rgba(0,0,0,0.55);
+      --text-intro: rgba(0,0,0,0.6);
+      --text-heading-sub: rgba(0,0,0,0.8);
+      --text-strong: rgba(0,0,0,0.7);
+      --text-updated: rgba(0,0,0,0.3);
+      --nav-bg: rgba(242,242,239,0.92);
+      --nav-link: rgba(0,0,0,0.35);
+      --nav-tagline: rgba(0,0,0,0.3);
+      --border: rgba(0,0,0,0.08);
+      --divider: rgba(0,0,0,0.08);
+      --mobile-bg: rgba(242,242,239,0.96);
+      --mobile-link: rgba(0,0,0,0.6);
+      --hamburger: #020202;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15.4px;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: var(--transition-theme);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 56px;
+      background: var(--nav-bg); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition-theme);
+    }
+    .nav-wordmark {
+      font-family: var(--display); font-size: 18px; font-weight: 700;
+      color: var(--text); text-decoration: none; letter-spacing: -0.02em;
+      display: flex; align-items: center;
+      transition: color 0.45s ease;
+    }
+    .nav-logo { height: 22px; width: auto; display: block; }
+    .nav-logo-dark { display: block; }
+    .nav-logo-light { display: none; }
+    [data-theme="light"] .nav-logo-dark { display: none; }
+    [data-theme="light"] .nav-logo-light { display: block; }
+    .nav-tagline {
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--nav-tagline);
+      margin-left: 12px; transition: color 0.45s ease;
+    }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--nav-link);
+      text-decoration: none; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 28px; height: 20px; position: relative; z-index: 210;
+      flex-direction: column; justify-content: space-between;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2px; background: var(--hamburger);
+      transition: transform 0.3s ease, opacity 0.3s ease, background 0.45s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--mobile-bg); backdrop-filter: blur(20px);
+      z-index: 199;
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+      transition: background 0.45s ease;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--mono); font-size: 14px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mobile-link);
+      text-decoration: none; transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--text); }
+
+    /* ── CONTENT ── */
+    .pp-container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 140px 56px 80px;
+    }
+
+    .pp-tag {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 20px;
+    }
+
+    .pp-title {
+      font-family: var(--display); font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.15; margin-bottom: 12px;
+      color: var(--text); transition: color 0.45s ease;
+    }
+
+    .pp-updated {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-updated); letter-spacing: 0.06em;
+      margin-bottom: 48px; transition: color 0.45s ease;
+    }
+
+    .pp-intro {
+      font-size: 15.4px; line-height: 1.75;
+      color: var(--text-intro); margin-bottom: 48px;
+      transition: color 0.45s ease;
+    }
+
+    .pp-section { margin-bottom: 40px; }
+
+    .pp-section h2 {
+      font-family: var(--display); font-size: 20px;
+      font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px; color: var(--text);
+      transition: color 0.45s ease;
+    }
+
+    .pp-section h3 {
+      font-family: var(--display); font-size: 16px;
+      font-weight: 700; letter-spacing: -0.01em;
+      margin-bottom: 10px; color: var(--text-heading-sub);
+      transition: color 0.45s ease;
+    }
+
+    .pp-section p {
+      font-size: 14px; line-height: 1.8;
+      color: var(--text-body); margin-bottom: 14px;
+      transition: color 0.45s ease;
+    }
+
+    .pp-section ul { list-style: none; margin-bottom: 16px; padding: 0; }
+
+    .pp-section ul li {
+      font-size: 14px; line-height: 1.8;
+      color: var(--text-body);
+      padding-left: 20px; position: relative;
+      margin-bottom: 10px; transition: color 0.45s ease;
+    }
+
+    .pp-section ul li::before {
+      content: '';
+      position: absolute; left: 0; top: 10px;
+      width: 6px; height: 6px;
+      border: 1px solid var(--purple);
+      border-radius: 1px;
+    }
+
+    .pp-section strong {
+      color: var(--text-strong); font-weight: 600;
+      transition: color 0.45s ease;
+    }
+
+    .pp-divider {
+      height: 1px;
+      background: var(--divider);
+      margin: 48px 0;
+      transition: background 0.45s ease;
+    }
+
+    .pp-section a {
+      color: var(--purple); text-decoration: none;
+      border-bottom: 1px solid rgba(109,40,217,0.3);
+      transition: border-color 0.2s;
+    }
+    .pp-section a:hover { border-color: var(--purple); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 56px; background: var(--bg);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 1;
+      transition: var(--transition-theme);
+    }
+    .footer-brand {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.1em; color: var(--text-dim);
+      transition: color 0.45s ease;
+    }
+    .footer-brand strong { color: var(--text-mid); transition: color 0.45s ease; }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-dim); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text-mid); }
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 1400px) {
+      nav, footer {
+        padding-left: calc((100vw - 1280px) / 2);
+        padding-right: calc((100vw - 1280px) / 2);
+      }
+    }
+    @media (max-width: 1100px) {
+      nav { padding: 18px 28px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .pp-container { padding-left: 28px; padding-right: 28px; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 14px 16px; }
+      .nav-logo { height: 18px; }
+      .nav-tagline { display: none; }
+      .pp-container { padding: 100px 16px 56px; }
+      footer { padding: 24px 16px; flex-direction: column; gap: 16px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    }
+  
+    /* ── PLATFORM LEGAL ── */
+    .pp-container { max-width: 860px; }
+    .pl-scope {
+      font-size: 14px; line-height: 1.7; color: var(--text-intro);
+      border: 1px solid var(--border); border-left: 3px solid var(--purple);
+      padding: 14px 18px; margin: 0 0 40px; border-radius: 2px;
+    }
+    .pl-scope a { color: var(--purple); border-bottom: 1px solid rgba(109,40,217,0.3); text-decoration: none; }
+    .pl-scope a:hover { border-color: var(--purple); }
+    .pl-doc .pp-section p, .pl-doc .pp-section li, .pl-doc td, .pl-doc th { color: var(--text-intro); }
+    .pl-doc p { font-size: 14px; line-height: 1.8; color: var(--text-intro); margin-bottom: 14px; overflow-wrap: anywhere; }
+    .pl-doc p .ln { display: block; padding-left: 2.2em; text-indent: -2.2em; }
+    .pl-doc p .ln:first-child { padding-left: 0; text-indent: 0; }
+    .pl-doc h2 { font-family: var(--display); font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 40px 0 16px; color: var(--text); }
+    .pl-doc h3 { font-family: var(--display); font-size: 16px; font-weight: 700; margin: 28px 0 10px; color: var(--text-heading-sub); }
+    .pl-doc h2.clause { font-size: 17px; margin-top: 36px; }
+    .pl-doc ul { list-style: none; margin: 0 0 16px; padding: 0; }
+    .pl-doc ul li { font-size: 14px; line-height: 1.8; color: var(--text-intro); padding-left: 20px; position: relative; margin-bottom: 8px; overflow-wrap: anywhere; }
+    .pl-doc ul li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border: 1px solid var(--purple); border-radius: 1px; }
+    .pl-doc ol { margin: 0 0 16px 22px; padding: 0; }
+    .pl-doc ol li { font-size: 14px; line-height: 1.8; color: var(--text-intro); margin-bottom: 8px; }
+    .pl-doc strong { color: var(--text-strong); font-weight: 600; }
+    .pl-doc a { color: var(--purple); text-decoration: none; border-bottom: 1px solid rgba(109,40,217,0.3); }
+    .pl-doc a:hover { border-color: var(--purple); }
+    .pl-doc code { font-family: var(--mono); font-size: 12.5px; }
+    .pl-doc hr { border: 0; height: 1px; background: var(--divider); margin: 40px 0; }
+    .pl-tablewrap { overflow-x: auto; margin: 0 0 24px; border: 1px solid var(--border); }
+    .pl-doc table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 12.5px; line-height: 1.6; }
+    .pl-doc th, .pl-doc td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--divider); }
+    .pl-doc th { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-strong); }
+    .pl-index { list-style: none; margin: 0; padding: 0; }
+    .pl-index li { border-top: 1px solid var(--divider); }
+    .pl-index li:last-child { border-bottom: 1px solid var(--divider); }
+    .pl-doc .pl-index li { padding-left: 0; margin-bottom: 0; }
+    .pl-doc .pl-index li::before { display: none; }
+    .pl-index a { display: block; padding: 20px 4px; text-decoration: none; border: 0; }
+    .pl-index a:hover .pl-name { color: var(--purple); }
+    .pl-name { display: block; font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+    .pl-desc { display: block; font-size: 14px; line-height: 1.6; color: var(--text-intro); margin-top: 4px; }
+    .pl-meta { display: block; font-family: var(--mono); font-size: 11px; color: var(--text-updated); margin-top: 6px; letter-spacing: 0.04em; }
+    .pl-raw { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; margin: 0 0 32px; color: var(--text-updated); }
+    .pl-raw a { color: var(--purple); }
+    .pl-skip { position: absolute; left: -999px; }
+    .pl-skip:focus { left: 8px; top: 8px; z-index: 300; background: var(--bg); color: var(--text); padding: 8px 12px; }
+    @media print {
+      :root, [data-theme="dark"], [data-theme="light"] {
+        --bg: #fff; --text: #000; --text-mid: #222; --text-dim: #444; --text-body: #111; --text-intro: #111;
+        --text-heading-sub: #000; --text-strong: #000; --text-updated: #333; --border: #bbb; --divider: #bbb; --purple: #000;
+      }
+      body { background: #fff; color: #000; font-size: 11pt; }
+      nav, .mobile-menu, footer, .pl-raw, .pl-skip { display: none !important; }
+      .pp-container { max-width: none; padding: 0; }
+      .pl-scope { border: 1px solid #000; border-left: 3px solid #000; }
+      .pl-doc p, .pl-doc ul li, .pl-doc ol li, .pl-doc td, .pl-doc th { font-size: 10.5pt; color: #000; }
+      .pl-doc a, .pl-scope a { color: #000; border: 0; text-decoration: underline; }
+      .pl-doc h2, .pl-doc h3 { break-after: avoid; }
+      .pl-doc p, .pl-doc li, .pl-doc tr { break-inside: avoid; }
+      .pl-tablewrap { overflow: visible; border: 0; }
+      .pl-doc table { min-width: 0; font-size: 9pt; }
+      .pl-doc th, .pl-doc td { border: 1px solid #888; }
+      .pl-print-url { display: block !important; }
+    }
+    .pl-print-url { display: none; font-family: var(--mono); font-size: 10pt; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+<a class="pl-skip" href="#main">Skip to the document</a>
+
+<!-- NAV -->
+<nav>
+  <div style="display:flex;align-items:center;">
+    <a href="/" class="nav-wordmark">
+      <img src="/assets/images/LOGO_Primary_W.png" alt="Blindsight" class="nav-logo nav-logo-dark" />
+      <img src="/assets/images/LOGO_Primary_B.png" alt="Blindsight" class="nav-logo nav-logo-light" />
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="/antidote/">Antidote</a></li>
+    <li><a href="mailto:info@blindsight.io">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/antidote/">Antidote</a>
+  <a href="mailto:info@blindsight.io">Contact</a>
+</div>
+
+<!-- CONTENT -->
+<main id="main" class="pp-container pl-doc">
+  <div class="pp-tag">// Platform legal</div>
+  <h1 class="pp-title">Blindsight Sub-processors</h1>
+  <div class="pp-updated">Version 1.0 &middot; Effective 19 December 2026</div>
+  <p class="pl-print-url">blindsight.io/platform/legal/subprocessors</p>
+  <p class="pl-scope">This document covers the Blindsight platform (the console, the desktop apps and the APIs). The blindsight.io website has its own <a href="/privacy-policy/">privacy notice</a> and terms (the website has no separate terms page; its <a href="/privacy-policy/">privacy policy</a> is the only website legal document). All platform legal documents are listed in the <a href="/platform/legal/">platform legal index</a>.</p>
+    <div class="pp-section">
+<h2>1. About this list</h2>
+<p><span class="ln">Blindsight Technologies AG, Rennweg 57, 8001 Zurich, Switzerland (UID CHE-484.046.837) ("Blindsight") provides a desktop agent and a hosted platform. When a customer ("Customer") uses the product, Blindsight processes Customer Personal Data on the Customer's behalf and acts as processor under the data processing agreement at <a href="/platform/legal/dpa/">https://blindsight.io/platform/legal/dpa</a> (the "DPA"; clause 10.1 of the Blindsight Endpoint Licence Agreement). To do so, Blindsight uses the providers listed in Table A. These are the sub-processors under the DPA, and Annex 3 of the DPA lists the same providers.</span></p>
+<p><span class="ln">This page also lists, for transparency, services a Customer may choose to connect (Table B), providers that support the product but do not receive Customer Personal Data (Table C), and providers Blindsight uses as controller for its own business (section 5), which are described in the privacy notice at <a href="/platform/legal/privacy/">https://blindsight.io/platform/legal/privacy</a>.</span></p>
+<p><span class="ln">Notice of changes. Blindsight will tell the Customer's administrators by e-mail, and will update this page, at least 30 days before a new sub-processor starts to process Customer Personal Data, or before an existing one is given a materially wider scope or a new location (DPA clause 6.2). The Customer may object within that period as DPA clause 6.3 provides.</span></p>
+<h2>2. Table A: Sub-processors for Customer Personal Data</h2>
+<p><span class="ln">These providers receive Customer Personal Data in the product. "Always" means the provider is part of the standard service. "Only if" means the provider receives data only when the stated feature is switched on for the Customer's workspace.</span></p>
+<div class="pl-tablewrap" tabindex="0" role="region" aria-label="Table"><table>
+<thead><tr><th scope="col">Provider (legal entity)</th><th scope="col">Service and purpose</th><th scope="col">Categories of data</th><th scope="col">Location of processing</th><th scope="col">Transfer mechanism</th><th scope="col">When used</th></tr></thead>
+<tbody>
+<tr><td>Amazon Web Services EMEA SARL (Luxembourg)</td><td>Hosting of the platform: compute, database, cache, file and object storage, encryption keys, logs, network and web-application firewall</td><td>All data held in a workspace: administrator and user accounts, device and fleet data, prompt and file inspection records (including redacted prompt, reply and file text, kept by default), audit records, uploaded documents and datasets</td><td>Ireland (AWS region eu-west-1)</td><td>None needed: inside the EEA, which Switzerland recognises as adequate</td><td>Always</td></tr>
+<tr><td>Amazon Web Services EMEA SARL (as above), Amazon Simple Email Service</td><td>Sends product e-mails (invitations, password and sign-in links, alert e-mails to addresses the Customer configures, in-app help and bug reports to Blindsight support)</td><td>Recipient and sender e-mail addresses, names, message content and attachments of those e-mails</td><td>Ireland (eu-west-1; the sending region is the platform's own region)</td><td>None needed (as above)</td><td>Always (default sending method)</td></tr>
+<tr><td>Amazon Web Services EMEA SARL (as above), Amazon Bedrock, with a hosted language model served by AWS</td><td>Reads a written AI policy that an administrator uploads and turns it into rules (policy import); judges, for topic rules, whether a redacted prompt window breaks a rule the Customer wrote; writes example sentences for a topic rule from the rule and the examples the Customer's administrators give</td><td>Policy import: the text of the uploaded policy document, kept only for the import run. Topic rules: at most 1,500 characters of prompt text taken from the platform's redacted output, not stored and not logged by Blindsight after the decision; topic rule text and examples. The text can still contain personal data that redaction did not catch</td><td>Ireland (eu-west-1) only, so no workspace can use another region</td><td>None needed: inside the EEA</td><td>Only for a workspace that imports a policy document or defines topic rules</td></tr>
+<tr><td>Microsoft Ireland Operations Limited (Microsoft 365 mailboxes)</td><td>Hosting the Blindsight mailboxes (support@ shared mailbox for support e-mails and bug reports, info@, legal@, security@)</td><td>The report or e-mail, the sender's name and e-mail address (unless the workspace hides identities), and attachments (up to 10 files, 25 MB each), which can contain Customer Personal Data</td><td>European Union and EFTA: the tenant's data location for Exchange Online, Exchange Online Protection, Teams, OneDrive and SharePoint is "European Union\EFTA", under the EU Data Boundary; under Microsoft's product terms certain inactive data is stored in Portugal</td><td>Data stored in the EU and EFTA under the EU Data Boundary; transfers outside the EU that the EU Data Boundary still allows are governed by Microsoft's data protection terms</td><td>When Customer Personal Data reaches Blindsight through support e-mails, attachments and bug reports</td></tr>
+</tbody></table></div>
+<p><span class="ln">Sub-processor staff and Blindsight staff: Blindsight's own personnel access the platform only as described in the DPA and the technical and organisational measures, and only from Switzerland, Portugal and Germany.</span></p>
+<h2>3. Table B: Services the Customer chooses to connect</h2>
+<p><span class="ln">These are not Blindsight sub-processors. Data goes to them only because the Customer, or an administrator acting for the Customer, connects them or configures them as a destination. The Customer's own agreement with each provider applies to that data. Each integration is off until the Customer sets it up.</span></p>
+<div class="pl-tablewrap" tabindex="0" role="region" aria-label="Table"><table>
+<thead><tr><th scope="col">Service the Customer connects</th><th scope="col">What it is used for</th><th scope="col">Data that goes there, on the Customer's instruction</th></tr></thead>
+<tbody>
+<tr><td>Microsoft Entra ID, Microsoft Graph, Microsoft Intune, Microsoft 365 (activity records of Microsoft's AI assistant)</td><td>Single sign-on, directory synchronisation, reading device inventory, deploying the agent app, reading AI assistant activity</td><td>Sign-in tokens and group membership; user and group records read from the Customer's tenant; device inventory read; the agent package pushed to the Customer's tenant</td></tr>
+<tr><td>Google sign-in (OpenID Connect)</td><td>Single sign-on for the Customer's users</td><td>Sign-in tokens and identity claims</td></tr>
+<tr><td>Okta and other identity providers using SCIM or OpenID Connect</td><td>Provisioning and sign-in</td><td>User and group records the Customer's provider sends to the platform; sign-in tokens</td></tr>
+<tr><td>Alert destinations: webhook, Slack, Microsoft Teams, e-mail (up to 20 addresses), syslog, Splunk HTTP Event Collector, Microsoft Sentinel</td><td>Delivery of alerts and exports to the Customer's own security tooling</td><td>Alert content as configured, which can include user names unless the workspace hides identities</td></tr>
+<tr><td>Managed service provider (MSP) integrations: the same destinations, plus ticketing</td><td>A Customer that is an MSP routes its clients' alerts to its own tools</td><td>Alert content for the MSP's clients, to the MSP's own endpoints. The MSP is a separate party for its clients</td></tr>
+<tr><td>AI providers the Customer already uses (for example when the Customer routes its own AI traffic through the platform's inspection proxy)</td><td>The Customer's own calls to the AI providers it chose, inspected on the way</td><td>The Customer's own requests, forwarded to the provider the Customer named. Blindsight does not choose or contract this provider</td></tr>
+<tr><td>Public dataset sites</td><td>Importing a public dataset by reference into the data-security scanner, when an administrator requests it</td><td>The dataset reference and the access token the administrator supplies</td></tr>
+<tr><td>The Customer's own document stores read for retrieval-augmented generation scanning</td><td>Scanning the Customer's own corpora</td><td>Documents read from the Customer's store, under credentials the Customer provides</td></tr>
+</tbody></table></div>
+<h2>4. Table C: Other providers that do not receive Customer Personal Data</h2>
+<div class="pl-tablewrap" tabindex="0" role="region" aria-label="Table"><table>
+<thead><tr><th scope="col">Provider</th><th scope="col">Role</th><th scope="col">Why it is not a sub-processor for Customer Personal Data</th></tr></thead>
+<tbody>
+<tr><td>Keygen</td><td>Licence validation and issuing</td><td>The platform sends Keygen only the workspace's licence key (to validate it) and aggregate usage counters written into the licence record. No names, e-mail addresses, prompts, device or user data. Separately, Blindsight's own licence console records the Customer's billing contact as a Keygen user; that is Blindsight's controller data, see section 5. Keygen states that its main servers are in the United States (Virginia)</td></tr>
+<tr><td>Amazon CloudFront and Amazon S3, operated by Blindsight as downloads.blindsight.io</td><td>Distribution of installers, update manifests and detection model files to devices</td><td>Files and manifests only; the CDN holds no Customer Personal Data. CloudFront sits only in front of downloads.blindsight.io, not in front of the console or the API. The storage bucket is in the United States (us-east-1) and the edge locations are in Europe and North America. A device that fetches an update connects to an edge location, so its IP address reaches AWS there, as in any web download; no other customer data does. CDN access logs, if enabled, are Blindsight's operational logs</td></tr>
+<tr><td>Public domain registries (RDAP, via the IANA bootstrap file) and public front pages of web hosts</td><td>Background classification of unknown web hosts and domain age</td><td>Only a host name or registrable domain is sent, never a workspace, device or person</td></tr>
+<tr><td>Cloudflare, Inc. (public IP range lists at www.cloudflare.com/ips-v4 and /ips-v6)</td><td>The desktop agent refreshes a public list of address ranges so it can scope interception correctly</td><td>A plain download initiated by the device. No Customer Personal Data is sent beyond the device's IP address, which any web request reveals</td></tr>
+</tbody></table></div>
+<h2>5. Providers used by Blindsight as controller</h2>
+<p><span class="ln">These providers process personal data for Blindsight's own purposes (billing, licensing and support). They are described in the Blindsight privacy notice, not here. One line each:</span></p>
+<ul>
+<li>Stripe (Stripe Payments Europe, Ltd. and Stripe, Inc.): card and invoice payments for self-serve subscriptions, through a separate licence console; Stripe collects payer name, billing address, tax identifier and payment details at checkout, and acts as a separate controller for payment processing under its own terms.</li>
+<li>Keygen, United States (Virginia): licence records, including the Customer's billing contact name and e-mail address where Blindsight creates a Keygen user for the account.</li>
+<li>Amazon Web Services EMEA SARL, eu-west-1: hosting of the licence console (one virtual server in Ireland) and its database and backups.</li>
+<li>Fonts: the platform console and the licence console serve their fonts from Blindsight's own servers, so no font request goes to a third party.</li>
+<li>Google reCAPTCHA Enterprise: not used. Bot protection on the console sign-in page is disabled in production, so no sign-in data goes to Google for this purpose.</li>
+<li>Providers used for the blindsight.io website (hosting, forms, analytics, consent and mail) are listed in the website's own privacy notice at <a href="/privacy-policy/">https://blindsight.io/privacy</a>.</li>
+</ul>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand"><strong>Blindsight Technologies AG</strong> · Securing AI · 2026</span>
+  <ul class="footer-links">
+    <li><a href="/antidote/">Antidote</a></li>
+    <li><a href="/privacy-policy/">Privacy</a></li>
+    <li><a href="/platform/legal/">Platform legal</a></li>
+    <li><a href="mailto:info@blindsight.io">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  // Live OS preference listener
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    document.documentElement.setAttribute('data-theme', e.matches ? 'light' : 'dark');
+  });
+</script>
+</body>
+</html>

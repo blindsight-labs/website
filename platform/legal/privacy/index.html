@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-06PKBPMVBJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-06PKBPMVBJ');
+  </script>
+
+  <title>Blindsight Privacy Notice | Blindsight platform</title>
+  <meta name="description" content="How Blindsight handles personal data on the platform, as controller." />
+  <link rel="canonical" href="https://blindsight.io/platform/legal/privacy" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/images/Emblem_B.png" type="image/png" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Set theme before paint to avoid flash -->
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    );
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+      --display: 'Space Grotesk', sans-serif;
+      --purple: #6D28D9;
+      --transition-theme: background 0.45s ease, color 0.45s ease, border-color 0.45s ease;
+    }
+
+    [data-theme="dark"] {
+      --bg: #020202;
+      --text: #F8F8F8;
+      --text-mid: #C5C5C5;
+      --text-dim: #545454;
+      --text-body: rgba(255,255,255,0.55);
+      --text-intro: rgba(255,255,255,0.7);
+      --text-heading-sub: rgba(255,255,255,0.9);
+      --text-strong: rgba(255,255,255,0.8);
+      --text-updated: rgba(255,255,255,0.3);
+      --nav-bg: rgba(2,2,2,0.7);
+      --nav-link: rgba(255,255,255,0.35);
+      --nav-tagline: rgba(255,255,255,0.3);
+      --border: rgba(255,255,255,0.05);
+      --divider: rgba(255,255,255,0.06);
+      --mobile-bg: rgba(2,2,2,0.96);
+      --mobile-link: rgba(255,255,255,0.7);
+      --hamburger: #F8F8F8;
+    }
+
+    [data-theme="light"] {
+      --bg: #F2F2EF;
+      --text: #020202;
+      --text-mid: #3a3a3a;
+      --text-dim: #888;
+      --text-body: rgba(0,0,0,0.55);
+      --text-intro: rgba(0,0,0,0.6);
+      --text-heading-sub: rgba(0,0,0,0.8);
+      --text-strong: rgba(0,0,0,0.7);
+      --text-updated: rgba(0,0,0,0.3);
+      --nav-bg: rgba(242,242,239,0.92);
+      --nav-link: rgba(0,0,0,0.35);
+      --nav-tagline: rgba(0,0,0,0.3);
+      --border: rgba(0,0,0,0.08);
+      --divider: rgba(0,0,0,0.08);
+      --mobile-bg: rgba(242,242,239,0.96);
+      --mobile-link: rgba(0,0,0,0.6);
+      --hamburger: #020202;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15.4px;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: var(--transition-theme);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 56px;
+      background: var(--nav-bg); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition-theme);
+    }
+    .nav-wordmark {
+      font-family: var(--display); font-size: 18px; font-weight: 700;
+      color: var(--text); text-decoration: none; letter-spacing: -0.02em;
+      display: flex; align-items: center;
+      transition: color 0.45s ease;
+    }
+    .nav-logo { height: 22px; width: auto; display: block; }
+    .nav-logo-dark { display: block; }
+    .nav-logo-light { display: none; }
+    [data-theme="light"] .nav-logo-dark { display: none; }
+    [data-theme="light"] .nav-logo-light { display: block; }
+    .nav-tagline {
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--nav-tagline);
+      margin-left: 12px; transition: color 0.45s ease;
+    }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--nav-link);
+      text-decoration: none; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 28px; height: 20px; position: relative; z-index: 210;
+      flex-direction: column; justify-content: space-between;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2px; background: var(--hamburger);
+      transition: transform 0.3s ease, opacity 0.3s ease, background 0.45s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--mobile-bg); backdrop-filter: blur(20px);
+      z-index: 199;
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+      transition: background 0.45s ease;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--mono); font-size: 14px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mobile-link);
+      text-decoration: none; transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--text); }
+
+    /* ── CONTENT ── */
+    .pp-container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 140px 56px 80px;
+    }
+
+    .pp-tag {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 20px;
+    }
+
+    .pp-title {
+      font-family: var(--display); font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.15; margin-bottom: 12px;
+      color: var(--text); transition: color 0.45s ease;
+    }
+
+    .pp-updated {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-updated); letter-spacing: 0.06em;
+      margin-bottom: 48px; transition: color 0.45s ease;
+    }
+
+    .pp-intro {
+      font-size: 15.4px; line-height: 1.75;
+      color: var(--text-intro); margin-bottom: 48px;
+      transition: color 0.45s ease;
+    }
+
+    .pp-section { margin-bottom: 40px; }
+
+    .pp-section h2 {
+      font-family: var(--display); font-size: 20px;
+      font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px; color: var(--text);
+      transition: color 0.45s ease;
+    }
+
+    .pp-section h3 {
+      font-family: var(--display); font-size: 16px;
+      font-weight: 700; letter-spacing: -0.01em;
+      margin-bottom: 10px; color: var(--text-heading-sub);
+      transition: color 0.45s ease;
+    }
+
+    .pp-section p {
+      font-size: 14px; line-height: 1.8;
+      color: var(--text-body); margin-bottom: 14px;
+      transition: color 0.45s ease;
+    }
+
+    .pp-section ul { list-style: none; margin-bottom: 16px; padding: 0; }
+
+    .pp-section ul li {
+      font-size: 14px; line-height: 1.8;
+      color: var(--text-body);
+      padding-left: 20px; position: relative;
+      margin-bottom: 10px; transition: color 0.45s ease;
+    }
+
+    .pp-section ul li::before {
+      content: '';
+      position: absolute; left: 0; top: 10px;
+      width: 6px; height: 6px;
+      border: 1px solid var(--purple);
+      border-radius: 1px;
+    }
+
+    .pp-section strong {
+      color: var(--text-strong); font-weight: 600;
+      transition: color 0.45s ease;
+    }
+
+    .pp-divider {
+      height: 1px;
+      background: var(--divider);
+      margin: 48px 0;
+      transition: background 0.45s ease;
+    }
+
+    .pp-section a {
+      color: var(--purple); text-decoration: none;
+      border-bottom: 1px solid rgba(109,40,217,0.3);
+      transition: border-color 0.2s;
+    }
+    .pp-section a:hover { border-color: var(--purple); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 56px; background: var(--bg);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 1;
+      transition: var(--transition-theme);
+    }
+    .footer-brand {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.1em; color: var(--text-dim);
+      transition: color 0.45s ease;
+    }
+    .footer-brand strong { color: var(--text-mid); transition: color 0.45s ease; }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-dim); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text-mid); }
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 1400px) {
+      nav, footer {
+        padding-left: calc((100vw - 1280px) / 2);
+        padding-right: calc((100vw - 1280px) / 2);
+      }
+    }
+    @media (max-width: 1100px) {
+      nav { padding: 18px 28px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .pp-container { padding-left: 28px; padding-right: 28px; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 14px 16px; }
+      .nav-logo { height: 18px; }
+      .nav-tagline { display: none; }
+      .pp-container { padding: 100px 16px 56px; }
+      footer { padding: 24px 16px; flex-direction: column; gap: 16px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    }
+  
+    /* ── PLATFORM LEGAL ── */
+    .pp-container { max-width: 860px; }
+    .pl-scope {
+      font-size: 14px; line-height: 1.7; color: var(--text-intro);
+      border: 1px solid var(--border); border-left: 3px solid var(--purple);
+      padding: 14px 18px; margin: 0 0 40px; border-radius: 2px;
+    }
+    .pl-scope a { color: var(--purple); border-bottom: 1px solid rgba(109,40,217,0.3); text-decoration: none; }
+    .pl-scope a:hover { border-color: var(--purple); }
+    .pl-doc .pp-section p, .pl-doc .pp-section li, .pl-doc td, .pl-doc th { color: var(--text-intro); }
+    .pl-doc p { font-size: 14px; line-height: 1.8; color: var(--text-intro); margin-bottom: 14px; overflow-wrap: anywhere; }
+    .pl-doc p .ln { display: block; padding-left: 2.2em; text-indent: -2.2em; }
+    .pl-doc p .ln:first-child { padding-left: 0; text-indent: 0; }
+    .pl-doc h2 { font-family: var(--display); font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 40px 0 16px; color: var(--text); }
+    .pl-doc h3 { font-family: var(--display); font-size: 16px; font-weight: 700; margin: 28px 0 10px; color: var(--text-heading-sub); }
+    .pl-doc h2.clause { font-size: 17px; margin-top: 36px; }
+    .pl-doc ul { list-style: none; margin: 0 0 16px; padding: 0; }
+    .pl-doc ul li { font-size: 14px; line-height: 1.8; color: var(--text-intro); padding-left: 20px; position: relative; margin-bottom: 8px; overflow-wrap: anywhere; }
+    .pl-doc ul li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border: 1px solid var(--purple); border-radius: 1px; }
+    .pl-doc ol { margin: 0 0 16px 22px; padding: 0; }
+    .pl-doc ol li { font-size: 14px; line-height: 1.8; color: var(--text-intro); margin-bottom: 8px; }
+    .pl-doc strong { color: var(--text-strong); font-weight: 600; }
+    .pl-doc a { color: var(--purple); text-decoration: none; border-bottom: 1px solid rgba(109,40,217,0.3); }
+    .pl-doc a:hover { border-color: var(--purple); }
+    .pl-doc code { font-family: var(--mono); font-size: 12.5px; }
+    .pl-doc hr { border: 0; height: 1px; background: var(--divider); margin: 40px 0; }
+    .pl-tablewrap { overflow-x: auto; margin: 0 0 24px; border: 1px solid var(--border); }
+    .pl-doc table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 12.5px; line-height: 1.6; }
+    .pl-doc th, .pl-doc td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--divider); }
+    .pl-doc th { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-strong); }
+    .pl-index { list-style: none; margin: 0; padding: 0; }
+    .pl-index li { border-top: 1px solid var(--divider); }
+    .pl-index li:last-child { border-bottom: 1px solid var(--divider); }
+    .pl-doc .pl-index li { padding-left: 0; margin-bottom: 0; }
+    .pl-doc .pl-index li::before { display: none; }
+    .pl-index a { display: block; padding: 20px 4px; text-decoration: none; border: 0; }
+    .pl-index a:hover .pl-name { color: var(--purple); }
+    .pl-name { display: block; font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+    .pl-desc { display: block; font-size: 14px; line-height: 1.6; color: var(--text-intro); margin-top: 4px; }
+    .pl-meta { display: block; font-family: var(--mono); font-size: 11px; color: var(--text-updated); margin-top: 6px; letter-spacing: 0.04em; }
+    .pl-raw { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; margin: 0 0 32px; color: var(--text-updated); }
+    .pl-raw a { color: var(--purple); }
+    .pl-skip { position: absolute; left: -999px; }
+    .pl-skip:focus { left: 8px; top: 8px; z-index: 300; background: var(--bg); color: var(--text); padding: 8px 12px; }
+    @media print {
+      :root, [data-theme="dark"], [data-theme="light"] {
+        --bg: #fff; --text: #000; --text-mid: #222; --text-dim: #444; --text-body: #111; --text-intro: #111;
+        --text-heading-sub: #000; --text-strong: #000; --text-updated: #333; --border: #bbb; --divider: #bbb; --purple: #000;
+      }
+      body { background: #fff; color: #000; font-size: 11pt; }
+      nav, .mobile-menu, footer, .pl-raw, .pl-skip { display: none !important; }
+      .pp-container { max-width: none; padding: 0; }
+      .pl-scope { border: 1px solid #000; border-left: 3px solid #000; }
+      .pl-doc p, .pl-doc ul li, .pl-doc ol li, .pl-doc td, .pl-doc th { font-size: 10.5pt; color: #000; }
+      .pl-doc a, .pl-scope a { color: #000; border: 0; text-decoration: underline; }
+      .pl-doc h2, .pl-doc h3 { break-after: avoid; }
+      .pl-doc p, .pl-doc li, .pl-doc tr { break-inside: avoid; }
+      .pl-tablewrap { overflow: visible; border: 0; }
+      .pl-doc table { min-width: 0; font-size: 9pt; }
+      .pl-doc th, .pl-doc td { border: 1px solid #888; }
+      .pl-print-url { display: block !important; }
+    }
+    .pl-print-url { display: none; font-family: var(--mono); font-size: 10pt; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+<a class="pl-skip" href="#main">Skip to the document</a>
+
+<!-- NAV -->
+<nav>
+  <div style="display:flex;align-items:center;">
+    <a href="/" class="nav-wordmark">
+      <img src="/assets/images/LOGO_Primary_W.png" alt="Blindsight" class="nav-logo nav-logo-dark" />
+      <img src="/assets/images/LOGO_Primary_B.png" alt="Blindsight" class="nav-logo nav-logo-light" />
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="/antidote/">Antidote</a></li>
+    <li><a href="mailto:info@blindsight.io">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/antidote/">Antidote</a>
+  <a href="mailto:info@blindsight.io">Contact</a>
+</div>
+
+<!-- CONTENT -->
+<main id="main" class="pp-container pl-doc">
+  <div class="pp-tag">// Platform legal</div>
+  <h1 class="pp-title">Blindsight Privacy Notice</h1>
+  <div class="pp-updated">Version 1.0 &middot; Effective 19 December 2026</div>
+  <p class="pl-print-url">blindsight.io/platform/legal/privacy</p>
+  <p class="pl-scope">This document covers the Blindsight platform (the console, the desktop apps and the APIs). The blindsight.io website has its own <a href="/privacy-policy/">privacy notice</a> and terms (the website has no separate terms page; its <a href="/privacy-policy/">privacy policy</a> is the only website legal document). All platform legal documents are listed in the <a href="/platform/legal/">platform legal index</a>.</p>
+    <div class="pp-section">
+<h2>1. Who we are and how to reach us</h2>
+<p><span class="ln">Controller: Blindsight Technologies AG, Rennweg 57, 8001 Zurich, Switzerland, UID CHE-484.046.837 ("Blindsight", "we", "us").</span></p>
+<p><span class="ln">Privacy contact: <a href="mailto:legal@blindsight.io">legal@blindsight.io</a>.</span></p>
+<h2>2. What this notice covers, and what it does not</h2>
+<p><span class="ln">This notice covers the Blindsight platform (the console, the desktop apps and the APIs). It covers personal data that Blindsight handles as controller, that is, for its own purposes, about:</span></p>
+<ol>
+<li>people who contact us or need support about the platform (section 4);</li>
+<li>administrators and other users of the Blindsight console, and the operators of our licence console (section 5);</li>
+<li>licensing and billing contacts of our customers (section 6).</li>
+</ol>
+<p><span class="ln">Visitors to the blindsight.io website, website forms, evaluation requests and job applications are covered by the website's own privacy notice at <a href="/privacy-policy/">https://blindsight.io/privacy</a>.</span></p>
+<h3>Data about a customer's staff is handled for the customer</h3>
+<p><span class="ln">When an organisation (the "Customer") uses the Blindsight software and service, Blindsight processes data about the Customer's staff and other users on the Customer's behalf. This includes data about devices and people in the Customer's workspace, findings, audit records of actions in the workspace and, by default (the Customer can change this), the text of prompts, replies and files sent to AI services, after redaction on the device, which is kept for 90 days by default (the Customer can change the period or turn sending or keeping off). When the contract ends, the Customer can export its data for at least 30 days; Blindsight staff then delete the data within 30 days after that period closes, and backups expire after 35 days. For that data the Customer (usually the employer) is the controller and Blindsight acts as its processor under the data processing agreement (DPA) at <a href="/platform/legal/dpa/">https://blindsight.io/platform/legal/dpa</a>. This notice does not describe that processing. If you are an employee or other user of a Customer and have a question or a request about it, please contact your employer, who decides how your data is used and is responsible for informing you. If you send such a request to us, we will pass it to the Customer where we can, and we will not answer it ourselves unless the Customer instructs us to.</span></p>
+<p><span class="ln">The sub-processors we use for Customer data are listed at <a href="/platform/legal/subprocessors/">https://blindsight.io/platform/legal/subprocessors</a>.</span></p>
+<p><span class="ln">Contact, account, sign-in, licensing and billing data of a Customer's administrators, other users of the Blindsight console and contacts is handled by Blindsight as controller, as described below (clause 10.2 of the Blindsight Endpoint Licence Agreement).</span></p>
+<h2>3. Overview</h2>
+<div class="pl-tablewrap" tabindex="0" role="region" aria-label="Table"><table>
+<thead><tr><th scope="col">Group</th><th scope="col">Main data</th><th scope="col">Main purpose</th><th scope="col">Legal basis (GDPR)</th><th scope="col">Retention</th></tr></thead>
+<tbody>
+<tr><td>People who contact us</td><td>Name, e-mail, message, attachments</td><td>Answer, give support</td><td>Art. 6(1)(b) and (f)</td><td>See section 4</td></tr>
+<tr><td>Console users and operators</td><td>Account, sign-in, session and security data</td><td>Provide and secure the service</td><td>Art. 6(1)(b), (c), (f)</td><td>See section 5</td></tr>
+<tr><td>Licensing and billing contacts</td><td>Name, e-mail, workspace, plan, payment status</td><td>Issue licences, bill, comply with law</td><td>Art. 6(1)(b), (c), (f)</td><td>See section 6</td></tr>
+</tbody></table></div>
+<h2>4. People who contact us or need support</h2>
+<p><span class="ln"><strong>Data.</strong></span></p>
+<ul>
+<li>E-mail to <a href="mailto:info@blindsight.io">info@blindsight.io</a> or <a href="mailto:legal@blindsight.io">legal@blindsight.io</a>: your address, name and the content of the message.</li>
+<li>Support: in-app help and bug reports are stored in the platform and forwarded by e-mail to our support mailbox. They contain the reference, the submitter's name and e-mail address (unless the workspace hides identities), the workspace label, an optional contact address, attachments (up to 10 files, 25 MB each) and the description. Those reports can contain data that belongs to the Customer; we handle that content for the Customer under the DPA (see section 2) and use it only to answer the report.</li>
+</ul>
+<p><span class="ln"><strong>Purposes and legal basis.</strong></span></p>
+<ul>
+<li>Answering e-mails and requests addressed to us: steps taken at your request before a contract, and performance of a contract, Art. 6(1)(b) GDPR; otherwise our legitimate interest in conducting our business, Art. 6(1)(f). Under the FADP the processing is proportionate and, where needed, justified by our overriding interest or by your request.</li>
+<li>Support: performance of the contract with the Customer, and our legitimate interest in running and improving the service, Art. 6(1)(f).</li>
+<li>Marketing: we send no newsletter or marketing e-mail.</li>
+</ul>
+<p><span class="ln"><strong>Recipients (categories and verified providers).</strong></span></p>
+<ul>
+<li>E-mail to us and support mailbox: Microsoft 365 hosts our mailboxes (the support@ shared mailbox for support e-mails and bug reports, info@, legal@, security@); the provider is Microsoft Ireland Operations Limited, acting as our processor for contact and support data. The mailboxes are stored in the European Union and EFTA under Microsoft's EU Data Boundary; under Microsoft's product terms certain inactive data is stored in Portugal. Support requests and bug reports go to a shared support mailbox (<a href="mailto:support@blindsight.io">support@blindsight.io</a>); support is handled in these mailboxes only, without a separate help desk tool. Support e-mails are kept two years after the last message in the thread, security@ e-mails three years, and legal@ e-mails ten years (business correspondence, Art. 958f CO); after that they are deleted. The platform sends its product e-mails through Amazon Simple Email Service (Amazon Web Services EMEA SARL) in Ireland.</li>
+<li>Our professional advisers, and authorities where the law requires.</li>
+</ul>
+<p><span class="ln"><strong>Retention.</strong> E-mails: support@ two years after the last message in the thread, security@ three years, legal@ ten years (as stated under Recipients above); info@ 36 months (commercial correspondence). Stored support reports and attachments: 24 months after closure.</span></p>
+<h2>5. Administrators and other users of the console, and our operators</h2>
+<p><span class="ln">This section applies to your own account data when you sign in to the Blindsight console as an administrator or user. For what the Customer's workspace holds about its staff, see section 2.</span></p>
+<p><span class="ln"><strong>Data.</strong></span></p>
+<ul>
+<li>Account: name, e-mail address, password hash, roles, status (active or deactivated), failed-login counter and lock-out time, password change time, notification preferences, identifiers from the Customer's directory or single sign-on provider (for example tenant and subject), and department and manager link where provided.</li>
+<li>Two-factor authentication: a flag and the one-time-password secret (time-based codes).</li>
+<li>Sessions: a session cookie (HttpOnly) and a security cookie (CSRF), lifetime configured per deployment; a device cookie that recognises a trusted device, valid for one year by default; session records with device, browser, IP address, user agent, creation, last use and revocation.</li>
+<li>Security records: sign-in attempts, failed sign-ins and lock-outs, rate-limiting data, and the web and application logs of our hosting, which include IP addresses.</li>
+<li>Audit records of actions in a Customer's workspace (event type, the person who acted, the object concerned, IP address, user agent and time, chained with hashes so that changes can be detected) are held for the Customer under the DPA, not as our own data (section 2).</li>
+<li>Acceptance records for the licence agreement: version, hash, the person, e-mail, organisation entered, time, IP address.</li>
+<li>Help requests (section 4).</li>
+<li>Bot protection at sign-in: not used. It is disabled in production, so no sign-in data goes to Google reCAPTCHA Enterprise.</li>
+<li>Fonts: the console serves its fonts from our own servers, so no font request goes to a third party.</li>
+<li>No analytics, advertising, tag manager, error-tracking or chat tools are loaded in the console.</li>
+<li>Operators of our licence console (Blindsight staff): e-mail, password hash, role, name, encrypted one-time-password secret, sign-in and lock-out data. IP addresses are used for rate limiting and lock-out. Web access logs include the client IP address. The operator audit log stores the actor, the action and the target, and not the IP address.</li>
+</ul>
+<p><span class="ln"><strong>Purposes and legal basis.</strong></span></p>
+<ul>
+<li>Providing the account, signing you in, applying roles and keeping the service available: performance of the contract with you, Art. 6(1)(b), or, where your access comes from the Customer's contract with us, our legitimate interest in providing the service the Customer ordered to the people it authorises, Art. 6(1)(f).</li>
+<li>Security (two-factor authentication, lock-out, rate limiting, bot protection, detecting abuse): our legitimate interest in protecting the service, our customers and their data against unauthorised access, Art. 6(1)(f), which also serves our duty to secure data, Art. 32 GDPR and Art. 8 FADP. Under the FADP the processing is justified by our overriding private interest where it goes beyond the performance of a contract.</li>
+<li>Complying with law, defending legal claims: Art. 6(1)(c) and (f).</li>
+<li>We do not use this data for advertising.</li>
+</ul>
+<p><span class="ln"><strong>Recipients.</strong> Hosting and e-mail: Amazon Web Services EMEA SARL (Luxembourg), in Ireland. The Customer's own administrators can see the accounts and audit records of their workspace, and the Customer is controller of what is recorded inside its workspace about its own users. Where an identity provider (Microsoft Entra, Google sign-in, Okta) is connected by the Customer, that provider and the Customer exchange sign-in data with us.</span></p>
+<p><span class="ln"><strong>Location and transfers.</strong> The platform runs on Amazon Web Services in Ireland (region eu-west-1). Processing inside the EEA needs no transfer mechanism. Our own licence console runs on one Amazon Web Services EC2 instance in the same region. Blindsight staff access personal data in the platform only from Switzerland, Portugal and Germany. Downloads of installers, update manifests and detection model files come from downloads.blindsight.io, which is operated by Blindsight on Amazon Web Services through Amazon CloudFront (edge locations in Europe and North America) from a storage bucket in the United States (us-east-1). CloudFront is not in front of the console or the API. A device that fetches an update connects to an edge location, so its IP address reaches AWS there; no other customer data does. The desktop agent also fetches Cloudflare's public IP range lists from cloudflare.com, which reveals the device's IP address to Cloudflare.</span></p>
+<p><span class="ln"><strong>Retention.</strong></span></p>
+<ul>
+<li>Account data: for as long as the account exists. Removed accounts: deleted 90 days after removal, subject to legal retention.</li>
+<li>Sessions: until revoked or expired; the records of ended sessions are kept one year.</li>
+<li>Security records (sign-in attempts, lock-outs and similar): one year. Application logs of the platform are kept 365 days and cloud audit logs 90 days.</li>
+<li>Audit records of a workspace follow the Customer's retention setting under the DPA.</li>
+<li>Backups: automated database backups, and the database snapshots taken before releases, are kept 35 days and then deleted.</li>
+<li>Infrastructure logs of the licence console: web access logs 90 days, container logs 30 days, database dumps 90 days, disk snapshots 14 days. Licence-console records (the operator audit log, failure records and workspace records) are kept seven years. Billing and accounting records are kept ten years, as Swiss law requires (Art. 958f CO; see section 6).</li>
+</ul>
+<h2>6. Licensing and billing contacts</h2>
+<p><span class="ln"><strong>Data.</strong></span></p>
+<ul>
+<li>In the licence console: workspace name, environment, plan and licence settings, billing mode, the billing contact's name and e-mail address, internal notes, subscription status, plan, interval, currency, number of seats, paid-through and trial dates, payment state, whether a payment is disputed, and identifiers at Stripe and Keygen.</li>
+<li>At Keygen (our licence service): licence records and, for the billing owner or licensee, a user record with e-mail address and first and last name. The platform sends Keygen only the workspace licence key and aggregate usage counters.</li>
+<li>At Stripe: if you pay by card through the hosted checkout page, you type your name, billing address, business tax identifier and payment details on Stripe's page. We do not send your name, e-mail or address to Stripe and card data never reaches our systems. We receive the status of the payment and identifiers from Stripe.</li>
+<li>Invoices and accounting records.</li>
+</ul>
+<p><span class="ln"><strong>Purposes and legal basis.</strong> Issuing and managing licences and subscriptions, invoicing and collecting payment: performance of the contract, Art. 6(1)(b). Tax and accounting duties: legal obligation, Art. 6(1)(c). Fraud prevention, debt collection and defence of claims: legitimate interest, Art. 6(1)(f). Under the FADP this processing is necessary for the contract or is justified by our overriding interest or by law (Art. 31).</span></p>
+<p><span class="ln"><strong>Recipients.</strong> Stripe (Stripe Payments Europe, Ltd. and Stripe, Inc.), which processes payment data as a separate controller under its own terms; Keygen, as our processor; Amazon Web Services EMEA SARL (hosting of the licence console and its backups), our accountants, tax advisers and authorities where the law requires.</span></p>
+<p><span class="ln"><strong>Location and transfers.</strong> The licence console (one virtual server) and its backups are on Amazon Web Services in Ireland. Keygen's main servers are in the United States (Virginia). Stripe processes data in the EEA and the United States and states that it takes part in the EU-U.S., UK and Swiss-U.S. Data Privacy Framework.</span></p>
+<p><span class="ln"><strong>Retention.</strong> Billing and accounting records: 10 years, the Swiss statutory period (Art. 958f of the Code of Obligations). Other licensing and contact data: for the life of the account, then 24 months unless the law requires longer.</span></p>
+<h2>7. Shared catalogue of AI services</h2>
+<p><span class="ln">Blindsight keeps one catalogue of AI services (host names, a name, vendor and category, public information such as a page title, a band showing how many workspaces reached it, and first and last day). An entry is created only when at least two independent paying workspaces reached the same public host, and holds no customer, device or person identifier. We use it, as the licence agreement allows (clause 10.3), to recognise AI services for all customers. We do not treat it as personal data.</span></p>
+<h2>8. Automated decisions</h2>
+<p><span class="ln">We take no decision about people who contact us, console users or billing contacts that has legal effect on them or similarly significantly affects them, based solely on automated processing, including profiling (Art. 22 GDPR, Art. 21 FADP). Automated measures such as lock-out after repeated failed sign-ins and bot protection protect the service and do not decide on rights or contracts. In the Customer's workspace, the software can block or redact content in prompts according to the Customer's policy. That is the Customer's processing (section 2).</span></p>
+<h2>9. Recipients and transfers in general</h2>
+<p><span class="ln">We share personal data only with the providers named above, our advisers, authorities where the law requires, and a buyer in a sale of the business (under the same protections). We do not sell personal data.</span></p>
+<p><span class="ln">Where data goes to a country without an adequacy decision (and for Switzerland, without a listing in Annex 1 of the Data Protection Ordinance), we use the Data Privacy Framework certification of the recipient or the EU Standard Contractual Clauses with the Swiss addendum, and we assess additional safeguards where needed. You can ask us for a copy of the safeguards. Transfers between the EEA and Switzerland rely on the adequacy decisions each side has issued for the other.</span></p>
+<h2>10. Whether you must give us data, and where it comes from</h2>
+<p><span class="ln">You are not required by law to give us personal data. Some data is needed for a contract or for the service: without an e-mail address and the sign-in data in section 5 we cannot give you a console account, without the billing data in section 6 we cannot issue a paid licence, and without the content of your message we cannot answer it.</span></p>
+<p><span class="ln">We collect most data from you directly. Some comes from others: the Customer that gives you access to the console (your name, e-mail address and role), the Customer's identity provider or directory when the Customer connects one (identifiers, department and manager link), Stripe (payment status and identifiers) and Keygen (licence records).</span></p>
+<h2>11. Security</h2>
+<p><span class="ln">We protect data with measures suited to the risk, including hosting in a European region, encryption in transit and at rest, role-based access, two-factor authentication as an option for console users, sign-in lock-out and rate limiting, hash-chained audit records, a web-application firewall, and logging and alarms. No system is completely secure. The measures for data we process for Customers are set out in Annex 2 of the DPA.</span></p>
+<h2>12. Your rights</h2>
+<p><span class="ln">Under the GDPR you have the right to access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction (Art. 18), notification of recipients (Art. 19), data portability (Art. 20), and not to be subject to certain automated decisions (Art. 22). Where processing rests on consent you can withdraw it at any time, without affecting the processing before the withdrawal.</span></p>
+<p><span class="ln"><strong>Right to object.</strong> Where we rely on our legitimate interest (Art. 6(1)(f) GDPR), you have the right to object at any time, on grounds relating to your particular situation (Art. 21 GDPR). We then stop the processing unless we have compelling legitimate grounds that override your interests, or need it for legal claims.</span></p>
+<p><span class="ln">You can lodge a complaint with a supervisory authority, in particular in the EU or EEA country where you live, work or where the alleged infringement took place (Art. 77 GDPR).</span></p>
+<p><span class="ln">Under the Swiss FADP you have the right to information about your data (Art. 25), to receive or have transmitted data you gave us (Art. 28), to have incorrect data corrected (Art. 32(1)), to request that a particular processing or a disclosure to third parties be stopped, or that data be deleted or destroyed (Art. 32(2)), and, for an automated individual decision, to state your point of view and to ask for a review by a person (Art. 21). You can report a suspected breach of data protection rules to the Federal Data Protection and Information Commissioner (FDPIC), <a href="https://www.edoeb.admin.ch">https://www.edoeb.admin.ch</a>.</span></p>
+<p><span class="ln"><strong>How to exercise them.</strong> Write to <a href="mailto:legal@blindsight.io">legal@blindsight.io</a>. We reply within one month under the GDPR (extendable by two months for complex requests, with notice) and within 30 days under the FADP. We may ask for proof of identity, for example confirmation from the e-mail address on file, before we release or change data. The service is free, unless the request is clearly unfounded or excessive. Under the FADP, we may ask for a contribution to costs only where answering involves disproportionate effort; it is at most CHF 300, and we tell you the amount before we answer (Art. 25(6) FADP; Art. 19 of the Data Protection Ordinance). For data a Customer controls, see section 2.</span></p>
+<h2>13. Children</h2>
+<p><span class="ln">Our software and service are for businesses and are not directed at children. We do not knowingly collect personal data from children. If you believe a child has sent us data, contact us and we will delete it.</span></p>
+<h2>14. Changes and effective date</h2>
+<p><span class="ln">We may update this notice. We publish the new version at <a href="/platform/legal/privacy/">https://blindsight.io/platform/legal/privacy</a> with its date and, for material changes affecting Customer administrators, tell them by e-mail. Earlier versions are available on request.</span></p>
+<p><span class="ln">This version is effective on the date of publication.</span></p>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand"><strong>Blindsight Technologies AG</strong> · Securing AI · 2026</span>
+  <ul class="footer-links">
+    <li><a href="/antidote/">Antidote</a></li>
+    <li><a href="/privacy-policy/">Privacy</a></li>
+    <li><a href="/platform/legal/">Platform legal</a></li>
+    <li><a href="mailto:info@blindsight.io">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  // Live OS preference listener
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    document.documentElement.setAttribute('data-theme', e.matches ? 'light' : 'dark');
+  });
+</script>
+</body>
+</html>

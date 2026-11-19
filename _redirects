@@ -1,3 +1,5 @@
 # Clean URL routing
 /antidote    /antidote/index.html   200
 /antidote/   /antidote/index.html   200
+# The platform documents refer to the website privacy notice as /privacy
+/privacy    /privacy-policy/    301

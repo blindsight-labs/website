@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-06PKBPMVBJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-06PKBPMVBJ');
+  </script>
+
+  <title>Blindsight Data Processing Agreement | Blindsight platform</title>
+  <meta name="description" content="How Blindsight processes personal data on behalf of its customers." />
+  <link rel="canonical" href="https://blindsight.io/platform/legal/dpa" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/images/Emblem_B.png" type="image/png" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Set theme before paint to avoid flash -->
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    );
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+      --display: 'Space Grotesk', sans-serif;
+      --purple: #6D28D9;
+      --transition-theme: background 0.45s ease, color 0.45s ease, border-color 0.45s ease;
+    }
+
+    [data-theme="dark"] {
+      --bg: #020202;
+      --text: #F8F8F8;
+      --text-mid: #C5C5C5;
+      --text-dim: #545454;
+      --text-body: rgba(255,255,255,0.55);
+      --text-intro: rgba(255,255,255,0.7);
+      --text-heading-sub: rgba(255,255,255,0.9);
+      --text-strong: rgba(255,255,255,0.8);
+      --text-updated: rgba(255,255,255,0.3);
+      --nav-bg: rgba(2,2,2,0.7);
+      --nav-link: rgba(255,255,255,0.35);
+      --nav-tagline: rgba(255,255,255,0.3);
+      --border: rgba(255,255,255,0.05);
+      --divider: rgba(255,255,255,0.06);
+      --mobile-bg: rgba(2,2,2,0.96);
+      --mobile-link: rgba(255,255,255,0.7);
+      --hamburger: #F8F8F8;
+    }
+
+    [data-theme="light"] {
+      --bg: #F2F2EF;
+      --text: #020202;
+      --text-mid: #3a3a3a;
+      --text-dim: #888;
+      --text-body: rgba(0,0,0,0.55);
+      --text-intro: rgba(0,0,0,0.6);
+      --text-heading-sub: rgba(0,0,0,0.8);
+      --text-strong: rgba(0,0,0,0.7);
+      --text-updated: rgba(0,0,0,0.3);
+      --nav-bg: rgba(242,242,239,0.92);
+      --nav-link: rgba(0,0,0,0.35);
+      --nav-tagline: rgba(0,0,0,0.3);
+      --border: rgba(0,0,0,0.08);
+      --divider: rgba(0,0,0,0.08);
+      --mobile-bg: rgba(242,242,239,0.96);
+      --mobile-link: rgba(0,0,0,0.6);
+      --hamburger: #020202;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15.4px;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: var(--transition-theme);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 56px;
+      background: var(--nav-bg); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition-theme);
+    }
+    .nav-wordmark {
+      font-family: var(--display); font-size: 18px; font-weight: 700;
+      color: var(--text); text-decoration: none; letter-spacing: -0.02em;
+      display: flex; align-items: center;
+      transition: color 0.45s ease;
+    }
+    .nav-logo { height: 22px; width: auto; display: block; }
+    .nav-logo-dark { display: block; }
+    .nav-logo-light { display: none; }
+    [data-theme="light"] .nav-logo-dark { display: none; }
+    [data-theme="light"] .nav-logo-light { display: block; }
+    .nav-tagline {
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--nav-tagline);
+      margin-left: 12px; transition: color 0.45s ease;
+    }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--nav-link);
+      text-decoration: none; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 28px; height: 20px; position: relative; z-index: 210;
+      flex-direction: column; justify-content: space-between;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2px; background: var(--hamburger);
+      transition: transform 0.3s ease, opacity 0.3s ease, background 0.45s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--mobile-bg); backdrop-filter: blur(20px);
+      z-index: 199;
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+      transition: background 0.45s ease;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--mono); font-size: 14px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mobile-link);
+      text-decoration: none; transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--text); }
+
+    /* ── CONTENT ── */
+    .pp-container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 140px 56px 80px;
+    }
+
+    .pp-tag {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 20px;
+    }
+
+    .pp-title {
+      font-family: var(--display); font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.15; margin-bottom: 12px;
+      color: var(--text); transition: color 0.45s ease;
+    }
+
+    .pp-updated {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-updated); letter-spacing: 0.06em;
+      margin-bottom: 48px; transition: color 0.45s ease;
+    }
+
+    .pp-intro {
+      font-size: 15.4px; line-height: 1.75;
+      color: var(--text-intro); margin-bottom: 48px;
+      transition: color 0.45s ease;
+    }
+
+    .pp-section { margin-bottom: 40px; }
+
+    .pp-section h2 {
+      font-family: var(--display); font-size: 20px;
+      font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px; color: var(--text);
+      transition: color 0.45s ease;
+    }
+
+    .pp-section h3 {
+      font-family: var(--display); font-size: 16px;
+      font-weight: 700; letter-spacing: -0.01em;
+      margin-bottom: 10px; color: var(--text-heading-sub);
+      transition: color 0.45s ease;
+    }
+
+    .pp-section p {
+      font-size: 14px; line-height: 1.8;
+      color: var(--text-body); margin-bottom: 14px;
+      transition: color 0.45s ease;
+    }
+
+    .pp-section ul { list-style: none; margin-bottom: 16px; padding: 0; }
+
+    .pp-section ul li {
+      font-size: 14px; line-height: 1.8;
+      color: var(--text-body);
+      padding-left: 20px; position: relative;
+      margin-bottom: 10px; transition: color 0.45s ease;
+    }
+
+    .pp-section ul li::before {
+      content: '';
+      position: absolute; left: 0; top: 10px;
+      width: 6px; height: 6px;
+      border: 1px solid var(--purple);
+      border-radius: 1px;
+    }
+
+    .pp-section strong {
+      color: var(--text-strong); font-weight: 600;
+      transition: color 0.45s ease;
+    }
+
+    .pp-divider {
+      height: 1px;
+      background: var(--divider);
+      margin: 48px 0;
+      transition: background 0.45s ease;
+    }
+
+    .pp-section a {
+      color: var(--purple); text-decoration: none;
+      border-bottom: 1px solid rgba(109,40,217,0.3);
+      transition: border-color 0.2s;
+    }
+    .pp-section a:hover { border-color: var(--purple); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 56px; background: var(--bg);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 1;
+      transition: var(--transition-theme);
+    }
+    .footer-brand {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.1em; color: var(--text-dim);
+      transition: color 0.45s ease;
+    }
+    .footer-brand strong { color: var(--text-mid); transition: color 0.45s ease; }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-dim); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text-mid); }
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 1400px) {
+      nav, footer {
+        padding-left: calc((100vw - 1280px) / 2);
+        padding-right: calc((100vw - 1280px) / 2);
+      }
+    }
+    @media (max-width: 1100px) {
+      nav { padding: 18px 28px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .pp-container { padding-left: 28px; padding-right: 28px; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 14px 16px; }
+      .nav-logo { height: 18px; }
+      .nav-tagline { display: none; }
+      .pp-container { padding: 100px 16px 56px; }
+      footer { padding: 24px 16px; flex-direction: column; gap: 16px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    }
+  
+    /* ── PLATFORM LEGAL ── */
+    .pp-container { max-width: 860px; }
+    .pl-scope {
+      font-size: 14px; line-height: 1.7; color: var(--text-intro);
+      border: 1px solid var(--border); border-left: 3px solid var(--purple);
+      padding: 14px 18px; margin: 0 0 40px; border-radius: 2px;
+    }
+    .pl-scope a { color: var(--purple); border-bottom: 1px solid rgba(109,40,217,0.3); text-decoration: none; }
+    .pl-scope a:hover { border-color: var(--purple); }
+    .pl-doc .pp-section p, .pl-doc .pp-section li, .pl-doc td, .pl-doc th { color: var(--text-intro); }
+    .pl-doc p { font-size: 14px; line-height: 1.8; color: var(--text-intro); margin-bottom: 14px; overflow-wrap: anywhere; }
+    .pl-doc p .ln { display: block; padding-left: 2.2em; text-indent: -2.2em; }
+    .pl-doc p .ln:first-child { padding-left: 0; text-indent: 0; }
+    .pl-doc h2 { font-family: var(--display); font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 40px 0 16px; color: var(--text); }
+    .pl-doc h3 { font-family: var(--display); font-size: 16px; font-weight: 700; margin: 28px 0 10px; color: var(--text-heading-sub); }
+    .pl-doc h2.clause { font-size: 17px; margin-top: 36px; }
+    .pl-doc ul { list-style: none; margin: 0 0 16px; padding: 0; }
+    .pl-doc ul li { font-size: 14px; line-height: 1.8; color: var(--text-intro); padding-left: 20px; position: relative; margin-bottom: 8px; overflow-wrap: anywhere; }
+    .pl-doc ul li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border: 1px solid var(--purple); border-radius: 1px; }
+    .pl-doc ol { margin: 0 0 16px 22px; padding: 0; }
+    .pl-doc ol li { font-size: 14px; line-height: 1.8; color: var(--text-intro); margin-bottom: 8px; }
+    .pl-doc strong { color: var(--text-strong); font-weight: 600; }
+    .pl-doc a { color: var(--purple); text-decoration: none; border-bottom: 1px solid rgba(109,40,217,0.3); }
+    .pl-doc a:hover { border-color: var(--purple); }
+    .pl-doc code { font-family: var(--mono); font-size: 12.5px; }
+    .pl-doc hr { border: 0; height: 1px; background: var(--divider); margin: 40px 0; }
+    .pl-tablewrap { overflow-x: auto; margin: 0 0 24px; border: 1px solid var(--border); }
+    .pl-doc table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 12.5px; line-height: 1.6; }
+    .pl-doc th, .pl-doc td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--divider); }
+    .pl-doc th { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-strong); }
+    .pl-index { list-style: none; margin: 0; padding: 0; }
+    .pl-index li { border-top: 1px solid var(--divider); }
+    .pl-index li:last-child { border-bottom: 1px solid var(--divider); }
+    .pl-doc .pl-index li { padding-left: 0; margin-bottom: 0; }
+    .pl-doc .pl-index li::before { display: none; }
+    .pl-index a { display: block; padding: 20px 4px; text-decoration: none; border: 0; }
+    .pl-index a:hover .pl-name { color: var(--purple); }
+    .pl-name { display: block; font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+    .pl-desc { display: block; font-size: 14px; line-height: 1.6; color: var(--text-intro); margin-top: 4px; }
+    .pl-meta { display: block; font-family: var(--mono); font-size: 11px; color: var(--text-updated); margin-top: 6px; letter-spacing: 0.04em; }
+    .pl-raw { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; margin: 0 0 32px; color: var(--text-updated); }
+    .pl-raw a { color: var(--purple); }
+    .pl-skip { position: absolute; left: -999px; }
+    .pl-skip:focus { left: 8px; top: 8px; z-index: 300; background: var(--bg); color: var(--text); padding: 8px 12px; }
+    @media print {
+      :root, [data-theme="dark"], [data-theme="light"] {
+        --bg: #fff; --text: #000; --text-mid: #222; --text-dim: #444; --text-body: #111; --text-intro: #111;
+        --text-heading-sub: #000; --text-strong: #000; --text-updated: #333; --border: #bbb; --divider: #bbb; --purple: #000;
+      }
+      body { background: #fff; color: #000; font-size: 11pt; }
+      nav, .mobile-menu, footer, .pl-raw, .pl-skip { display: none !important; }
+      .pp-container { max-width: none; padding: 0; }
+      .pl-scope { border: 1px solid #000; border-left: 3px solid #000; }
+      .pl-doc p, .pl-doc ul li, .pl-doc ol li, .pl-doc td, .pl-doc th { font-size: 10.5pt; color: #000; }
+      .pl-doc a, .pl-scope a { color: #000; border: 0; text-decoration: underline; }
+      .pl-doc h2, .pl-doc h3 { break-after: avoid; }
+      .pl-doc p, .pl-doc li, .pl-doc tr { break-inside: avoid; }
+      .pl-tablewrap { overflow: visible; border: 0; }
+      .pl-doc table { min-width: 0; font-size: 9pt; }
+      .pl-doc th, .pl-doc td { border: 1px solid #888; }
+      .pl-print-url { display: block !important; }
+    }
+    .pl-print-url { display: none; font-family: var(--mono); font-size: 10pt; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+<a class="pl-skip" href="#main">Skip to the document</a>
+
+<!-- NAV -->
+<nav>
+  <div style="display:flex;align-items:center;">
+    <a href="/" class="nav-wordmark">
+      <img src="/assets/images/LOGO_Primary_W.png" alt="Blindsight" class="nav-logo nav-logo-dark" />
+      <img src="/assets/images/LOGO_Primary_B.png" alt="Blindsight" class="nav-logo nav-logo-light" />
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="/antidote/">Antidote</a></li>
+    <li><a href="mailto:info@blindsight.io">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/antidote/">Antidote</a>
+  <a href="mailto:info@blindsight.io">Contact</a>
+</div>
+
+<!-- CONTENT -->
+<main id="main" class="pp-container pl-doc">
+  <div class="pp-tag">// Platform legal</div>
+  <h1 class="pp-title">Blindsight Data Processing Agreement</h1>
+  <div class="pp-updated">Version 1.0 &middot; Effective 19 December 2026</div>
+  <p class="pl-print-url">blindsight.io/platform/legal/dpa</p>
+  <p class="pl-scope">This document covers the Blindsight platform (the console, the desktop apps and the APIs). The blindsight.io website has its own <a href="/privacy-policy/">privacy notice</a> and terms (the website has no separate terms page; its <a href="/privacy-policy/">privacy policy</a> is the only website legal document). All platform legal documents are listed in the <a href="/platform/legal/">platform legal index</a>.</p>
+    <div class="pp-section">
+<hr>
+<h2>1. Parties, scope and precedence</h2>
+<p><span class="ln">1.1 This Data Processing Agreement (the "DPA") is made between Blindsight Technologies AG, Rennweg 57, 8001 Zurich, Switzerland, UID CHE-484.046.837 ("Blindsight"), and the Customer named in, or accepting, the Blindsight Endpoint Licence Agreement (the "EULA").</span></p>
+<p><span class="ln">1.2 The DPA forms part of the EULA (EULA clause 10.1) and of the Service Terms (as defined in the EULA). It applies to all personal data that Blindsight processes on behalf of the Customer in providing the Service ("Customer Personal Data"). It does not apply to the contact, account, sign-in, licensing and billing data of the Customer's administrators, other users of the Blindsight console and contacts, which Blindsight processes as a controller as described in its privacy notice at <a href="/platform/legal/privacy/">https://blindsight.io/platform/legal/privacy</a> (EULA clause 10.2). Customer Personal Data does not include that data.</span></p>
+<p><span class="ln">1.3 The Customer is the controller of Customer Personal Data or, where the Customer processes it for its own controller, a processor. Blindsight is the processor or, respectively, the sub-processor. Where the Customer is a processor, it confirms that its own controller has authorised the instructions it gives under this DPA and the engagement of Blindsight and of the sub-processors in Annex 3, and the Customer passes on to Blindsight any instruction of that controller that is relevant.</span></p>
+<p><span class="ln">1.4 The Software processes data on the Customer's devices (for example detection and redaction of personal data in traffic to AI services). That processing is the Customer's own processing, carried out with the Customer's installation of the Software, and is not processing by Blindsight. Blindsight is a processor for the data that reaches the Service, as described in Annex 1.</span></p>
+<p><span class="ln">1.5 If this DPA conflicts with the EULA or the Service Terms, this DPA prevails for the processing of personal data, in accordance with EULA clause 20.1(c). An addendum under EULA clause 17 prevails over this DPA. Clause 13 (liability) and clause 14 (law and courts) of this DPA follow the EULA as stated there.</span></p>
+<p><span class="ln">1.6 This DPA forms part of the EULA (EULA clause 10.1), and the Customer accepts it when it accepts the EULA in any of the ways set out in EULA clause 1.2, or when it signs an order form or other agreement that refers to this DPA. The console records the version and the hash of the DPA accepted. Signed copies are available on request.</span></p>
+<h2>2. Definitions</h2>
+<p><span class="ln">2.1 "GDPR" means Regulation (EU) 2016/679. "FADP" means the Swiss Federal Act on Data Protection of 25 September 2020 (SR 235.1) and its ordinances. "Applicable Data Protection Law" means the GDPR, the FADP and any other law on the protection of personal data that applies to the processing of Customer Personal Data under this DPA.</span></p>
+<p><span class="ln">2.2 "Controller", "processor", "personal data", "processing", "data subject", "personal data breach", "supervisory authority" and "special categories of personal data" have the meanings given in the GDPR. Under the FADP they include the corresponding terms ("controller", "processor", "personal data", "processing", "data subject", "breach of data security", "sensitive personal data") and the Federal Data Protection and Information Commissioner ("FDPIC").</span></p>
+<p><span class="ln">2.3 "Sub-processor" means a third party that Blindsight engages to process Customer Personal Data.</span></p>
+<p><span class="ln">2.4 "Restricted Transfer" means a transfer of Customer Personal Data (a) from Switzerland to a country outside Switzerland that is not recognised as providing adequate protection under the FADP, or (b) from the EEA to a country outside the EEA that is not recognised as providing adequate protection under the GDPR, in each case including onward transfer.</span></p>
+<p><span class="ln">2.5 "Authorised Users", "Customer Data", "Service", "Software" and "Documentation" have the meanings given in the EULA.</span></p>
+<h2>3. Roles and instructions</h2>
+<p><span class="ln">3.1 Blindsight processes Customer Personal Data only on the Customer's documented instructions (GDPR Art. 28(3)(a); FADP Art. 9), including as to transfers. The EULA, the Service Terms, this DPA, the Customer's order, the Customer's configuration of the Service and the Documentation are the Customer's complete documented instructions at the date of acceptance. The Customer may give further instructions in writing (including by e-mail or through settings in the console) that are consistent with the Service. If a further instruction requires work or cost beyond the Service, the parties will agree it first.</span></p>
+<p><span class="ln">3.2 The Customer's configuration of the Service is an instruction. This includes whether text may leave devices, whether text is kept, how identities are shown, retention periods, the AI services inspected, policy import and topic rules (which use a hosted language model service in Ireland only), and the integrations and alert destinations that the Customer connects.</span></p>
+<p><span class="ln">3.3 Blindsight will inform the Customer immediately if, in its opinion, an instruction infringes Applicable Data Protection Law (GDPR Art. 28(3), final subparagraph). Blindsight may suspend carrying out that instruction until the Customer confirms or changes it.</span></p>
+<p><span class="ln">3.4 Blindsight will not process Customer Personal Data for its own purposes. In line with EULA clause 10.3, Blindsight does not use the text of prompts, replies or files processed for the Customer to train models or for any other purpose of its own. Blindsight may use technical operating data and aggregated information that does not identify the Customer, any Authorised User or any other person, as EULA clause 10.3 provides. Where EU, Member State or Swiss law to which Blindsight is subject requires Blindsight to process Customer Personal Data otherwise, Blindsight will tell the Customer of that legal requirement before the processing, unless that law forbids it on important grounds of public interest (GDPR Art. 28(3)(a)).</span></p>
+<p><span class="ln">3.5 The Customer is responsible for the matters in EULA clause 8.2, in particular for having a lawful basis, for informing Authorised Users and others concerned, for consulting works councils and staff representatives where required, and for its own policy settings. The Customer warrants that its instructions and its use of the Service comply with Applicable Data Protection Law.</span></p>
+<p><span class="ln">3.6 Annex 1 describes the processing and is part of the Customer's instructions.</span></p>
+<h2>4. Confidentiality of personnel</h2>
+<p><span class="ln">4.1 Blindsight ensures that the persons it authorises to process Customer Personal Data are bound by a duty of confidentiality, by contract or by law, that continues after their engagement ends (GDPR Art. 28(3)(b)).</span></p>
+<p><span class="ln">4.2 Blindsight gives its personnel access to Customer Personal Data only to the extent needed to provide, secure and support the Service. Blindsight staff access Customer Personal Data only from Switzerland, Portugal and Germany. Privileged administrative access to the hosting account and the database is held by Blindsight's technical founders, who access it from Switzerland, Portugal and Germany, and by an automated deployment identity used only by the deployment pipeline. Stored prompt text is encrypted with an application key, but administrators of the hosting account can technically reach that key and the database. Support access to Customer Personal Data held in the Service takes place only on the Customer's request or with its permission, or where needed to resolve a security incident or a fault in the Service.</span></p>
+<p><span class="ln">4.3 Banking and professional secrecy.</span></p>
+<p><span class="ln">(a) Where the Customer is bound by a statutory duty of professional secrecy, in particular banking secrecy under Art. 47 of the Swiss Banking Act, Blindsight acknowledges that Customer Data may contain information protected by that duty. This includes information about the Customer's clients, whether they are natural persons or legal entities, and whether or not that information is personal data.</span></p>
+<p><span class="ln">(b) Blindsight undertakes, for itself and its personnel, to keep that information secret, to use it only to provide the Service, and not to disclose it except as this DPA allows or as paragraph (c) provides. Blindsight requires each Sub-processor, by contract, to keep Customer Data confidential. The duty of a Sub-processor is the confidentiality duty in its contract with Blindsight; Blindsight does not promise that a Sub-processor owes the Customer the same duty of secrecy as the Customer's own.</span></p>
+<p><span class="ln">(c) Blindsight will disclose that information to an authority or court only where Swiss law, or a binding order recognised in Switzerland, requires it, and only to the extent required. Where the law allows, Blindsight will tell the Customer before it discloses, so that the Customer can respond. This paragraph prevails over clause 3.4 and over EULA clause 11.2 for that information.</span></p>
+<p><span class="ln">(d) This undertaking has no time limit. It continues after this DPA and the EULA end, and the five-year limit in EULA clause 11.3 does not apply to it.</span></p>
+<h2>5. Security</h2>
+<p><span class="ln">5.1 Blindsight implements the technical and organisational measures in Annex 2, taking into account the state of the art, the costs, the nature, scope, context and purposes of the processing and the risks to data subjects (GDPR Arts. 28(3)(c) and 32; FADP Art. 8; Arts. 1 to 3 of the Data Protection Ordinance, SR 235.11, and its Arts. 4 and 5 where their conditions are met). Blindsight may change those measures if the change does not lower the overall level of protection, and will update Annex 2 for material changes.</span></p>
+<p><span class="ln">5.2 The Customer is responsible for the security of its own devices, networks, identities and console accounts, for the roles and permissions it grants in the console, and for using the controls in Annex 2, part 9, appropriately for the data it handles.</span></p>
+<p><span class="ln">5.3 Blindsight does not hold a security certification or attestation (for example ISO/IEC 27001 or SOC 2) for the Service.</span></p>
+<h2>6. Sub-processors</h2>
+<p><span class="ln">6.1 The Customer gives Blindsight a general authorisation to engage Sub-processors (GDPR Art. 28(2); FADP Art. 9(3) and Art. 7 of the Data Protection Ordinance), on the conditions in this clause. The Sub-processors engaged at the date of this DPA are in Annex 3. The current list is published at <a href="/platform/legal/subprocessors/">https://blindsight.io/platform/legal/subprocessors</a>.</span></p>
+<p><span class="ln">6.2 Blindsight will give the Customer's administrators notice by e-mail, and will update the published list, at least 30 days before (a) a new Sub-processor starts to process Customer Personal Data, or (b) an existing Sub-processor is given a materially wider scope or a new location. The Customer is responsible for keeping an administrator e-mail address current.</span></p>
+<p><span class="ln">6.3 The Customer may object to the change on reasonable data protection grounds by written notice within that period, stating the grounds. The parties will discuss the objection in good faith. If it is not resolved within 30 days after the objection, and Blindsight does not offer a reasonable alternative (for example, not using the new Sub-processor for the Customer, or a setting that removes the Customer's data from it), the Customer may terminate the affected part of the Service by written notice. Blindsight will refund the prepaid fees for the remainder of the Subscription Term for the affected part, pro rata. Until termination takes effect, Blindsight will not use the new Sub-processor for the Customer Personal Data concerned, where the Service allows that data to be kept apart. Where the change is needed urgently for security or to meet a legal duty, Blindsight may make it earlier, will tell the Customer at once, and the Customer's rights to object and terminate continue.</span></p>
+<p><span class="ln">6.4 Blindsight enters into a written contract with each Sub-processor that imposes data protection obligations no less protective than those in this DPA, including the technical and organisational measures appropriate to the processing, and, for Restricted Transfers, the safeguards in clause 7 (GDPR Art. 28(4)).</span></p>
+<p><span class="ln">6.5 Blindsight remains fully liable to the Customer for the performance of its Sub-processors' obligations, subject to EULA clause 13 and clause 13 of this DPA.</span></p>
+<p><span class="ln">6.6 Services that the Customer itself chooses to connect (for example identity providers, directory and device-management services, alert destinations such as webhook, chat, e-mail, syslog or security-information tools, and AI services the Customer uses) are not Sub-processors of Blindsight. Data sent to them is sent on the Customer's instruction and under the Customer's own agreement with each provider. The Customer is responsible for those integrations.</span></p>
+<h2>7. International transfers</h2>
+<p><span class="ln">7.1 Blindsight hosts the Service in the EEA: production data is held in Amazon Web Services' Ireland region (eu-west-1), which Switzerland recognises as providing adequate protection (Annex 1 of the Data Protection Ordinance). Blindsight is established in Switzerland, which the European Commission recognises as providing adequate protection (Decision 2000/518/EC). Customer Personal Data that Blindsight accesses or processes in Switzerland, Portugal or Germany is therefore not a Restricted Transfer from the EEA. The exceptions are the Microsoft 365 mailboxes described in Annex 3 (stored in the EU and EFTA under the EU Data Boundary, with the limited transfers that it allows), the IP address of a device that fetches updates, which reaches Amazon CloudFront edge locations in Europe and North America (Annex 1, part 10), and integrations the Customer connects (clause 7.4).</span></p>
+<p><span class="ln">7.2 Blindsight will not carry out, and will not allow a Sub-processor to carry out, a Restricted Transfer unless one of the following applies: (a) the receiving country or recipient is covered by an adequacy decision or equivalent recognition under Applicable Data Protection Law, including the EU-U.S. Data Privacy Framework and the Swiss-U.S. Data Privacy Framework where the recipient is certified and the certification covers the data; or (b) the transfer is covered by the standard contractual clauses in Commission Implementing Decision (EU) 2021/914 (the "SCCs"), with the amendments for Switzerland required by the FDPIC (so that references to the GDPR are read as references to the FADP for transfers governed by the FADP, the term "Member State" is not interpreted so as to exclude data subjects with their habitual residence in Switzerland from bringing claims there under Clause 18(c), Swiss courts are an alternative forum for those data subjects, and the FDPIC is named in Annex I.C as the competent supervisory authority for transfers governed by the FADP); or (c) another safeguard that Applicable Data Protection Law recognises applies.</span></p>
+<p><span class="ln">7.3 Where the SCCs apply between the parties, they are incorporated as follows: Module Two (controller to processor) or Module Three (processor to processor), as the Customer's role requires; the option in clause 7 (docking clause) applies; for clause 9 option 2 (general written authorisation) applies with the notice period in clause 6.2 of this DPA; the optional wording in clause 11 does not apply; for clause 17 option 1 applies and the governing law is the law of Ireland; for clause 18 the courts of Ireland; Annexes I to III of the SCCs are completed by Annexes 1 to 3 of this DPA. Where the SCCs apply, they prevail over this DPA, the EULA and the Service Terms if they conflict, and nothing in those documents modifies them (SCC Clauses 2(a) and 5).</span></p>
+<p><span class="ln">7.4 The Customer's choices of integration or destination are the Customer's instruction. The hosted language model service is limited to Ireland (eu-west-1) in production, so a workspace cannot send data to it in another region. If the Customer connects an integration or alert destination located outside Switzerland and the EEA (clause 6.6), the transfer to it is made on the Customer's instruction under the Customer's own agreement with that provider, and the Customer is responsible for its lawfulness.</span></p>
+<p><span class="ln">7.5 Blindsight will tell the Customer without undue delay if it can no longer comply with this clause 7, for example because a safeguard is invalidated. The Customer may then suspend the transfer concerned.</span></p>
+<h2>8. Assistance with data subject rights</h2>
+<p><span class="ln">8.1 Taking into account the nature of the processing, Blindsight will assist the Customer by appropriate technical and organisational measures, so far as possible, in answering requests from data subjects to exercise their rights under Applicable Data Protection Law (GDPR Art. 28(3)(e), Chapter III; FADP Arts. 25 to 29 and 32). The console lets the Customer's administrators export the record the Service holds about one person or one device for an access request, and erase a console user together with the records linked to that user's account. The Customer should use these functions where they meet the request. Erasing a person who has no console account, or a person named inside stored prompt text, is not a console function and is done under clause 8.3.</span></p>
+<p><span class="ln">8.2 If a data subject contacts Blindsight about Customer Personal Data, Blindsight will, so far as it can identify the Customer, refer the person to the Customer and tell the Customer without undue delay, and will not answer the request itself except to confirm the referral, unless the Customer instructs it or the law requires.</span></p>
+<p><span class="ln">8.3 Where the Customer cannot meet a request with the functions of the Service, Blindsight will carry it out on written instruction, in a reasonable time. If the assistance requires effort beyond the functions of the Service and routine support, Blindsight may charge for it at its then current rates, after telling the Customer.</span></p>
+<p><span class="ln">8.4 Where the Customer has turned on pseudonymised or aggregated identity display, pseudonymised data remains personal data. In the console, a pseudonymised person is re-identified only through the reveal function, which records who asked, who approved and when.</span></p>
+<h2>9. Personal data breaches</h2>
+<p><span class="ln">9.1 Blindsight will notify the Customer without undue delay, and at the latest within 48 hours, after becoming aware of a personal data breach affecting Customer Personal Data (GDPR Art. 33(2); FADP Art. 24(3)). Notice goes to the e-mail addresses of the Customer's administrators.</span></p>
+<p><span class="ln">9.2 The notice will contain, so far as available at that time and in stages if necessary (GDPR Art. 33(3) and (4); Art. 15(1) and (2) of the Data Protection Ordinance): (a) the nature of the breach, including where possible its time and duration and the categories and approximate number of data subjects and of records concerned; (b) the name and contact details of the contact point at Blindsight; (c) the likely consequences; (d) the measures taken or proposed to address the breach and reduce its possible adverse effects.</span></p>
+<p><span class="ln">9.3 Blindsight will take reasonable steps to contain and investigate the breach, will keep the Customer informed, and will cooperate with the Customer in meeting its duties to notify supervisory authorities and data subjects. The Customer decides whether and how to notify them. Blindsight will not notify a supervisory authority or data subject about a breach affecting the Customer without the Customer's prior approval, unless the law requires it.</span></p>
+<p><span class="ln">9.4 Notice of a breach is not an acknowledgement of fault or liability.</span></p>
+<p><span class="ln">9.5 Blindsight will also tell the Customer without undue delay of any security incident or outage that materially affects the confidentiality, integrity or availability of Customer Data in the Service, even where no personal data is affected.</span></p>
+<h2>10. Assistance with impact assessments and prior consultation</h2>
+<p><span class="ln">10.1 Blindsight will, on request and taking into account the nature of the processing and the information available to it, assist the Customer with its obligations under GDPR Arts. 32 to 36 and FADP Arts. 8, 22 and 23, including data protection impact assessments and prior consultation of a supervisory authority (GDPR Art. 28(3)(f)).</span></p>
+<p><span class="ln">10.2 The Customer acknowledges that inspecting traffic to AI services on employees' devices is likely to require a data protection impact assessment, and that carrying it out is the Customer's duty (EULA clause 8.2(d)).</span></p>
+<p><span class="ln">10.3 To support this, Blindsight makes available the Documentation, this DPA, the list in Annex 3 and the description in Annex 1 and Annex 2. The Service also generates, for the Customer to review and adapt before use, (a) a works-council pack that describes the processing for employee representatives, and (b) an employee notice, in the languages offered in the console. These documents describe the Service's functions and the Customer's settings. They are not legal advice, and the Customer remains responsible for their content and use.</span></p>
+<h2>11. Audits and information</h2>
+<p><span class="ln">11.1 Blindsight will make available to the Customer the information necessary to demonstrate compliance with this DPA and Article 28 GDPR, and will allow for and contribute to audits, including inspections, by the Customer or an auditor it appoints (GDPR Art. 28(3)(h)).</span></p>
+<p><span class="ln">11.2 The Customer will first use the Documentation and Blindsight's written answers to reasonable questions and questionnaires, which Blindsight will give within 30 days.</span></p>
+<p><span class="ln">11.3 If that information is not enough to show compliance, or if a supervisory authority or Applicable Data Protection Law requires it, the Customer may carry out an audit, remotely or on site at Blindsight's premises, at most once in any twelve months (unless a personal data breach affecting the Customer or a supervisory authority's request gives a reason for more), on at least 30 days' written notice, during business hours, in a way that does not unreasonably disturb Blindsight's operations or the data of its other customers. The auditor must be bound by confidentiality and not be a competitor of Blindsight. The scope and timing will be agreed in advance. The audit is at the Customer's cost, including a reasonable charge for Blindsight's time, unless it shows a material breach of this DPA by Blindsight, in which case Blindsight bears its own costs.</span></p>
+<p><span class="ln">11.4 The audit will not extend to the data of other customers or to Sub-processors' facilities, except as the Sub-processor contract allows. Blindsight will pass on to the Customer the audit reports that a Sub-processor makes available to it where the Sub-processor contract allows.</span></p>
+<p><span class="ln">11.5 Nothing in this clause limits the powers of a supervisory authority, including its right to audit and inspect Blindsight under Applicable Data Protection Law, and Blindsight will cooperate with them.</span></p>
+<p><span class="ln">11.6 If the Customer is a regulated customer within EULA clause 17, the access, information and audit rights in the addendum under that clause apply in addition to and, where they conflict, instead of this clause 11.</span></p>
+<h2>12. Return and deletion</h2>
+<p><span class="ln">12.1 During the Subscription Term, the Customer can export its Customer Data and erase records using the functions of the Service, and can set the retention periods described in Annex 1.</span></p>
+<p><span class="ln">12.2 At the end of the provision of the Service, Blindsight will, at the Customer's choice, return Customer Personal Data and delete it, or delete it (GDPR Art. 28(3)(g)). The Customer exercises the choice to have it returned by exporting it: after the EULA ends (EULA clause 15.3), the Customer may export its Customer Data for at least 30 days after the end, in a common machine-readable format through the console. The export period is at least 30 days after the end, whether the end is automatic or follows a revocation or suspension, as EULA clause 15.3(c) provides.</span></p>
+<p><span class="ln">12.3 Blindsight will delete the remaining Customer Personal Data, including existing copies, from the Service within 30 days after the end of the export period, or earlier at the Customer's written request after it has exported its data, and will confirm the deletion to the Customer on request. Deletion is carried out by Blindsight staff, who run the documented erasure path of the Service; it is not an automatic job. Blindsight records the date the export period closed and the date the deletion was completed.</span></p>
+<p><span class="ln">12.4 Copies in backups and logs are not deleted individually. Automated database backups, and the database snapshots that the deployment process takes before production releases, are kept for 35 days and then deleted, so Customer Personal Data in them is gone no later than 35 days after its deletion from the Service. Application logs, which can contain identifiers such as e-mail and IP addresses, expire after 365 days, and cloud audit logs after 90 days. Blindsight will not restore Customer Personal Data from a backup or snapshot except to recover the Service, in which case it will repeat the deletion.</span></p>
+<p><span class="ln">12.5 Audit records of the Customer's workspace (actions in the console, with the actor, IP address and user agent) are Customer Personal Data and are deleted with the workspace under clause 12.3. During the Subscription Term they follow the workspace's audit retention setting (clause 9 of Annex 1). When a person is erased, the personal fields in the hash-chained audit trail are redacted by a separate worker. Where EU, Member State or Swiss law requires retention, Blindsight may keep what it must, and will protect it under this DPA and process it only for that purpose.</span></p>
+<p><span class="ln">12.6 Blindsight may keep Customer Personal Data after the end only to the extent that EU, Member State or Swiss law requires, and will tell the Customer which law, unless the law forbids it.</span></p>
+<p><span class="ln">12.7 The Software is the Customer's installation. When the licence ends, the Software behaves as EULA clause 4.2 describes. The Customer is responsible for uninstalling it (EULA clause 15.3(b)). Data stored on the Customer's devices by the Software, for example the local event store (which holds redacted text by default and has no automatic deletion period today) and the pseudonymisation vault, is the Customer's data on its own devices and is outside this clause 12.</span></p>
+<h2>13. Liability</h2>
+<p><span class="ln">13.1 The liability of each party under or in connection with this DPA is subject to the exclusions and limits in clause 13 of the EULA, which apply to this DPA together with the EULA and the Service Terms (EULA clause 13.3).</span></p>
+<p><span class="ln">13.2 Nothing in this DPA or the EULA limits or excludes either party's liability to data subjects under Article 82 GDPR or equivalent mandatory law, or any liability that cannot be limited by law (EULA clause 13.1). Between the parties, the allocation of that liability under Article 82(5) GDPR is not affected.</span></p>
+<p><span class="ln">13.3 Each party is responsible for its own fines. A fine imposed on one party because of the other party's breach of this DPA is a loss that the other party must bear, subject to clause 13.1 and EULA clause 13.</span></p>
+<h2>14. Term, governing law and courts</h2>
+<p><span class="ln">14.1 This DPA starts on acceptance (clause 1.6) and continues for as long as Blindsight processes Customer Personal Data, including during the export and deletion periods in clause 12. Clauses 9, 11, 12, 13 and 14 survive until the Customer Personal Data has been deleted. Clause 4.3 continues without time limit.</span></p>
+<p><span class="ln">14.2 This DPA is governed by Swiss law, and the courts of Zurich have jurisdiction, in accordance with EULA clause 19 (including EULA clause 19.3 where it applies), except where mandatory law or the SCCs (clause 7.3) require otherwise. Data subjects keep their rights to enforce this DPA, or the SCCs, as those instruments provide, and their rights before a supervisory authority and the courts of their place of residence.</span></p>
+<p><span class="ln">14.3 Blindsight may update this DPA to reflect a change in Applicable Data Protection Law, in a supervisory authority's guidance, or in the Service, in accordance with EULA clause 18. An update does not reduce the protection of Customer Personal Data.</span></p>
+<p><span class="ln">14.4 This DPA is written in English. If it is translated, the English text prevails.</span></p>
+<hr>
+<h2>Annex 1: Description of the processing</h2>
+<p><span class="ln"><strong>1. Subject matter.</strong> Operation of the Blindsight hosted platform and console (the "Service") for the Customer, to protect personal data and confidential information when the Customer's staff and others use AI services from devices on which the Customer has installed the Software.</span></p>
+<p><span class="ln"><strong>2. Duration.</strong> The Subscription Term, plus the export and deletion periods in clause 12.</span></p>
+<p><span class="ln"><strong>3. Nature of the processing.</strong> Receiving, storing, analysing, displaying, exporting, transmitting to destinations that the Customer configures, and erasing (a) data that the Software on the Customer's devices sends to the Service, (b) text that the Customer's own applications send to the Service through its programming interface or software development kit for inspection, (c) datasets, documents and document stores that the Customer uploads or connects for scanning, and (d) data that the Customer's administrators enter or synchronise. The Service analyses the text it receives for security threats (for example prompt injection), sensitive information and the Customer's own rules. Blindsight's own classifiers run in Blindsight's own containers in the hosting region; the hosted language model service in Annex 3 is used only for the functions stated there. The Service shows the Customer's reviewers per-person counts of allowed, flagged, redacted and blocked requests over a period, and shows managers those counts for their own reports, unless the Customer chooses pseudonymised or aggregated identity display.</span></p>
+<p><span class="ln"><strong>4. Purpose.</strong> To provide the Service to the Customer under the EULA and the Service Terms: enrolling and monitoring the health of devices; applying the Customer's policy; recording findings and actions; showing them to the Customer's authorised administrators; alerting; compliance reporting; support; and the security and operation of the Service. The Service is not designed to evaluate the performance or behaviour of individuals (EULA clause 8.3).</span></p>
+<h2 class="clause">5. Data subjects.</h2>
+<ul>
+<li>Authorised Users: the Customer's staff and other persons who use devices on which the Customer has installed the Software.</li>
+<li>Persons whose data appears in prompts, replies, system instructions, tool results or files that Authorised Users send to AI services, for example the Customer's clients, customers, counterparts and colleagues.</li>
+<li>Users of the Customer's own applications that the Customer connects to the Service, and persons whose data appears in the text those applications send.</li>
+<li>Persons whose data appears in datasets or documents the Customer has scanned.</li>
+<li>The Customer's console users (administrators and others), only to the extent their data is processed within the Customer's workspace, for example as the person who took an action, in the audit trail, or in a synchronised directory. Contact, account, sign-in, licensing and billing data of the Customer's administrators, other console users and contacts is controller data of Blindsight (clause 1.2; EULA clause 10.2).</li>
+</ul>
+<h2 class="clause">6. Categories of personal data.</h2>
+<ul>
+<li>Device and user identifiers: host name, operating system user name, hardware identifier, serial number, Entra device identifier where readable, agent version, IP address as seen by the Service, e-mail address and name where synchronised from the Customer's directory or provided in the console.</li>
+<li>Device status and health: heartbeats about every minute (protection state, version, policy markers), the AI services a device reached and, while whole-device discovery is on (the default), the names of other hosts it connected to that are not on Blindsight's list of known non-AI services and infrastructure, so that AI services not yet known can be found, each with counts, first and last time seen and, where available, the name of the process (the content of those connections is not read), health log lines scrubbed on the device, tamper reports (the class of change and the file path), an inventory of AI applications, browser extensions and similar tools installed on the device (names and versions, only if the Customer turns it on), and diagnostic bundles (scrubbed logs, a trace and a policy snapshot) that a device uploads only when an administrator or the person asks.</li>
+<li>Event records: the AI service used, the model and host, time, direction and action taken (allow, flag, redact, block), categories and counts of findings, injection score and label, text length, the name of the process that made the request, and the names of files submitted to AI services.</li>
+<li>Content from devices: by default, and unless the Customer turns it off (clause 3.2 and part 9 of Annex 2), the text of prompts, replies, system instructions, tool results and uploaded files after redaction on the device. Unredacted text is not sent by the Software. Redaction does not catch every item (EULA clause 8.3), so the text that reaches the Service, and that is kept while "keep prompt text" is on, can still contain personal data and other confidential information, for example the names of the Customer's clients where the on-device name model is not turned on (it is off by default). While "keep prompt text" is on (the default), up to 4,000 characters of that redacted text per event are stored, encrypted, and kept for the period in part 9 (90 days by default). If the Customer turns "keep prompt text" off, the Service still reads the text in memory to score it and then discards it, and the event keeps its verdict, scores, categories, counts and length. If the Customer turns sending text from devices off, only counts, categories and labels are sent, together with the names of files, unless a rule the Customer sets for a particular AI service sends text for that service.</li>
+<li>Content from the Customer's own applications: the text those applications send, which the Software has not redacted. The Service redacts it and stores the redacted text; where the Customer sets an application to keep original text as well, that original text is also stored, encrypted, and access to it is limited by role.</li>
+<li>Datasets, documents and document stores that the Customer uploads or connects for scanning, and the findings.</li>
+<li>Records of the Customer's workspace: the console accounts and roles of administrators, audit trail records of actions in the console (with actor, IP address and user agent), device-linking records, identity reveal records, alert records, and support reports and attachments that console users submit through in-app help, which reach Blindsight by e-mail in its Microsoft 365 mailboxes (Annex 3), as do support e-mails and bug reports sent to Blindsight directly.</li>
+<li>Where the Customer connects them: directory and group data from the Customer's identity provider or directory, device inventory from its device-management service, activity records read from its Microsoft 365 tenant, and records sent to the Customer's alert destinations.</li>
+<li>Pseudonymisation maps of the Software: kept on the device, not by Blindsight.</li>
+<li>Policy documents the Customer uploads for policy import, and topic rules and examples its administrators write (only if used).</li>
+</ul>
+<p><span class="ln"><strong>7. Special categories and criminal-offence data.</strong> The Service does not look for special categories of personal data as such, but the text of prompts, replies and files may contain them (for example health, trade-union membership, religion, biometric or criminal-conviction data), because the Customer's staff write what they write. The Customer controls this through its policy (which services are inspected and what is blocked or redacted), through whether text leaves devices and whether it is kept, and through its rules for staff. The Customer must not instruct Blindsight to process special categories except as its policy and Applicable Data Protection Law allow.</span></p>
+<p><span class="ln"><strong>8. Frequency.</strong> Continuous while the Software is active (device heartbeats about every minute, event records when AI services are used, console use).</span></p>
+<p><span class="ln"><strong>9. Retention.</strong> Every workspace has retention on by default, and the Customer controls the periods within the limits of the product. Prompt records (the event, the encrypted text, embeddings and labels), with alert deliveries and host findings, are kept for 90 days by default (the Customer can set 7 to 3,650 days). Counts, with identity reveal records and retention run records, are kept for 400 days by default (30 to 3,650 days). Audit records are kept for seven years (2,555 days) by default (365 to 3,650 days). Workspaces created before 26 September 2026 moved to this default on 19 December 2026, 30 days after notice to their administrators. Device timelines are kept for 30 days and diagnostic bundles for 30 days. Datasets, documents and their scan results are kept until the Customer deletes them. Imported policy documents are kept only for the import run. Support reports and attachments stored in the platform are kept for 24 months after closure. The copies that reach Blindsight's mailboxes (Annex 3) are kept two years after the last message in the thread in the support@ mailbox, three years in security@ and ten years in legal@, and are then deleted. After the end of the contract, clause 12 applies.</span></p>
+<p><span class="ln"><strong>10. Hosting and locations.</strong> Amazon Web Services, Ireland (eu-west-1). The hosted language model service, where used, runs in Ireland (eu-west-1) only. Amazon CloudFront is used only in front of downloads.blindsight.io (installers, update manifests and model files), with its origin bucket in the United States (us-east-1) and edge locations in Europe and North America (price class 100). It is not in front of the console or the API. A device that fetches an update connects to a CloudFront edge location, so its IP address reaches AWS there; no other Customer Personal Data does. Support e-mails and bug reports that reach Blindsight are held in Microsoft 365 mailboxes (Annex 3). Support and engineering by Blindsight personnel take place in Switzerland, Portugal and Germany. Privileged administrative access to the hosting account and the database is held by Blindsight's technical founders and by an automated deployment identity used only by the deployment pipeline. See Annex 3 for Sub-processors.</span></p>
+<hr>
+<h2>Annex 2: Technical and organisational measures</h2>
+<p><span class="ln">Blindsight applies the measures below.</span></p>
+<h2 class="clause">1. On-device minimisation (done by the Software on the Customer&#x27;s devices).</h2>
+<ul>
+<li>Detection of personal data and other sensitive information on the device by rules and checksums (for example e-mail addresses, card numbers, IBAN, national identity numbers, secrets) and, if the Customer enables it, an on-device name model.</li>
+<li>Redaction of detected values before text leaves the device, according to the Customer's policy, with the option of pseudonymisation.</li>
+<li>Files and images are scanned for personal data on the device, using the operating system's own text recognition for images. By default the redacted text of files is then sent to the Service like other content (Annex 1, part 6).</li>
+<li>Traffic to sign-in, identity and telemetry hosts and to operating-system update hosts is not decrypted. Where an AI service host also serves sign-in pages, the sign-in paths are passed through without being read.</li>
+<li>The root certificate used for inspection is created on each device, and its private key does not leave the device.</li>
+<li>The Customer can turn off sending text from devices, so that only counts, categories, labels and file names reach the Service (Annex 1, part 6).</li>
+</ul>
+<h2 class="clause">2. Transport.</h2>
+<ul>
+<li>TLS for all connections to the Service. The load balancer redirects HTTP to HTTPS and uses TLS policy ELBSecurityPolicy-TLS13-1-2-2021-06.</li>
+<li>Mutual TLS between the API and the firewall service inside the platform.</li>
+<li>Redis connections use in-transit encryption.</li>
+<li>Updates to the Software are signed and verified before installation.</li>
+<li>Alert destinations that the Customer configures use the transport the Customer chooses; for example, syslog over UDP is not encrypted.</li>
+</ul>
+<h2 class="clause">3. Encryption at rest.</h2>
+<ul>
+<li>Database storage, file storage and cache are encrypted at rest with AWS-managed keys. Blindsight does not currently use customer-managed keys for these.</li>
+<li>Storage buckets use server-side encryption.</li>
+<li>Application-level encryption of stored prompt text (Fernet, and AES-256-GCM for files) with a key ring and key identifiers. In production the application refuses to store text if the key is missing (fail closed).</li>
+<li>Passwords are hashed with bcrypt. Two-factor (TOTP) secrets and stored integration credentials are encrypted. Secrets are held in AWS Systems Manager Parameter Store as secure strings and injected into the running service.</li>
+</ul>
+<h2 class="clause">4. Access control and authentication.</h2>
+<ul>
+<li>Role and permission model in the console, with workspace-scoped permissions. New permissions default to administrators.</li>
+<li>Passwords, optional TOTP two-factor authentication, and single sign-on through the Customer's identity provider; directory provisioning by SCIM.</li>
+<li>Session cookies are HttpOnly and Secure, with protection against cross-site request forgery.</li>
+<li>Rate limiting on the API.</li>
+<li>Private network subnets for service tasks, the database and the cache; the database is not publicly accessible.</li>
+<li>A web application firewall with managed rule sets in block mode. An account-wide block on public access to storage buckets.</li>
+<li>Privileged administrative access to the hosting account and the database is held by Blindsight's technical founders and by an automated deployment identity used only by the deployment pipeline.</li>
+<li>Pseudonymised and aggregated identity modes, and a reveal function that records who revealed a person's identity.</li>
+</ul>
+<h2 class="clause">5. Tenant isolation (row level security).</h2>
+<ul>
+<li>Customer data is separated by workspace. The database enforces PostgreSQL row level security (forced on workspace tables), and the application uses separate database roles for workspace operations and for platform administration.</li>
+</ul>
+<h2 class="clause">6. Logging and audit trail.</h2>
+<ul>
+<li>Append-only admin audit log, and a hash-chained audit trail with signed checkpoints. A public verification key can be fetched.</li>
+<li>Cloud audit logs of the hosting account (CloudTrail, retained 90 days) and application logs (CloudWatch, retained 365 days). Threat detection, configuration monitoring and access analysis services of the hosting account where enabled.</li>
+<li>Tamper reports from the Software when its own files change.</li>
+</ul>
+<h2 class="clause">7. Availability and backups.</h2>
+<ul>
+<li>Managed database with Multi-AZ operation, deletion protection and automated backups kept for 35 days. A database snapshot taken before production releases is deleted after 35 days (clause 12.4).</li>
+<li>Cache with a replica, and automatic scaling of services.</li>
+<li>Release practice: Blindsight aims to release without downtime. This is not an availability commitment.</li>
+<li>No recovery time or recovery point objective is promised in this DPA.</li>
+</ul>
+<h2 class="clause">8. Vulnerability and update management.</h2>
+<ul>
+<li>Security updates for the Software for at least five years from first availability and during the Subscription Term (EULA clause 9.2). Automatic updates are on by default, controlled by the Customer for managed devices.</li>
+<li>Vulnerabilities in the Software can be reported to <a href="mailto:security@blindsight.io">security@blindsight.io</a> (EULA clause 9.3).</li>
+<li>Dependencies are tracked, and the Software lists its third-party components in THIRD_PARTY_NOTICES.md (EULA clause 20.1).</li>
+</ul>
+<h2 class="clause">9. Customer-configurable controls.</h2>
+<ul>
+<li>Sending text from devices (injection detection setting): on by default, can be turned off; a rule for a particular AI service can send text for that service. A stronger setting under which no text can leave devices exists in the product but is not offered in production today.</li>
+<li>Keep prompt text: on by default, can be turned off.</li>
+<li>Identity display: named by default; pseudonymised or aggregated can be chosen.</li>
+<li>Retention: on by default for every workspace; 90 days for prompt records, 400 days for counts and seven years for audit records by default, each adjustable within the product's limits (Annex 1, part 9).</li>
+<li>Policy import and topic rules: available in production, used only for a workspace that imports a policy document or defines topic rules. The uploaded policy text, or for topic rules a redacted prompt window of at most 1,500 characters, goes to the hosted language model service in Annex 3, in Ireland (eu-west-1) only. The prompt window is not stored by Blindsight after the decision; the policy document is kept only for the import run.</li>
+<li>Which AI services are inspected, and the actions taken on findings.</li>
+<li>The roles and permissions of console users, and the integrations and alert destinations the Customer connects.</li>
+<li>Automatic update settings for managed devices.</li>
+</ul>
+<p><span class="ln"><strong>10. Organisational measures.</strong> Confidentiality undertakings of personnel (clause 4); Sub-processor management (clause 6); a process for personal data breaches (clause 9).</span></p>
+<hr>
+<h2>Annex 3: Sub-processors</h2>
+<p><span class="ln">The binding list is the one published at <a href="/platform/legal/subprocessors/">https://blindsight.io/platform/legal/subprocessors</a>, which is kept in line with the table below.</span></p>
+<div class="pl-tablewrap" tabindex="0" role="region" aria-label="Table"><table>
+<thead><tr><th scope="col">Sub-processor</th><th scope="col">Service and purpose</th><th scope="col">Data</th><th scope="col">Location</th><th scope="col">Transfer mechanism</th><th scope="col">When used</th></tr></thead>
+<tbody>
+<tr><td>Amazon Web Services EMEA SARL (Luxembourg)</td><td>Hosting of the platform: compute, database, cache, file and object storage, encryption keys, logs, network and web application firewall</td><td>All data held in a workspace</td><td>Ireland (eu-west-1)</td><td>None needed: inside the EEA, which Switzerland recognises as adequate</td><td>Always</td></tr>
+<tr><td>Amazon Web Services EMEA SARL (as above), Amazon Simple Email Service</td><td>Product e-mails (invitations, sign-in and password links, alerts to addresses the Customer sets, in-app help and bug reports sent to Blindsight support)</td><td>Recipient and sender addresses, names, message content and attachments</td><td>Ireland (eu-west-1)</td><td>None needed (as above)</td><td>Always (default sending method)</td></tr>
+<tr><td>Amazon Web Services EMEA SARL (as above), Amazon Bedrock</td><td>A hosted language model that reads a policy document the Customer uploads and turns it into rules (policy import); judges, for topic rules, whether a redacted prompt window of at most 1,500 characters breaks a rule the Customer wrote; and writes example sentences for a topic rule from the rule and the examples the Customer's administrators give</td><td>The uploaded policy text (kept only for the import run); the redacted prompt window (not stored by Blindsight after the decision), which can still contain personal data that redaction did not catch; topic rule text and examples</td><td>Ireland (eu-west-1) only</td><td>None needed: inside the EEA</td><td>Only for a workspace that imports a policy document or defines topic rules</td></tr>
+<tr><td>Microsoft Ireland Operations Limited (Microsoft 365 mailboxes)</td><td>Hosting the Blindsight mailboxes (support@ shared mailbox for support e-mails and bug reports, info@, legal@, security@), which receive Customer Personal Data when a console user submits in-app help or a bug report, or a Customer writes to Blindsight</td><td>The report or e-mail, the sender's name and e-mail address (unless the workspace hides identities), and attachments, which can contain Customer Personal Data</td><td>European Union and EFTA: the tenant's data location for Exchange Online, Exchange Online Protection, Teams, OneDrive and SharePoint is "European Union\EFTA", under the EU Data Boundary; under Microsoft's product terms certain inactive data is stored in Portugal</td><td>Data stored in the EU and EFTA under the EU Data Boundary; transfers outside the EU that the EU Data Boundary still allows are governed by Microsoft's data protection terms</td><td>When Customer Personal Data reaches Blindsight by support e-mail, attachment or bug report</td></tr>
+</tbody></table></div>
+<p><span class="ln">Blindsight's other providers that do not receive Customer Personal Data (for example licence validation, which receives only the workspace licence key and aggregate counters, and the download network for installers and model files), the providers Blindsight uses for its own controller data, and the services the Customer connects itself are listed on the published page for information and are not Sub-processors. Sign-in bot protection (Google reCAPTCHA Enterprise) is not used in production. Amazon CloudFront serves only downloads.blindsight.io and receives only the IP address of a device that fetches an update (Annex 1, part 10).</span></p>
+<hr>
+<h2>Annex 4: Mapping of Article 28(3) GDPR and FADP requirements to this DPA</h2>
+<div class="pl-tablewrap" tabindex="0" role="region" aria-label="Table"><table>
+<thead><tr><th scope="col">Requirement</th><th scope="col">Reference</th><th scope="col">Clause</th></tr></thead>
+<tbody>
+<tr><td>Subject matter, duration, nature, purpose, data types, data subjects</td><td>GDPR Art. 28(3)</td><td>Annex 1</td></tr>
+<tr><td>Processing only on documented instructions, including transfers</td><td>GDPR Art. 28(3)(a); FADP Art. 9(1)</td><td>3, 7</td></tr>
+<tr><td>Notice if an instruction infringes law</td><td>GDPR Art. 28(3), last subparagraph</td><td>3.3</td></tr>
+<tr><td>Confidentiality of persons authorised to process</td><td>GDPR Art. 28(3)(b)</td><td>4</td></tr>
+<tr><td>Security measures</td><td>GDPR Arts. 28(3)(c), 32; FADP Art. 8</td><td>5, Annex 2</td></tr>
+<tr><td>Conditions for engaging another processor</td><td>GDPR Art. 28(2), (3)(d), (4); FADP Art. 9(3); Data Protection Ordinance Art. 7</td><td>6, Annex 3</td></tr>
+<tr><td>Assistance with data subject requests</td><td>GDPR Art. 28(3)(e); FADP Arts. 25 to 29 and 32</td><td>8</td></tr>
+<tr><td>Assistance with security, breach notification, DPIA, prior consultation</td><td>GDPR Art. 28(3)(f), Arts. 32 to 36; FADP Arts. 22 to 24</td><td>5, 9, 10</td></tr>
+<tr><td>Return or deletion at the end, at the controller's choice</td><td>GDPR Art. 28(3)(g)</td><td>12</td></tr>
+<tr><td>Controller's obligations and rights</td><td>GDPR Art. 28(3), first subparagraph</td><td>3.5, 6.3, 11</td></tr>
+<tr><td>Information and audits</td><td>GDPR Art. 28(3)(h)</td><td>11</td></tr>
+<tr><td>Transfers outside Switzerland and the EEA</td><td>GDPR Chapter V; FADP Arts. 16, 17</td><td>7</td></tr>
+<tr><td>Breach notification by the processor</td><td>GDPR Art. 33(2); FADP Art. 24(3); Data Protection Ordinance Art. 15</td><td>9</td></tr>
+<tr><td>Processor deciding purposes and means</td><td>GDPR Art. 28(10)</td><td>3.4</td></tr>
+<tr><td>Written form, including electronic</td><td>GDPR Art. 28(9)</td><td>1.6</td></tr>
+</tbody></table></div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand"><strong>Blindsight Technologies AG</strong> · Securing AI · 2026</span>
+  <ul class="footer-links">
+    <li><a href="/antidote/">Antidote</a></li>
+    <li><a href="/privacy-policy/">Privacy</a></li>
+    <li><a href="/platform/legal/">Platform legal</a></li>
+    <li><a href="mailto:info@blindsight.io">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  // Live OS preference listener
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    document.documentElement.setAttribute('data-theme', e.matches ? 'light' : 'dark');
+  });
+</script>
+</body>
+</html>
