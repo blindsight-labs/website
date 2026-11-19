@@ -220,9 +220,7 @@ def page(frame: str, *, title: str, desc: str, slug: str, content: str) -> str:
 def scope_line() -> str:
     return (
         '<p class="pl-scope">This document covers the Blindsight platform (the console, the desktop apps and the APIs). '
-        f'The blindsight.io website has its own <a href="{WEBSITE_PRIVACY}">privacy notice</a> and terms '
-        f'(the website has no separate terms page; its <a href="{WEBSITE_PRIVACY}">privacy policy</a> is the only website legal document). '
-        'All platform legal documents are listed in the <a href="/platform/legal/">platform legal index</a>.</p>'
+        f'The blindsight.io website has its own <a href="{WEBSITE_PRIVACY}">privacy policy</a>.</p>'
     )
 
 
