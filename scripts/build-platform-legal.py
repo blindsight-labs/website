@@ -75,6 +75,7 @@ EXTRA_CSS = """
     .pl-doc a:hover { border-color: var(--purple); }
     .pl-doc code { font-family: var(--mono); font-size: 12.5px; }
     .pl-doc hr { border: 0; height: 1px; background: var(--divider); margin: 40px 0; }
+    .pl-doc pre.pl-notice { font-family: var(--mono); font-size: 11.5px; line-height: 1.6; color: var(--text-intro); white-space: pre-wrap; overflow-wrap: anywhere; border: 1px solid var(--border); padding: 14px 16px; margin: 0 0 24px; }
     .pl-tablewrap { overflow-x: auto; margin: 0 0 24px; border: 1px solid var(--border); }
     .pl-doc table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 12.5px; line-height: 1.6; }
     .pl-doc th, .pl-doc td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--divider); }
@@ -107,6 +108,7 @@ EXTRA_CSS = """
       .pl-doc h2, .pl-doc h3 { break-after: avoid; }
       .pl-doc p, .pl-doc li, .pl-doc tr { break-inside: avoid; }
       .pl-tablewrap { overflow: visible; border: 0; }
+      .pl-doc pre.pl-notice { font-size: 8.5pt; color: #000; border: 1px solid #888; }
       .pl-doc table { min-width: 0; font-size: 9pt; }
       .pl-doc th, .pl-doc td { border: 1px solid #888; }
       .pl-print-url { display: block !important; }
@@ -224,10 +226,122 @@ def scope_line() -> str:
     )
 
 
+CC = {
+    "CC BY-SA 4.0": "https://creativecommons.org/licenses/by-sa/4.0/legalcode",
+    "CC BY-SA 3.0": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+    "CC BY 4.0": "https://creativecommons.org/licenses/by/4.0/legalcode",
+    "CC0": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+    "Apache-2.0": "http://www.apache.org/licenses/LICENSE-2.0",
+    "AFL-3.0": "https://opensource.org/license/afl-3-0-php",
+}
+CONVERTED = "Converted to a token-classification format and relabelled to person, organisation, place and date; entity classes mapped; some sentences case-changed or had names swapped."
+# name, creator, licence key, source url, what Blindsight changed. Each licence key, source URL and
+# creator surname must appear in the NOTICE text (checked in third_party_rows), so nothing here is invented.
+BASE = ("distilbert-base-multilingual-cased (base model)", "Sanh et al.", "Apache-2.0",
+        "https://huggingface.co/distilbert/distilbert-base-multilingual-cased",
+        "Weights fine-tuned by Blindsight for token classification (names, organisations, places and dates), then converted to ONNX with reduced numeric precision (FP16 or INT8).")
+ROWS = [
+    ("Universal NER v1 (treebanks English-EWT, Portuguese-Bosque, Chinese-GSD, Chinese-GSDSimp)", "Mayhew et al.", "CC BY-SA 4.0", "https://www.universalner.org", CONVERTED),
+    ("Europeana Newspapers NER corpora", "Europeana Newspapers Project", "CC0", "https://github.com/EuropeanaNewspapers/ner-corpora", CONVERTED),
+    ("ANERcorp, CAMeL Lab train/test splits", "Benajiba, Rosso and Benedi Ruiz; Obeid et al.", "CC BY-SA 4.0", "https://camel.abudhabi.nyu.edu/anercorp/", CONVERTED),
+    ("AQMAR Arabic Wikipedia Named Entity Corpus", "Mohit, Schneider, Bhowmick, Oflazer and Smith", "CC BY-SA 3.0", "https://www.cs.cmu.edu/~ark/ArabicNER/", CONVERTED + " CC BY-SA 3.0 section 4(b) permits an adaptation to be distributed under a later version of the licence with the same licence elements, here CC BY-SA 4.0."),
+    ("GermEval 2014 NER shared task data", "Benikova, Biemann, Reznicek", "CC BY 4.0", "https://sites.google.com/site/germeval2014ner/", CONVERTED),
+    ("WikiNER and wikigold", "Nothman, Ringland, Radford, Murphy, Curran; Balasuriya et al.", "CC BY 4.0", "https://doi.org/10.6084/m9.figshare.5462500", CONVERTED),
+    ("MultiCoNER v2", "Fetahu, Chen, Kar, Rokhlenko, Malmasi", "CC BY 4.0", "https://multiconer.github.io", CONVERTED),
+    ("LUMII AiLab FullStack, Latvian named entities", "LUMII AiLab", "CC BY-SA 4.0", "https://github.com/LUMII-AILab/FullStack", CONVERTED),
+    ("Wikidata name labels", "Wikidata", "CC0", "https://www.wikidata.org", "Used to fill synthetic sentences."),
+]
+
+
+def licence_link(key: str) -> str:
+    return f'<a href="{CC[key]}">{html.escape(key)}</a>'
+
+
+def third_party_rows(notice: str) -> str:
+    """Table rows. Every licence, source URL and creator name used must occur in the NOTICE text."""
+    out = []
+    for name, creator, lic, url, change in [BASE] + ROWS:
+        assert url in notice, f"source url not in the NOTICE: {url}"
+        assert lic.replace("Apache-2.0", "Apache") in notice or lic in notice, lic
+        first = re.split(r"[,;]| and ", creator)[0].split()[-1] if "et al" not in creator else creator.split()[0]
+        assert first in notice, f"creator not in the NOTICE: {creator}"
+        out.append(
+            f"<tr><td>{html.escape(name)}</td><td>{html.escape(creator)}</td><td>{licence_link(lic)}</td>"
+            f'<td><a href="{url}">{html.escape(url)}</a></td><td>{html.escape(change)}</td></tr>'
+        )
+    return "\n".join(out)
+
+
+def third_party_content(notices: Path, effective: str, public_name: str | None) -> str:
+    n8 = (notices / "int8" / "NOTICE.txt").read_text(encoding="utf-8")
+    n16 = (notices / "fp16" / "NOTICE.txt").read_text(encoding="utf-8")
+    orgs = (notices / "int8" / "NOTICE-orgs-v1.txt").read_text(encoding="utf-8")
+    assert orgs == (notices / "fp16" / "NOTICE-orgs-v1.txt").read_text(encoding="utf-8")
+    block = re.compile(r"^Modification statement \(this variant: [^\n]*\)\n(?:  [^\n]*\n)+", re.M)
+    m8, m16 = block.search(n8), block.search(n16)
+    assert m8 and m16 and n8.replace(m8.group(0), "") == n16.replace(m16.group(0), ""), "the two notices differ outside the modification statement"
+    for t in (n8, n16, orgs):
+        assert "\r" not in t and "—" not in t and "–" not in t, "CR or dash in a notice"
+    # The product name stays out of the page until the trademark check is done.
+    first_line = "Mosaic v2, the Blindsight name model (model id mosaic-v2)\n"
+    assert n8.startswith(first_line)
+    assert n8.count("Mosaic") == 2 and n16.count("Mosaic") == 2 and "Mosaic" not in orgs
+    if public_name is None:
+        repl = lambda t: t.replace(first_line, "The Blindsight on-device names model\n", 1).replace("from the Mosaic v2 weights", "from the weights")
+        shown8, shown16 = repl(n8), repl(n16)
+        model = "the on-device names model"
+        assert "Mosaic" not in shown8 + shown16
+    else:
+        shown8, shown16, model = n8, n16, public_name
+    rows = third_party_rows(n8)
+    org_row = (
+        "<tr><td>Organisation name list (orgs-v1.json)</td><td>Wikidata</td><td>" + licence_link("CC0") + '</td><td><a href="https://www.wikidata.org">https://www.wikidata.org</a></td>'
+        "<td>Labels and identifiers only, no Wikipedia text. A separate file, not covered by the CC BY-SA 4.0 grant for the model files.</td></tr>"
+    )
+    davlan_row = (
+        "<tr><td>Davlan/distilbert-base-multilingual-cased-ner-hrl (earlier name model, versions 1 and 2-fp16 only)</td>"
+        "<td>Davlan (the model card names no copyright holder)</td><td>" + licence_link("AFL-3.0") + '</td>'
+        '<td><a href="https://huggingface.co/Davlan/distilbert-base-multilingual-cased-ner-hrl">https://huggingface.co/Davlan/distilbert-base-multilingual-cased-ner-hrl</a></td>'
+        "<td>Converted to ONNX; the Apple silicon file is quantised to int8 and the file for every other device is converted to fp16. Weights otherwise unmodified.</td></tr>"
+    )
+    own_row = (
+        f"<tr><td>Weights of {html.escape(model)} (versions 4 and 4-fp16)</td><td>Blindsight Technologies AG</td><td>{licence_link('CC BY-SA 4.0')}</td>"
+        "<td>Downloaded by the desktop app after installation; not inside the installers.</td>"
+        "<td>Fine-tuned from the base model; converted to ONNX; INT8 (dynamic, per channel) on Apple silicon, FP16 on all other devices. The tokenizer file is the tokenizer of the base model.</td></tr>"
+    )
+    esc = html.escape
+    return (
+        '<main id="main" class="pp-container pl-doc">\n  <div class="pp-tag">// Platform legal</div>\n'
+        '  <h1 class="pp-title">Blindsight third-party licences</h1>\n'
+        f'  <div class="pp-updated">Applies to {esc(model)} versions 4 and 4-fp16 &middot; Updated {esc(effective)}</div>\n'
+        '  <p class="pl-print-url">blindsight.io/platform/legal/third-party</p>\n'
+        f"  {scope_line()}\n"
+        '  <div class="pp-section">\n'
+        "<h2>1. What this page lists</h2>\n"
+        f"<p>The models, tokenizer and datasets behind {esc(model)}, with their creators, licences, sources and the changes Blindsight made. The model files are downloaded by the desktop app after installation. The weights and the tokenizer file are licensed under CC BY-SA 4.0; the base model and the datasets keep the licences named below. The libraries and programs inside the installers are listed in the licence notices supplied with the software.</p>\n"
+        "<h2>2. Models, tokenizer and datasets</h2>\n"
+        '<div class="pl-tablewrap" tabindex="0" role="region" aria-label="Models, tokenizer and datasets"><table>\n'
+        "<thead><tr><th scope=\"col\">Name</th><th scope=\"col\">Creator</th><th scope=\"col\">Licence</th><th scope=\"col\">Source</th><th scope=\"col\">What Blindsight changed</th></tr></thead>\n<tbody>\n"
+        + own_row + "\n" + rows + "\n" + org_row + "\n" + davlan_row +
+        "\n</tbody></table></div>\n"
+        "<p>Blindsight also generated sentences by script from its own templates and lists, and had a language model write synthetic sentences with the names filled in by script. These are Blindsight's own material. No data from any Blindsight customer was used.</p>\n"
+        "<h2>3. Full notice shipped with the model files</h2>\n"
+        "<p>This is the notice that comes with the INT8 model files, followed by the one change that differs in the FP16 files. It includes the Apache License 2.0 text for the base model.</p>\n"
+        f'<pre class="pl-notice">{esc(shown8)}</pre>\n'
+        "<h3>Modification statement in the FP16 notice</h3>\n"
+        f'<pre class="pl-notice">{esc(block.search(shown16).group(0))}</pre>\n'
+        "<h3>Organisation list notice</h3>\n"
+        f'<pre class="pl-notice">{esc(orgs)}</pre>\n'
+        "  </div>\n</main>\n"
+    )
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("source", type=Path)
     ap.add_argument("--effective", required=True, help="effective date of the three documents that take effect on publication, e.g. '19 December 2026'")
+    ap.add_argument("--notices", type=Path, required=True, help="the Mosaic v2 artifacts directory holding int8/ and fp16/ with NOTICE.txt and NOTICE-orgs-v1.txt")
+    ap.add_argument("--product-name", help="use this product name for the names model instead of 'the on-device names model' (only after the trademark check)")
     a = ap.parse_args()
 
     eula_path = a.source / "EULA-1.0.md"
@@ -272,10 +386,20 @@ def main() -> int:
         index_items.append((slug, title, desc, version, effective))
         print(f"{slug}: version {version}, effective {effective}, {len(body)} bytes of html")
 
+    tp = third_party_content(a.notices, a.effective, a.product_name)
+    d = OUT / "third-party"
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "index.html").write_text(page(frame, title="Blindsight third-party licences", desc="Models, tokenizer and datasets behind the Blindsight on-device names model, with creators, licences, sources and changes.", slug="third-party/", content=tp), encoding="utf-8")
+    print("third-party written")
+
     li = "\n".join(
         f'    <li><a href="/platform/legal/{s}/"><span class="pl-name">{html.escape(t)}</span>'
         f'<span class="pl-desc">{html.escape(d)}</span><span class="pl-meta">Version {v} &middot; Effective {html.escape(e)}</span></a></li>'
         for s, t, d, v, e in index_items
+    ) + (
+        '\n    <li><a href="/platform/legal/third-party/"><span class="pl-name">Third-party licences</span>'
+        '<span class="pl-desc">Models, tokenizer and datasets behind the on-device names model, with creators, licences, sources and changes.</span>'
+        f'<span class="pl-meta">Updated {html.escape(a.effective)}</span></a></li>'
     )
     content = (
         '<main id="main" class="pp-container pl-doc">\n  <div class="pp-tag">// Platform legal</div>\n'

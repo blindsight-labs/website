@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-06PKBPMVBJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-06PKBPMVBJ');
+  </script>
+
+  <title>Blindsight third-party licences | Blindsight platform</title>
+  <meta name="description" content="Models, tokenizer and datasets behind the Blindsight on-device names model, with creators, licences, sources and changes." />
+  <link rel="canonical" href="https://blindsight.io/platform/legal/third-party" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/images/Emblem_B.png" type="image/png" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Set theme before paint to avoid flash -->
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    );
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+      --display: 'Space Grotesk', sans-serif;
+      --purple: #6D28D9;
+      --transition-theme: background 0.45s ease, color 0.45s ease, border-color 0.45s ease;
+    }
+
+    [data-theme="dark"] {
+      --bg: #020202;
+      --text: #F8F8F8;
+      --text-mid: #C5C5C5;
+      --text-dim: #545454;
+      --text-body: rgba(255,255,255,0.55);
+      --text-intro: rgba(255,255,255,0.7);
+      --text-heading-sub: rgba(255,255,255,0.9);
+      --text-strong: rgba(255,255,255,0.8);
+      --text-updated: rgba(255,255,255,0.3);
+      --nav-bg: rgba(2,2,2,0.7);
+      --nav-link: rgba(255,255,255,0.35);
+      --nav-tagline: rgba(255,255,255,0.3);
+      --border: rgba(255,255,255,0.05);
+      --divider: rgba(255,255,255,0.06);
+      --mobile-bg: rgba(2,2,2,0.96);
+      --mobile-link: rgba(255,255,255,0.7);
+      --hamburger: #F8F8F8;
+    }
+
+    [data-theme="light"] {
+      --bg: #F2F2EF;
+      --text: #020202;
+      --text-mid: #3a3a3a;
+      --text-dim: #888;
+      --text-body: rgba(0,0,0,0.55);
+      --text-intro: rgba(0,0,0,0.6);
+      --text-heading-sub: rgba(0,0,0,0.8);
+      --text-strong: rgba(0,0,0,0.7);
+      --text-updated: rgba(0,0,0,0.3);
+      --nav-bg: rgba(242,242,239,0.92);
+      --nav-link: rgba(0,0,0,0.35);
+      --nav-tagline: rgba(0,0,0,0.3);
+      --border: rgba(0,0,0,0.08);
+      --divider: rgba(0,0,0,0.08);
+      --mobile-bg: rgba(242,242,239,0.96);
+      --mobile-link: rgba(0,0,0,0.6);
+      --hamburger: #020202;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15.4px;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: var(--transition-theme);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 56px;
+      background: var(--nav-bg); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition-theme);
+    }
+    .nav-wordmark {
+      font-family: var(--display); font-size: 18px; font-weight: 700;
+      color: var(--text); text-decoration: none; letter-spacing: -0.02em;
+      display: flex; align-items: center;
+      transition: color 0.45s ease;
+    }
+    .nav-logo { height: 22px; width: auto; display: block; }
+    .nav-logo-dark { display: block; }
+    .nav-logo-light { display: none; }
+    [data-theme="light"] .nav-logo-dark { display: none; }
+    [data-theme="light"] .nav-logo-light { display: block; }
+    .nav-tagline {
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--nav-tagline);
+      margin-left: 12px; transition: color 0.45s ease;
+    }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--nav-link);
+      text-decoration: none; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 28px; height: 20px; position: relative; z-index: 210;
+      flex-direction: column; justify-content: space-between;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2px; background: var(--hamburger);
+      transition: transform 0.3s ease, opacity 0.3s ease, background 0.45s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--mobile-bg); backdrop-filter: blur(20px);
+      z-index: 199;
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+      transition: background 0.45s ease;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--mono); font-size: 14px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mobile-link);
+      text-decoration: none; transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--text); }
+
+    /* ── CONTENT ── */
+    .pp-container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 140px 56px 80px;
+    }
+
+    .pp-tag {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 20px;
+    }
+
+    .pp-title {
+      font-family: var(--display); font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.15; margin-bottom: 12px;
+      color: var(--text); transition: color 0.45s ease;
+    }
+
+    .pp-updated {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-updated); letter-spacing: 0.06em;
+      margin-bottom: 48px; transition: color 0.45s ease;
+    }
+
+    .pp-intro {
+      font-size: 15.4px; line-height: 1.75;
+      color: var(--text-intro); margin-bottom: 48px;
+      transition: color 0.45s ease;
+    }
+
+    .pp-section { margin-bottom: 40px; }
+
+    .pp-section h2 {
+      font-family: var(--display); font-size: 20px;
+      font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px; color: var(--text);
+      transition: color 0.45s ease;
+    }
+
+    .pp-section h3 {
+      font-family: var(--display); font-size: 16px;
+      font-weight: 700; letter-spacing: -0.01em;
+      margin-bottom: 10px; color: var(--text-heading-sub);
+      transition: color 0.45s ease;
+    }
+
+    .pp-section p {
+      font-size: 14px; line-height: 1.8;
+      color: var(--text-body); margin-bottom: 14px;
+      transition: color 0.45s ease;
+    }
+
+    .pp-section ul { list-style: none; margin-bottom: 16px; padding: 0; }
+
+    .pp-section ul li {
+      font-size: 14px; line-height: 1.8;
+      color: var(--text-body);
+      padding-left: 20px; position: relative;
+      margin-bottom: 10px; transition: color 0.45s ease;
+    }
+
+    .pp-section ul li::before {
+      content: '';
+      position: absolute; left: 0; top: 10px;
+      width: 6px; height: 6px;
+      border: 1px solid var(--purple);
+      border-radius: 1px;
+    }
+
+    .pp-section strong {
+      color: var(--text-strong); font-weight: 600;
+      transition: color 0.45s ease;
+    }
+
+    .pp-divider {
+      height: 1px;
+      background: var(--divider);
+      margin: 48px 0;
+      transition: background 0.45s ease;
+    }
+
+    .pp-section a {
+      color: var(--purple); text-decoration: none;
+      border-bottom: 1px solid rgba(109,40,217,0.3);
+      transition: border-color 0.2s;
+    }
+    .pp-section a:hover { border-color: var(--purple); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 56px; background: var(--bg);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 1;
+      transition: var(--transition-theme);
+    }
+    .footer-brand {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.1em; color: var(--text-dim);
+      transition: color 0.45s ease;
+    }
+    .footer-brand strong { color: var(--text-mid); transition: color 0.45s ease; }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-dim); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text-mid); }
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 1400px) {
+      nav, footer {
+        padding-left: calc((100vw - 1280px) / 2);
+        padding-right: calc((100vw - 1280px) / 2);
+      }
+    }
+    @media (max-width: 1100px) {
+      nav { padding: 18px 28px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .pp-container { padding-left: 28px; padding-right: 28px; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 14px 16px; }
+      .nav-logo { height: 18px; }
+      .nav-tagline { display: none; }
+      .pp-container { padding: 100px 16px 56px; }
+      footer { padding: 24px 16px; flex-direction: column; gap: 16px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    }
+  
+    /* ── PLATFORM LEGAL ── */
+    .pp-container { max-width: 860px; }
+    .pl-scope {
+      font-size: 14px; line-height: 1.7; color: var(--text-intro);
+      border: 1px solid var(--border); border-left: 3px solid var(--purple);
+      padding: 14px 18px; margin: 0 0 40px; border-radius: 2px;
+    }
+    .pl-scope a { color: var(--purple); border-bottom: 1px solid rgba(109,40,217,0.3); text-decoration: none; }
+    .pl-scope a:hover { border-color: var(--purple); }
+    .pl-doc .pp-section p, .pl-doc .pp-section li, .pl-doc td, .pl-doc th { color: var(--text-intro); }
+    .pl-doc p { font-size: 14px; line-height: 1.8; color: var(--text-intro); margin-bottom: 14px; overflow-wrap: anywhere; }
+    .pl-doc p .ln { display: block; padding-left: 2.2em; text-indent: -2.2em; }
+    .pl-doc p .ln:first-child { padding-left: 0; text-indent: 0; }
+    .pl-doc h2 { font-family: var(--display); font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 40px 0 16px; color: var(--text); }
+    .pl-doc h3 { font-family: var(--display); font-size: 16px; font-weight: 700; margin: 28px 0 10px; color: var(--text-heading-sub); }
+    .pl-doc h2.clause { font-size: 17px; margin-top: 36px; }
+    .pl-doc ul { list-style: none; margin: 0 0 16px; padding: 0; }
+    .pl-doc ul li { font-size: 14px; line-height: 1.8; color: var(--text-intro); padding-left: 20px; position: relative; margin-bottom: 8px; overflow-wrap: anywhere; }
+    .pl-doc ul li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border: 1px solid var(--purple); border-radius: 1px; }
+    .pl-doc ol { margin: 0 0 16px 22px; padding: 0; }
+    .pl-doc ol li { font-size: 14px; line-height: 1.8; color: var(--text-intro); margin-bottom: 8px; }
+    .pl-doc strong { color: var(--text-strong); font-weight: 600; }
+    .pl-doc a { color: var(--purple); text-decoration: none; border-bottom: 1px solid rgba(109,40,217,0.3); }
+    .pl-doc a:hover { border-color: var(--purple); }
+    .pl-doc code { font-family: var(--mono); font-size: 12.5px; }
+    .pl-doc hr { border: 0; height: 1px; background: var(--divider); margin: 40px 0; }
+    .pl-doc pre.pl-notice { font-family: var(--mono); font-size: 11.5px; line-height: 1.6; color: var(--text-intro); white-space: pre-wrap; overflow-wrap: anywhere; border: 1px solid var(--border); padding: 14px 16px; margin: 0 0 24px; }
+    .pl-tablewrap { overflow-x: auto; margin: 0 0 24px; border: 1px solid var(--border); }
+    .pl-doc table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 12.5px; line-height: 1.6; }
+    .pl-doc th, .pl-doc td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--divider); }
+    .pl-doc th { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-strong); }
+    .pl-index { list-style: none; margin: 0; padding: 0; }
+    .pl-index li { border-top: 1px solid var(--divider); }
+    .pl-index li:last-child { border-bottom: 1px solid var(--divider); }
+    .pl-doc .pl-index li { padding-left: 0; margin-bottom: 0; }
+    .pl-doc .pl-index li::before { display: none; }
+    .pl-index a { display: block; padding: 20px 4px; text-decoration: none; border: 0; }
+    .pl-index a:hover .pl-name { color: var(--purple); }
+    .pl-name { display: block; font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+    .pl-desc { display: block; font-size: 14px; line-height: 1.6; color: var(--text-intro); margin-top: 4px; }
+    .pl-meta { display: block; font-family: var(--mono); font-size: 11px; color: var(--text-updated); margin-top: 6px; letter-spacing: 0.04em; }
+    .pl-raw { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; margin: 0 0 32px; color: var(--text-updated); }
+    .pl-raw a { color: var(--purple); }
+    .pl-skip { position: absolute; left: -999px; }
+    .pl-skip:focus { left: 8px; top: 8px; z-index: 300; background: var(--bg); color: var(--text); padding: 8px 12px; }
+    @media print {
+      :root, [data-theme="dark"], [data-theme="light"] {
+        --bg: #fff; --text: #000; --text-mid: #222; --text-dim: #444; --text-body: #111; --text-intro: #111;
+        --text-heading-sub: #000; --text-strong: #000; --text-updated: #333; --border: #bbb; --divider: #bbb; --purple: #000;
+      }
+      body { background: #fff; color: #000; font-size: 11pt; }
+      nav, .mobile-menu, footer, .pl-raw, .pl-skip { display: none !important; }
+      .pp-container { max-width: none; padding: 0; }
+      .pl-scope { border: 1px solid #000; border-left: 3px solid #000; }
+      .pl-doc p, .pl-doc ul li, .pl-doc ol li, .pl-doc td, .pl-doc th { font-size: 10.5pt; color: #000; }
+      .pl-doc a, .pl-scope a { color: #000; border: 0; text-decoration: underline; }
+      .pl-doc h2, .pl-doc h3 { break-after: avoid; }
+      .pl-doc p, .pl-doc li, .pl-doc tr { break-inside: avoid; }
+      .pl-tablewrap { overflow: visible; border: 0; }
+      .pl-doc pre.pl-notice { font-size: 8.5pt; color: #000; border: 1px solid #888; }
+      .pl-doc table { min-width: 0; font-size: 9pt; }
+      .pl-doc th, .pl-doc td { border: 1px solid #888; }
+      .pl-print-url { display: block !important; }
+    }
+    .pl-print-url { display: none; font-family: var(--mono); font-size: 10pt; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+<a class="pl-skip" href="#main">Skip to the document</a>
+
+<!-- NAV -->
+<nav>
+  <div style="display:flex;align-items:center;">
+    <a href="/" class="nav-wordmark">
+      <img src="/assets/images/LOGO_Primary_W.png" alt="Blindsight" class="nav-logo nav-logo-dark" />
+      <img src="/assets/images/LOGO_Primary_B.png" alt="Blindsight" class="nav-logo nav-logo-light" />
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="/antidote/">Antidote</a></li>
+    <li><a href="mailto:info@blindsight.io">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/antidote/">Antidote</a>
+  <a href="mailto:info@blindsight.io">Contact</a>
+</div>
+
+<!-- CONTENT -->
+<main id="main" class="pp-container pl-doc">
+  <div class="pp-tag">// Platform legal</div>
+  <h1 class="pp-title">Blindsight third-party licences</h1>
+  <div class="pp-updated">Applies to the on-device names model versions 4 and 4-fp16 &middot; Updated 19 November 2026</div>
+  <p class="pl-print-url">blindsight.io/platform/legal/third-party</p>
+  <p class="pl-scope">This document covers the Blindsight platform (the console, the desktop apps and the APIs). The blindsight.io website has its own <a href="/privacy-policy/">privacy policy</a>.</p>
+  <div class="pp-section">
+<h2>1. What this page lists</h2>
+<p>The models, tokenizer and datasets behind the on-device names model, with their creators, licences, sources and the changes Blindsight made. The model files are downloaded by the desktop app after installation. The weights and the tokenizer file are licensed under CC BY-SA 4.0; the base model and the datasets keep the licences named below. The libraries and programs inside the installers are listed in the licence notices supplied with the software.</p>
+<h2>2. Models, tokenizer and datasets</h2>
+<div class="pl-tablewrap" tabindex="0" role="region" aria-label="Models, tokenizer and datasets"><table>
+<thead><tr><th scope="col">Name</th><th scope="col">Creator</th><th scope="col">Licence</th><th scope="col">Source</th><th scope="col">What Blindsight changed</th></tr></thead>
+<tbody>
+<tr><td>Weights of the on-device names model (versions 4 and 4-fp16)</td><td>Blindsight Technologies AG</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode">CC BY-SA 4.0</a></td><td>Downloaded by the desktop app after installation; not inside the installers.</td><td>Fine-tuned from the base model; converted to ONNX; INT8 (dynamic, per channel) on Apple silicon, FP16 on all other devices. The tokenizer file is the tokenizer of the base model.</td></tr>
+<tr><td>distilbert-base-multilingual-cased (base model)</td><td>Sanh et al.</td><td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a></td><td><a href="https://huggingface.co/distilbert/distilbert-base-multilingual-cased">https://huggingface.co/distilbert/distilbert-base-multilingual-cased</a></td><td>Weights fine-tuned by Blindsight for token classification (names, organisations, places and dates), then converted to ONNX with reduced numeric precision (FP16 or INT8).</td></tr>
+<tr><td>Universal NER v1 (treebanks English-EWT, Portuguese-Bosque, Chinese-GSD, Chinese-GSDSimp)</td><td>Mayhew et al.</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode">CC BY-SA 4.0</a></td><td><a href="https://www.universalner.org">https://www.universalner.org</a></td><td>Converted to a token-classification format and relabelled to person, organisation, place and date; entity classes mapped; some sentences case-changed or had names swapped.</td></tr>
+<tr><td>Europeana Newspapers NER corpora</td><td>Europeana Newspapers Project</td><td><a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode">CC0</a></td><td><a href="https://github.com/EuropeanaNewspapers/ner-corpora">https://github.com/EuropeanaNewspapers/ner-corpora</a></td><td>Converted to a token-classification format and relabelled to person, organisation, place and date; entity classes mapped; some sentences case-changed or had names swapped.</td></tr>
+<tr><td>ANERcorp, CAMeL Lab train/test splits</td><td>Benajiba, Rosso and Benedi Ruiz; Obeid et al.</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode">CC BY-SA 4.0</a></td><td><a href="https://camel.abudhabi.nyu.edu/anercorp/">https://camel.abudhabi.nyu.edu/anercorp/</a></td><td>Converted to a token-classification format and relabelled to person, organisation, place and date; entity classes mapped; some sentences case-changed or had names swapped.</td></tr>
+<tr><td>AQMAR Arabic Wikipedia Named Entity Corpus</td><td>Mohit, Schneider, Bhowmick, Oflazer and Smith</td><td><a href="https://creativecommons.org/licenses/by-sa/3.0/legalcode">CC BY-SA 3.0</a></td><td><a href="https://www.cs.cmu.edu/~ark/ArabicNER/">https://www.cs.cmu.edu/~ark/ArabicNER/</a></td><td>Converted to a token-classification format and relabelled to person, organisation, place and date; entity classes mapped; some sentences case-changed or had names swapped. CC BY-SA 3.0 section 4(b) permits an adaptation to be distributed under a later version of the licence with the same licence elements, here CC BY-SA 4.0.</td></tr>
+<tr><td>GermEval 2014 NER shared task data</td><td>Benikova, Biemann, Reznicek</td><td><a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a></td><td><a href="https://sites.google.com/site/germeval2014ner/">https://sites.google.com/site/germeval2014ner/</a></td><td>Converted to a token-classification format and relabelled to person, organisation, place and date; entity classes mapped; some sentences case-changed or had names swapped.</td></tr>
+<tr><td>WikiNER and wikigold</td><td>Nothman, Ringland, Radford, Murphy, Curran; Balasuriya et al.</td><td><a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a></td><td><a href="https://doi.org/10.6084/m9.figshare.5462500">https://doi.org/10.6084/m9.figshare.5462500</a></td><td>Converted to a token-classification format and relabelled to person, organisation, place and date; entity classes mapped; some sentences case-changed or had names swapped.</td></tr>
+<tr><td>MultiCoNER v2</td><td>Fetahu, Chen, Kar, Rokhlenko, Malmasi</td><td><a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a></td><td><a href="https://multiconer.github.io">https://multiconer.github.io</a></td><td>Converted to a token-classification format and relabelled to person, organisation, place and date; entity classes mapped; some sentences case-changed or had names swapped.</td></tr>
+<tr><td>LUMII AiLab FullStack, Latvian named entities</td><td>LUMII AiLab</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode">CC BY-SA 4.0</a></td><td><a href="https://github.com/LUMII-AILab/FullStack">https://github.com/LUMII-AILab/FullStack</a></td><td>Converted to a token-classification format and relabelled to person, organisation, place and date; entity classes mapped; some sentences case-changed or had names swapped.</td></tr>
+<tr><td>Wikidata name labels</td><td>Wikidata</td><td><a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode">CC0</a></td><td><a href="https://www.wikidata.org">https://www.wikidata.org</a></td><td>Used to fill synthetic sentences.</td></tr>
+<tr><td>Organisation name list (orgs-v1.json)</td><td>Wikidata</td><td><a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode">CC0</a></td><td><a href="https://www.wikidata.org">https://www.wikidata.org</a></td><td>Labels and identifiers only, no Wikipedia text. A separate file, not covered by the CC BY-SA 4.0 grant for the model files.</td></tr>
+<tr><td>Davlan/distilbert-base-multilingual-cased-ner-hrl (earlier name model, versions 1 and 2-fp16 only)</td><td>Davlan (the model card names no copyright holder)</td><td><a href="https://opensource.org/license/afl-3-0-php">AFL-3.0</a></td><td><a href="https://huggingface.co/Davlan/distilbert-base-multilingual-cased-ner-hrl">https://huggingface.co/Davlan/distilbert-base-multilingual-cased-ner-hrl</a></td><td>Converted to ONNX; the Apple silicon file is quantised to int8 and the file for every other device is converted to fp16. Weights otherwise unmodified.</td></tr>
+</tbody></table></div>
+<p>Blindsight also generated sentences by script from its own templates and lists, and had a language model write synthetic sentences with the names filled in by script. These are Blindsight's own material. No data from any Blindsight customer was used.</p>
+<h2>3. Full notice shipped with the model files</h2>
+<p>This is the notice that comes with the INT8 model files, followed by the one change that differs in the FP16 files. It includes the Apache License 2.0 text for the base model.</p>
+<pre class="pl-notice">The Blindsight on-device names model
+
+This model detects person names, organisations, places and dates in text on the
+device. It was trained by Blindsight from the base model below on the datasets
+below. The model weights and the tokenizer file in this directory are licensed
+under the Creative Commons Attribution-ShareAlike 4.0 International licence
+(CC BY-SA 4.0): https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+Base model
+  distilbert-base-multilingual-cased, Apache License 2.0
+  https://huggingface.co/distilbert/distilbert-base-multilingual-cased
+  Sanh et al., DistilBERT, 2019. The Apache-2.0 notice of the base model is
+  preserved here, and the full text of the Apache License 2.0 is reproduced at
+  the end of this file. The base model was modified: its weights were
+  fine-tuned by Blindsight for token classification (names, organisations,
+  places and dates) and the result was converted to ONNX, with reduced numeric
+  precision (FP16 or INT8) in some variants.
+
+Training data and attribution
+  Universal NER v1 (CC BY-SA 4.0). Mayhew et al., Universal NER: A Gold-Standard
+  Multilingual Named Entity Recognition Benchmark, NAACL 2024.
+  https://www.universalner.org
+  Treebanks used: English-EWT, Portuguese-Bosque, Chinese-GSD and
+  Chinese-GSDSimp (Universal Dependencies treebanks, CC BY-SA 4.0, with the
+  Universal NER annotations).
+  Europeana Newspapers NER corpora (CC0). Europeana Newspapers Project,
+  2012-2015. https://github.com/EuropeanaNewspapers/ner-corpora
+  ANERcorp, CAMeL Lab train/test splits (CC BY-SA 4.0). Benajiba, Rosso and
+  Benedi Ruiz, 2007; Obeid et al., CAMeL Tools, LREC 2020.
+  https://camel.abudhabi.nyu.edu/anercorp/
+  AQMAR Arabic Wikipedia Named Entity Corpus (CC BY-SA 3.0). Mohit, Schneider,
+  Bhowmick, Oflazer and Smith, Recall-Oriented Learning of Named Entities in
+  Arabic Wikipedia, EACL 2012. https://www.cs.cmu.edu/~ark/ArabicNER/
+  CC BY-SA 3.0 section 4(b) permits an adaptation to be distributed under a
+  later version of the licence with the same licence elements, here CC BY-SA
+  4.0.
+  GermEval 2014 NER shared task data (CC BY 4.0). Benikova, Biemann, Reznicek,
+  2014. https://sites.google.com/site/germeval2014ner/
+  WikiNER and wikigold (CC BY 4.0). Nothman, Ringland, Radford, Murphy, Curran,
+  Learning multilingual named entity recognition from Wikipedia, Artificial
+  Intelligence 2013; Balasuriya et al., 2009.
+  https://doi.org/10.6084/m9.figshare.5462500
+  MultiCoNER v2 (CC BY 4.0). Fetahu, Chen, Kar, Rokhlenko, Malmasi, 2023.
+  https://multiconer.github.io
+  LUMII AiLab FullStack, Latvian named entities (CC BY-SA 4.0).
+  https://github.com/LUMII-AILab/FullStack
+  Wikidata name labels (CC0), used to fill synthetic sentences.
+  https://www.wikidata.org
+  Several of the corpora above (AQMAR, GermEval 2014, WikiNER, wikigold and
+  MultiCoNER v2) consist of sentences from Wikipedia, which is licensed under
+  CC BY-SA.
+  Round 6 adds sentences generated by Blindsight scripts from its own
+  templates, and same-type name swaps inside the corpora above, filled with
+  the Wikidata labels above. Round 8 adds sentences generated by Blindsight
+  scripts from its own templates (JSON, YAML, tables, logs, e-mail headers,
+  citations, chat exports, tool calls and short questions that contain names),
+  filled with Wikidata name labels and corpus name frequencies from the
+  corpora above. Round 9 adds sentences generated by Blindsight scripts from its
+  own templates (multi-record logs, CSV cells, user= lines, mail headers,
+  headings, usernames and bot names kept as non-names, organisation classes,
+  first names with surnames that are also common nouns), and same-type
+  organisation swaps inside the real training sentences of the corpora above
+  (German, English, Arabic, French). No new third-party data.
+  Synthetic sentences written with a language model, with names,
+  organisations, places and dates filled in by script, so every label is
+  exact.
+  Further sentences (government bodies, product and tool names, questions)
+  generated by script from lists written by Blindsight, and real training
+  sentences of the corpora above with organisations swapped by script.
+  Round 11 adds, by script from lists written by Blindsight, organisation
+  names of companies, newspapers and magazines, venues and clubs, universities
+  and schools, parties and international bodies in German and Portuguese
+  sentences (templates, and real training sentences of the corpora above with
+  an organisation swapped), further German, Austrian and Swiss business and
+  public-body names, persons with fresh first names and surnames in many
+  frames, and further non-name examples. No new third-party data.
+  Round 12 adds, by script from lists written by Blindsight and the Wikidata
+  name labels above: person names in English, German, Spanish, Italian, Dutch,
+  French and Portuguese (first names after labels and in signatures, surnames,
+  initials, public figures, placeholder names, titled and fictional names, and
+  common words kept as non-names); organisation names (public bodies and
+  agencies, armed forces and social-security bodies, department and team nouns,
+  sports leagues, clubs and venues, newspapers and journals, universities,
+  schools, libraries and museums, small companies with legal forms, all-capital
+  company names, company names in code, configuration and e-mail text); further
+  German, Austrian and Swiss organisation classes; and further non-name
+  examples. No new third-party data.
+  Round 13 adds, by script from lists written by Blindsight and the Wikidata
+  name labels above: person names in English, German, Spanish, Italian, Dutch,
+  French and Portuguese (lone first names after verbs of address and in
+  sign-offs, surnames without a title, initial forms, public figures and
+  stage names in ordinary questions, placeholder names in templates, titled
+  names, and capitalised common words, role words, assistant and tool names
+  kept as non-names), and replays, unchanged, person-bearing training
+  sentences of the corpora above (including ANERcorp, AQMAR, GermEval 2014,
+  Europeana, WikiNER, MultiCoNER v2 and Universal NER) that were also used in
+  earlier rounds. No new third-party data. Round 13 also adds, by script from
+  lists written by Blindsight, non-name examples (occupation words that are
+  also surnames, plural colour nouns, postcodes with city names). No new
+  third-party data.
+
+These datasets were converted to a token-classification format and relabelled
+to person, organisation, place and date; entity classes were mapped; some
+sentences were case-changed or had names swapped.
+
+Provided as is without warranties, as set out in the disclaimer of warranties
+of the licences named above.
+
+Based on distilbert-base-multilingual-cased (Apache-2.0), fine-tuned by
+Blindsight Technologies AG.
+
+Modification statement (this variant: dynamic per-channel INT8)
+  model.onnx in this directory was converted to ONNX and INT8 quantised by
+  Blindsight Technologies AG from the weights, which Blindsight
+  Technologies AG fine-tuned from distilbert-base-multilingual-cased
+  (https://huggingface.co/distilbert/distilbert-base-multilingual-cased).
+  tokenizer.json is the tokenizer of that base model.
+
+Organisation list
+  Organisation names are taken from Wikidata (CC0); names belong to their
+  owners. The file orgs-v1.json holds labels and identifiers only, no
+  Wikipedia text (see NOTICE-orgs-v1.txt). It is a separate file, not
+  covered by the CC BY-SA 4.0 grant above, and the &quot;license&quot; field of
+  manifest.json does not apply to it.
+
+Integrity checks are not access restrictions
+  The model files are shipped as separate, unencrypted files. Code signing
+  and the sha256 values in manifest.json only let the Blindsight app check
+  that the files are intact; they do not restrict copying, modifying or
+  sharing these files under their licences.
+
+No data from any Blindsight customer was used.
+
+Apache License 2.0 (applies to the base model distilbert-base-multilingual-cased)
+------------------------------------------------------------------------
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      &quot;License&quot; shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      &quot;Licensor&quot; shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      &quot;Legal Entity&quot; shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      &quot;control&quot; means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      &quot;You&quot; (or &quot;Your&quot;) shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      &quot;Source&quot; form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      &quot;Object&quot; form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      &quot;Work&quot; shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      &quot;Derivative Works&quot; shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      &quot;Contribution&quot; shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, &quot;submitted&quot;
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as &quot;Not a Contribution.&quot;
+
+      &quot;Contributor&quot; shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a &quot;NOTICE&quot; text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an &quot;AS IS&quot; BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets &quot;[]&quot;
+      replaced with your own identifying information. (Don&#x27;t include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same &quot;printed page&quot; as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [yyyy] [name of copyright owner]
+
+   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+</pre>
+<h3>Modification statement in the FP16 notice</h3>
+<pre class="pl-notice">Modification statement (this variant: FP16)
+  model.onnx in this directory was converted to ONNX and FP16 quantised by
+  Blindsight Technologies AG from the weights, which Blindsight
+  Technologies AG fine-tuned from distilbert-base-multilingual-cased
+  (https://huggingface.co/distilbert/distilbert-base-multilingual-cased).
+  tokenizer.json is the tokenizer of that base model.
+</pre>
+<h3>Organisation list notice</h3>
+<pre class="pl-notice">Organisation name list orgs-v1: names and identifiers from Wikidata (https://www.wikidata.org), released under CC0 1.0 Universal (public domain dedication). No attribution is required; given for transparency.
+</pre>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand"><strong>Blindsight Technologies AG</strong> · Securing AI · 2026</span>
+  <ul class="footer-links">
+    <li><a href="/antidote/">Antidote</a></li>
+    <li><a href="/privacy-policy/">Privacy</a></li>
+    <li><a href="/platform/legal/">Platform legal</a></li>
+    <li><a href="mailto:info@blindsight.io">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  // Live OS preference listener
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    document.documentElement.setAttribute('data-theme', e.matches ? 'light' : 'dark');
+  });
+</script>
+</body>
+</html>

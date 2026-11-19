@@ -17,7 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 EULA_SHA256 = "2006c54f53548282ff652423ef2a1590d43fa6dcadde87e8bf954ad2e704f2a7"
-PAGES = ["", "eula/", "dpa/", "subprocessors/", "privacy/"]
+PAGES = ["", "eula/", "dpa/", "subprocessors/", "privacy/", "third-party/"]
 
 
 def get(base: str | None, path: str) -> bytes:
@@ -42,10 +42,12 @@ def main() -> int:
         name = p or "index"
         if "—" in t or "–" in t:
             bad.append(f"{name}: dash character")
-        if not re.search(r"Version \d+\.\d+ &middot; Effective|Version \d+\.\d+", t):
+        if p not in ("", "third-party/") and not re.search(r"Version \d+\.\d+ &middot; Effective", t):
             bad.append(f"{name}: no version")
         if "covers the Blindsight platform" not in t and "cover the Blindsight platform" not in t:
             bad.append(f"{name}: no scope line")
+        if "Mosaic" in t:
+            bad.append(f"{name}: product name before the trademark check")
         if "/privacy-policy/" not in t:
             bad.append(f"{name}: no link to the website privacy notice")
         if not a.base:
